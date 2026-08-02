@@ -1,0 +1,251 @@
+import { useEffect, useMemo, useState } from 'react'
+import { Link, NavLink, useLocation } from 'react-router-dom'
+import { ChevronDown, Menu, X, Phone, Mail, Search as SearchIcon } from 'lucide-react'
+import { useData } from '../context/DataContext.jsx'
+import { cn } from '../lib/utils.js'
+import GlobalSearch from './GlobalSearch.jsx'
+
+function buildTree(items) {
+  const top = items
+    .filter((i) => !i.parentId)
+    .sort((a, b) => a.order - b.order)
+  const childrenByParent = {}
+  items
+    .filter((i) => i.parentId)
+    .sort((a, b) => a.order - b.order)
+    .forEach((i) => {
+      ;(childrenByParent[i.parentId] = childrenByParent[i.parentId] || []).push(i)
+    })
+  return { top, childrenByParent }
+}
+
+function Logo({ light, logo, name, shortName }) {
+  const displayName = name || 'Highgate School'
+  const subName = shortName || displayName
+  const initials = displayName.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase()
+  return (
+    <Link to="/" className="group flex items-center gap-3">
+      {logo ? (
+        <img src={logo} alt={displayName} className="h-11 w-11 rounded-xl object-cover shadow-gold transition-transform duration-300 group-hover:scale-105" />
+      ) : (
+        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gold-500 font-serif text-2xl font-bold text-navy-900 shadow-gold transition-transform duration-300 group-hover:scale-105">
+          {initials}
+        </div>
+      )}
+      <div className="leading-tight">
+        <p className={cn('font-serif text-lg font-semibold tracking-wide', light ? 'text-white' : 'text-white')}>
+          {displayName}
+        </p>
+        {subName !== displayName && (
+          <p className={cn('text-[10px] font-semibold uppercase tracking-[0.22em]', light ? 'text-gold-300' : 'text-gold-300')}>
+            {subName}
+          </p>
+        )}
+      </div>
+    </Link>
+  )
+}
+
+export default function Navbar() {
+  const { db } = useData()
+  const location = useLocation()
+  const [scrolled, setScrolled] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const [openAccordion, setOpenAccordion] = useState(null)
+  const [searchOpen, setSearchOpen] = useState(false)
+
+  const isHome = location.pathname === '/'
+  const solid = !isHome || scrolled
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    setMobileOpen(false)
+    setOpenAccordion(null)
+  }, [location.pathname])
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [mobileOpen])
+
+  const menus = useMemo(
+    () => (db.menus || []).filter((m) => m.isVisible),
+    [db.menus]
+  )
+  const { top, childrenByParent } = useMemo(() => buildTree(menus), [menus])
+  const schoolInfo = db.schoolInfo
+
+  return (
+    <>
+      <header
+        className={cn(
+          'fixed inset-x-0 top-0 z-50 transition-all duration-500',
+          solid ? 'bg-navy-900/95 shadow-lg backdrop-blur-md' : 'bg-gradient-to-b from-navy-950/70 to-transparent'
+        )}
+      >
+        <div className="container-x flex h-[76px] items-center justify-between gap-6">
+          <Logo logo={schoolInfo?.logo} name={schoolInfo?.name} shortName={schoolInfo?.shortName} />
+
+          <nav className="hidden items-center gap-1 xl:flex" aria-label="Primary">
+            {top.map((item) => {
+              const kids = childrenByParent[item.id]
+              if (kids?.length) {
+                return (
+                  <div key={item.id} className="group relative">
+                    <Link
+                      to={item.url}
+                      className="flex items-center gap-1.5 rounded-full px-4 py-2.5 text-sm font-medium text-white/90 transition hover:bg-white/10 hover:text-white"
+                    >
+                      {item.label}
+                      <ChevronDown size={14} className="transition-transform duration-300 group-hover:rotate-180" />
+                    </Link>
+                    <div className="invisible absolute left-0 top-full pt-2 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+                      <div className="w-64 overflow-hidden rounded-2xl border border-navy-100 bg-white p-2 shadow-cardHover">
+                        {kids.map((k) => (
+                          <Link
+                            key={k.id}
+                            to={k.url}
+                            className="flex items-center justify-between rounded-xl px-4 py-2.5 text-sm font-medium text-navy-800 transition hover:bg-navy-50 hover:text-navy-900"
+                          >
+                            {k.label}
+                            <ChevronDown size={12} className="-rotate-90 text-gold-500" />
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )
+              }
+              return (
+                <NavLink
+                  key={item.id}
+                  to={item.url}
+                  end
+                  className={({ isActive }) =>
+                    cn(
+                      'rounded-full px-4 py-2.5 text-sm font-medium transition',
+                      isActive
+                        ? 'bg-gold-500/15 text-gold-300'
+                        : 'text-white/90 hover:bg-white/10 hover:text-white'
+                    )
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              )
+            })}
+            <button
+              onClick={() => setSearchOpen(true)}
+              className="flex h-10 w-10 items-center justify-center rounded-full text-white/90 transition hover:bg-white/10 hover:text-white"
+              aria-label="Search the site"
+              title="Search"
+            >
+              <SearchIcon size={18} />
+            </button>
+            <Link
+              to="/contact"
+              className="ml-1 rounded-full bg-gold-500 px-6 py-2.5 text-sm font-semibold text-navy-900 shadow-gold transition hover:-translate-y-0.5 hover:bg-gold-400"
+            >
+              {schoolInfo?.contactButtonLabel || 'Contact Us'}
+            </Link>
+          </nav>
+
+          <button
+            className="flex h-11 w-11 items-center justify-center rounded-xl text-white transition hover:bg-white/10 xl:hidden"
+            onClick={() => setMobileOpen((v) => !v)}
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
+      </header>
+
+      <div
+        className={cn(
+          'fixed inset-0 z-40 flex flex-col bg-navy-900 transition-all duration-400 xl:hidden',
+          mobileOpen ? 'visible opacity-100' : 'invisible opacity-0'
+        )}
+      >
+        <div className="container-x flex-1 overflow-y-auto pb-16 pt-24">
+          <div className="space-y-1">
+            {top.map((item) => {
+              const kids = childrenByParent[item.id]
+              if (kids?.length) {
+                const isOpen = openAccordion === item.id
+                return (
+                  <div key={item.id} className="border-b border-white/10">
+                    <button
+                      className="flex w-full items-center justify-between py-4 text-left text-lg font-medium text-white"
+                      onClick={() => setOpenAccordion(isOpen ? null : item.id)}
+                    >
+                      {item.label}
+                      <ChevronDown size={18} className={cn('text-gold-400 transition-transform', isOpen && 'rotate-180')} />
+                    </button>
+                    <div className={cn('grid transition-all duration-300', isOpen ? 'grid-rows-[1fr] pb-3' : 'grid-rows-[0fr]')}>
+                      <div className="overflow-hidden">
+                        <div className="space-y-1 pl-4">
+                          {kids.map((k) => (
+                            <Link
+                              key={k.id}
+                              to={k.url}
+                              className="block rounded-lg px-4 py-2.5 text-[15px] font-medium text-navy-100 transition hover:bg-white/5 hover:text-gold-300"
+                            >
+                              {k.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )
+              }
+              return (
+                <Link
+                  key={item.id}
+                  to={item.url}
+                  className="block border-b border-white/10 py-4 text-lg font-medium text-white transition hover:text-gold-300"
+                >
+                  {item.label}
+                </Link>
+              )
+            })}
+          </div>
+
+          <div className="mt-8 space-y-3">
+            <button
+              onClick={() => {
+                setMobileOpen(false)
+                setSearchOpen(true)
+              }}
+              className="flex w-full items-center gap-2.5 rounded-xl border border-white/10 px-4 py-3.5 text-left text-sm font-medium text-navy-100 transition hover:bg-white/5"
+            >
+              <SearchIcon size={16} className="text-gold-400" /> {schoolInfo?.searchPlaceholder || 'Search the site…'}
+            </button>
+            <Link to="/contact" className="btn-gold w-full">
+              {schoolInfo?.contactButtonLabel || 'Contact Us'}
+            </Link>
+            <a
+              href={`tel:${schoolInfo?.phone?.replace(/[^+\d]/g, '')}`}
+              className="flex items-center gap-2.5 text-sm text-navy-100"
+            >
+              <Phone size={15} className="text-gold-400" /> {schoolInfo?.phone}
+            </a>
+            <a href={`mailto:${schoolInfo?.email}`} className="flex items-center gap-2.5 text-sm text-navy-100">
+              <Mail size={15} className="text-gold-400" /> {schoolInfo?.email}
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <GlobalSearch open={searchOpen} onClose={() => setSearchOpen(false)} />
+    </>
+  )
+}
