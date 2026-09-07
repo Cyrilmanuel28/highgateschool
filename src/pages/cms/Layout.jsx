@@ -44,7 +44,7 @@ const NAV = [
       { to: '/dashboard/academics', label: 'Academic Programmes', icon: GraduationCap },
       { to: '/dashboard/fees', label: 'Fee Structures', icon: Wallet },
       { to: '/dashboard/calendar', label: 'Calendar Events', icon: CalendarRange },
-      { to: '/dashboard/careers', label: 'Careers', icon: Briefcase }
+      { to: '/dashboard/vacancies', label: 'Careers', icon: Briefcase }
     ]
   },
   {

@@ -57,8 +57,8 @@ export const seedSchoolInfo = {
 }
 
 export const seedSettings = {
-  adminUser: 'zs716992@gmail.com',
-  adminEmail: 'zs716992@gmail.com',
+  adminUser: 'admin@highgate.sch.uk',
+  adminEmail: 'admin@highgate.sch.uk',
   siteStatus: 'live',
   maintenance: false,
   contactEmail: 'admissions@highgate.sch.uk',

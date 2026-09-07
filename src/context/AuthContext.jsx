@@ -41,8 +41,15 @@ export function AuthProvider({ children }) {
   }, [])
 
   const changePassword = useCallback(
-    async (_current, next) => {
+    async (current, next) => {
       if (!supabase) return { ok: false, error: 'Not connected' }
+      // Re-authenticate with current password to verify identity
+      const { data: sessionData } = await supabase.auth.getSession()
+      const email = sessionData?.session?.user?.email
+      if (email && current) {
+        const { error: verifyErr } = await supabase.auth.signInWithPassword({ email, password: current })
+        if (verifyErr) return { ok: false, error: 'Current password is incorrect' }
+      }
       const { error } = await supabase.auth.updateUser({ password: next })
       if (error) return { ok: false, error: error.message }
       return { ok: true }

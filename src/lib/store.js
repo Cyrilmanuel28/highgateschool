@@ -10,7 +10,7 @@ export const COLLECTIONS = [
   'campusLocations','tourScenes','emergencyAlerts',
   'faqs','videos','menus',
   'newsletterCampaigns','newsletterSubscribers',
-  'applications','jobApplications',
+  'applications','jobApplications','eventRegistrations',
 ]
 
 export const SINGLES = {

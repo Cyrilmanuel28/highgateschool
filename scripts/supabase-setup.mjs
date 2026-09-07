@@ -20,8 +20,8 @@ for (const line of readFileSync(path.resolve(import.meta.dirname, '..', '.env'),
 const URL = env.VITE_SUPABASE_URL || ''
 const SERVICE_KEY = env.SUPABASE_SERVICE_ROLE_KEY || ''
 const ACCESS_TOKEN = env.SUPABASE_ACCESS_TOKEN || ''
-const ADMIN_EMAIL = env.SUPABASE_ADMIN_EMAIL || 'zs716992@gmail.com'
-const ADMIN_PASSWORD = env.SUPABASE_ADMIN_PASSWORD || 'Cyril@0620013019'
+const ADMIN_EMAIL = env.SUPABASE_ADMIN_EMAIL || ''
+const ADMIN_PASSWORD = env.SUPABASE_ADMIN_PASSWORD || ''
 
 if (!URL || !SERVICE_KEY) {
   console.error('Missing VITE_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY in .env')

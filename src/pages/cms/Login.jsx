@@ -37,7 +37,7 @@ export default function Login() {
             <GraduationCap size={30} className="text-navy-900" />
           </div>
           <h1 className="mt-5 font-serif text-3xl font-semibold text-white">Developer Dashboard</h1>
-          <p className="mt-2 text-sm text-navy-200">{info?.name || 'Highgate School'} · Content Management System</p>
+          <p className="mt-2 text-sm text-navy-200">{info?.name || 'School'} · Content Management System</p>
         </div>
 
         <form onSubmit={onSubmit} className="rounded-2xl border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur-xl">
