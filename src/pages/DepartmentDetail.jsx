@@ -94,7 +94,7 @@ export default function DepartmentDetail() {
               <div className="rounded-2xl bg-navy-900 p-7">
                 <h3 className="font-serif text-lg font-semibold text-white">{info?.departmentsCtaTitle || 'Want to learn more?'}</h3>
                 <p className="mt-2 text-sm text-navy-100">{info?.departmentsCtaText || 'Talk to the department or explore our programmes.'}</p>
-                <Link to="/academics" className="btn-gold mt-5 w-full">
+                <Link to="/academics" className="btn-royal mt-5 w-full">
                   Explore Programmes
                 </Link>
               </div>

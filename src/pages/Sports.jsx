@@ -50,7 +50,7 @@ export default function Sports() {
             <p className="mx-auto mt-2 max-w-md text-sm text-navy-100">
               Trials for competitive squads run at the start of every term — everyone is welcome.
             </p>
-            <Link to="/calendar" className="btn-gold mt-6">
+            <Link to="/calendar" className="btn-royal mt-6">
               See the Calendar
             </Link>
           </div>

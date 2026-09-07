@@ -143,7 +143,7 @@ export default function NewsIndex() {
                   }}
                   className={cn(
                     'h-10 w-10 rounded-xl text-sm font-semibold transition',
-                    p === currentPage ? 'bg-gold-500 text-white shadow-gold' : 'bg-white text-navy-800 shadow-card hover:bg-navy-50'
+                    p === currentPage ? 'bg-royal text-white shadow-royal' : 'bg-white text-navy-800 shadow-card hover:bg-navy-50'
                   )}
                 >
                   {p}

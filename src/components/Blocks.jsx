@@ -39,13 +39,13 @@ export function BlockHero({ block }) {
   return (
     <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden bg-navy-950">
       <div className="absolute inset-0">
-        <Img src={c.image} alt="" className="opacity-50" eager fetchpriority="high" />
+        <Img src={c.image} alt="" className="opacity-45" eager fetchpriority="high" />
         <div className="absolute inset-0 bg-gradient-to-b from-navy-950/90 via-navy-950/65 to-navy-950/95" />
       </div>
       <div className="container-x relative z-10 py-32 text-center">
-        <div className="animate-fade-up inline-flex items-center gap-2 rounded-full border border-gold-500/30 bg-gold-500/10 px-4 py-1.5 backdrop-blur-sm">
+        <div className="animate-fade-up inline-flex items-center gap-2 rounded-full border border-gold-400/40 bg-navy-900/80 px-4 py-1.5 backdrop-blur-md shadow-sm">
           <span className="h-1.5 w-1.5 rounded-full bg-gold-400" />
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-300">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold-200">
             {c.kicker || tagline}
           </p>
         </div>
@@ -60,7 +60,7 @@ export function BlockHero({ block }) {
         {(c.cta1 || c.cta2) && (
           <div className="mt-10 flex animate-fade-up flex-wrap items-center justify-center gap-4 [animation-delay:360ms]">
             {c.cta1 && (
-              <Link to={c.cta1.to || '/'} className="btn-gold rounded-lg px-7 py-3.5 text-sm font-bold shadow-gold">
+              <Link to={c.cta1.to || '/'} className="btn-royal rounded-lg px-7 py-3.5 text-sm font-semibold shadow-royal">
                 {c.cta1.label}
               </Link>
             )}
@@ -72,7 +72,6 @@ export function BlockHero({ block }) {
           </div>
         )}
       </div>
-      <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-surface to-transparent" />
     </section>
   )
 }
@@ -404,7 +403,7 @@ export function BlockCta({ block, dark }) {
             {(block.cta1 || block.cta2) && (
               <div className="relative mt-8 flex flex-wrap items-center justify-center gap-4">
                 {block.cta1 && (
-                  <Link to={block.cta1.to || '/'} className="btn-gold rounded-lg px-7 py-3 font-bold shadow-gold">
+                  <Link to={block.cta1.to || '/'} className="btn-royal rounded-lg px-7 py-3 font-semibold shadow-royal">
                     {block.cta1.label}
                   </Link>
                 )}

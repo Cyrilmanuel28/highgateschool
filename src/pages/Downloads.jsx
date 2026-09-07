@@ -96,7 +96,7 @@ export default function Downloads() {
             <p className="mx-auto mt-2 max-w-md text-sm text-navy-100">
               {info?.downloadsCtaText || 'Our office will happily send printed copies or answer any questions.'}
             </p>
-            <Link to="/contact" className="btn-gold mt-6">
+            <Link to="/contact" className="btn-royal mt-6">
               {info?.downloadsCtaButton || 'Contact the Office'}
             </Link>
           </div>

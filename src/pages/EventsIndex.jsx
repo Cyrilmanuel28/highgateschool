@@ -68,8 +68,8 @@ export default function EventsIndex() {
               title="No events here yet"
               text={filter === 'upcoming' ? 'New events are scheduled regularly — check the calendar or come back soon.' : 'No past events to show.'}
               action={
-                <Link to="/calendar" className="btn-outline">
-                  View Academic Calendar
+                <Link to="/calendar" className="btn-royal">
+                  <CalendarDays size={16} /> View term calendar
                 </Link>
               }
             />
@@ -91,7 +91,7 @@ export default function EventsIndex() {
                   Term dates, holidays, assessments, and events all live on the academic calendar.
                 </p>
               </div>
-              <Link to="/calendar" className="btn-gold">
+              <Link to="/calendar" className="btn-royal">
                 Academic Calendar <ChevronRight size={16} />
               </Link>
             </div>

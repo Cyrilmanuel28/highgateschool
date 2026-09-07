@@ -270,7 +270,7 @@ export default function Apply() {
                     <input ref={fileRef} type="file" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" className="hidden" onChange={(e) => addFiles(e.target.files)} />
                   </div>
 
-                  <button type="submit" disabled={submitting} className="btn-gold w-full">
+                  <button type="submit" disabled={submitting} className="btn-royal w-full">
                     <GraduationCap size={17} /> {submitting ? 'Submitting…' : 'Submit application'}
                   </button>
                   <p className="text-center text-xs text-slate-400">

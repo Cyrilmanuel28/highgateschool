@@ -68,8 +68,8 @@ export default {
         card: '0 1px 3px rgba(11,31,58,0.06), 0 6px 16px -2px rgba(11,31,58,0.04)',
         cardHover: '0 12px 28px -4px rgba(11,31,58,0.12), 0 4px 12px -2px rgba(11,31,58,0.06)',
         dropdown: '0 10px 30px -5px rgba(11, 31, 58, 0.15), 0 0 0 1px rgba(11, 31, 58, 0.05)',
-        gold: '0 8px 24px -4px rgba(201, 162, 39, 0.35)',
-        royal: '0 8px 24px -4px rgba(23, 74, 139, 0.35)'
+        gold: '0 4px 12px -2px rgba(201, 162, 39, 0.20)',
+        royal: '0 4px 14px 0 rgba(23, 74, 139, 0.35)'
       },
       borderRadius: {
         xl2: '1rem',

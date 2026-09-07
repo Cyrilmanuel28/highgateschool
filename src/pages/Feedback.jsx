@@ -128,7 +128,7 @@ export default function Feedback() {
                   </div>
                 </div>
 
-                <button type="submit" className="btn-gold mt-6 w-full sm:w-auto">Submit feedback</button>
+                <button type="submit" className="btn-royal mt-6 w-full sm:w-auto">Submit feedback</button>
                 <p className="mt-3 flex items-center gap-1.5 text-xs text-slate-400">
                   <ShieldCheck size={13} /> Your details are shared only with the feedback team.
                 </p>

@@ -86,7 +86,7 @@ export default function Faq() {
             <p className="mx-auto mt-2 max-w-md text-sm text-navy-100">
               {info?.faqCtaText || 'Our team replies within one working day.'}
             </p>
-            <a href="/contact" className="btn-gold mt-6">{info?.faqCtaLabel || 'Ask Us Anything'}</a>
+            <a href="/contact" className="btn-royal mt-6">{info?.faqCtaLabel || 'Ask Us Anything'}</a>
           </div>
         </div>
       </div>

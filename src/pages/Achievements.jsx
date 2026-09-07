@@ -82,7 +82,7 @@ export default function Achievements() {
                 <h2 className="font-serif text-2xl font-semibold text-white sm:text-3xl">Read the Stories Behind the Trophies</h2>
                 <p className="mt-2 max-w-lg text-sm text-navy-100">Full articles on our biggest achievements live in the newsroom.</p>
               </div>
-              <a href="/news" className="btn-gold">
+              <a href="/news" className="btn-royal">
                 Visit the Newsroom <ArrowRight size={16} />
               </a>
             </div>

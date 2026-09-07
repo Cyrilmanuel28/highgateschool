@@ -50,7 +50,7 @@ export default function Clubs() {
             <p className="mx-auto mt-2 max-w-md text-sm text-navy-100">
               Every year, students pitch new societies to the Activities Council. Talk to your form tutor to get started.
             </p>
-            <Link to="/student-life" className="btn-gold mt-6">
+            <Link to="/student-life" className="btn-royal mt-6">
               Explore Student Life
             </Link>
           </div>

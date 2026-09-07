@@ -97,7 +97,7 @@ export default function EventDetail() {
               <div className="rounded-2xl bg-navy-900 p-7 text-center">
                 <h3 className="font-serif text-xl font-semibold text-white">Questions?</h3>
                 <p className="mt-2 text-sm text-navy-100">Our team is happy to help you plan your visit.</p>
-                <Link to="/contact" className="btn-gold mt-5 w-full">
+                <Link to="/contact" className="btn-royal mt-5 w-full">
                   Contact Us
                 </Link>
               </div>

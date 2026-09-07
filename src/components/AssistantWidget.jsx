@@ -459,9 +459,9 @@ export default function AssistantWidget() {
       <button
         onClick={() => setOpen((v) => !v)}
         aria-label={open ? 'Close assistant' : 'Open School Assistant'}
-        className="fixed bottom-6 right-4 z-[70] flex items-center gap-2 rounded-full bg-gold-500 px-5 py-4 font-semibold text-navy-900 shadow-gold transition hover:-translate-y-0.5 hover:bg-gold-400 sm:right-6"
+        className="fixed bottom-6 right-4 z-[70] flex items-center gap-2.5 rounded-full bg-royal px-5 py-3.5 font-semibold text-white shadow-royal border border-white/20 transition hover:-translate-y-0.5 hover:bg-royal-hover sm:right-6"
       >
-        {open ? <X size={20} /> : <MessageCircle size={20} />}
+        {open ? <X size={20} className="text-gold-300" /> : <MessageCircle size={20} className="text-gold-300" />}
         {!open && <span className="hidden text-sm sm:inline">{info?.assistantButtonLabel || 'Ask Assistant'}</span>}
       </button>
     </>

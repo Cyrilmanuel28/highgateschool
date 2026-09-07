@@ -192,8 +192,8 @@ export default function Testimonials() {
                     <textarea rows={4} className={inputCls} value={form.quote} onChange={set('quote')} required placeholder="What has Highgate meant to you or your family?" />
                   </div>
                 </div>
-                <button type="submit" className="btn-gold mt-6">
-                  <Send size={15} /> Submit testimonial
+                <button type="submit" className="btn-royal mt-6">
+                  <Quote size={16} /> Submit testimonial
                 </button>
               </form>
             </div>

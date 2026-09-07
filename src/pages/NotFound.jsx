@@ -18,7 +18,7 @@ export default function NotFound() {
           The page you're looking for may have moved, been renamed, or never existed. Let's get you back on track.
         </p>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-          <Link to="/" className="btn-gold">
+          <Link to="/" className="btn-royal">
             <Home size={16} /> Back to Home
           </Link>
           <Link to="/contact" className="btn-outline-light">

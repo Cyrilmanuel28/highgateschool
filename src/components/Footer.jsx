@@ -57,7 +57,7 @@ export default function Footer() {
                 aria-label="Email address"
                 className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white outline-none placeholder:text-navy-300 focus:border-gold-500"
               />
-              <button type="submit" className="btn-gold shrink-0" aria-label="Subscribe">
+              <button type="submit" className="btn-royal shrink-0" aria-label="Subscribe">
                 <Send size={16} />
               </button>
             </form>

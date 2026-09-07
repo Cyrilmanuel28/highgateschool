@@ -89,8 +89,8 @@ export default function Navbar() {
         className={cn(
           'fixed inset-x-0 top-0 z-50 transition-all duration-300',
           solid
-            ? 'border-b border-white/10 bg-navy-900/95 shadow-lg backdrop-blur-md'
-            : 'bg-gradient-to-b from-navy-950/80 via-navy-950/40 to-transparent'
+            ? 'border-b border-white/10 bg-navy-950/95 shadow-lg backdrop-blur-md'
+            : 'border-b border-white/10 bg-navy-950/90 shadow-md backdrop-blur-md'
         )}
       >
         <div className="container-x flex h-[76px] items-center justify-between gap-6">
@@ -135,8 +135,8 @@ export default function Navbar() {
                     cn(
                       'relative rounded-lg px-3.5 py-2 text-sm font-medium transition',
                       isActive
-                        ? 'text-gold-300 after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:rounded-full after:bg-gold-500'
-                        : 'text-white/90 hover:bg-white/10 hover:text-white'
+                        ? 'text-white font-semibold after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:rounded-full after:bg-gold-500'
+                        : 'text-white/80 hover:bg-white/10 hover:text-white'
                     )
                   }
                 >
@@ -154,7 +154,7 @@ export default function Navbar() {
             </button>
             <Link
               to="/contact"
-              className="ml-2 rounded-lg bg-gold-500 px-5 py-2.5 text-sm font-bold text-navy-950 shadow-gold transition hover:-translate-y-0.5 hover:bg-gold-400"
+              className="ml-2 inline-flex items-center justify-center rounded-lg bg-royal px-5 py-2.5 text-sm font-semibold text-white shadow-royal border border-white/15 transition hover:-translate-y-0.5 hover:bg-royal-hover active:scale-[0.98]"
             >
               {schoolInfo?.contactButtonLabel || 'Contact Us'}
             </Link>
@@ -231,7 +231,7 @@ export default function Navbar() {
             >
               <SearchIcon size={16} className="text-gold-400" /> {schoolInfo?.searchPlaceholder || 'Search the site…'}
             </button>
-            <Link to="/contact" className="btn-gold w-full">
+            <Link to="/contact" className="btn-royal w-full">
               {schoolInfo?.contactButtonLabel || 'Contact Us'}
             </Link>
             <a

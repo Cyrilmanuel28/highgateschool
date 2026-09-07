@@ -33,8 +33,8 @@ export default function Login() {
 
       <div className="relative w-full max-w-md">
         <div className="mb-8 text-center">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gold-500 shadow-gold">
-            <GraduationCap size={30} className="text-navy-900" />
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-royal shadow-royal border border-white/20">
+            <GraduationCap size={30} className="text-gold-300" />
           </div>
           <h1 className="mt-5 font-serif text-3xl font-semibold text-white">Developer Dashboard</h1>
           <p className="mt-2 text-sm text-navy-200">{info?.name || 'School'} · Content Management System</p>
@@ -47,7 +47,7 @@ export default function Login() {
             onChange={(e) => setUsername(e.target.value)}
             autoComplete="username"
             placeholder="admin"
-            className="mb-5 w-full rounded-lg border border-white/15 bg-white/10 px-4 py-3 text-sm text-white placeholder-navy-300 outline-none transition focus:border-gold-400 focus:ring-2 focus:ring-gold-500/30"
+            className="mb-5 w-full rounded-lg border border-white/15 bg-white/10 px-4 py-3 text-sm text-white placeholder-navy-300 outline-none transition focus:border-royal-light focus:ring-2 focus:ring-royal/30"
           />
           <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-navy-200">Password</label>
           <div className="relative mb-2">
@@ -57,7 +57,7 @@ export default function Login() {
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="current-password"
               placeholder="••••••••"
-              className="w-full rounded-lg border border-white/15 bg-white/10 px-4 py-3 pr-12 text-sm text-white placeholder-navy-300 outline-none transition focus:border-gold-400 focus:ring-2 focus:ring-gold-500/30"
+              className="w-full rounded-lg border border-white/15 bg-white/10 px-4 py-3 pr-12 text-sm text-white placeholder-navy-300 outline-none transition focus:border-royal-light focus:ring-2 focus:ring-royal/30"
             />
             <button
               type="button"
@@ -75,7 +75,7 @@ export default function Login() {
             </p>
           )}
 
-          <button type="submit" className="mt-3 flex w-full items-center justify-center gap-2 rounded-lg bg-gold-500 py-3 text-sm font-bold text-navy-900 shadow-gold transition hover:bg-gold-400">
+          <button type="submit" className="mt-3 flex w-full items-center justify-center gap-2 rounded-lg bg-royal py-3 text-sm font-semibold text-white shadow-royal border border-white/15 transition hover:-translate-y-0.5 hover:bg-royal-hover">
             <Lock size={15} /> Sign In
           </button>
 
