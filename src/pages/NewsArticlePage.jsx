@@ -13,8 +13,8 @@ import NotFound from './NotFound.jsx'
 export default function NewsArticlePage() {
   const { slug } = useParams()
   const [searchParams] = useSearchParams()
-  const { getBySlug, publishedOnly } = useData()
-  const article = useMemo(() => getBySlug('news', slug), [getBySlug, slug])
+  const { getBySlug, getRecord, publishedOnly, db } = useData()
+  const article = useMemo(() => getBySlug('news', slug) || getRecord('news', slug), [getBySlug, getRecord, slug, db.news])
 
   if (!article || (!searchParams.get('preview') && article.status !== 'published')) return <NotFound />
 

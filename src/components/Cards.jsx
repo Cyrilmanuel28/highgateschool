@@ -149,24 +149,35 @@ export function VideoCard({ video }) {
 }
 
 export function ProgramCard({ program, index }) {
+  const target = program.slug || program.id
   return (
-    <div className="card-hover relative overflow-hidden p-7">
-      <span className="absolute -right-2 -top-5 font-serif text-[6.5rem] font-bold leading-none text-navy-900/5">
+    <Link to={`/programs/${target}`} className="card-hover group relative flex flex-col justify-between overflow-hidden p-7 transition-all duration-300">
+      <span className="absolute -right-2 -top-5 font-serif text-[6.5rem] font-bold leading-none text-navy-900/5 transition-colors group-hover:text-royal/10">
         {String(index + 1).padStart(2, '0')}
       </span>
-      <div className="flex items-center gap-3">
-        <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-royal/10 border border-royal/20 text-royal">
-          <GraduationCap size={22} />
+      <div>
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-royal/10 border border-royal/20 text-royal transition-colors group-hover:bg-royal group-hover:text-white">
+              <GraduationCap size={22} />
+            </span>
+            <span className="rounded-md bg-royal/10 px-3 py-1 text-xs font-semibold text-royal">{program.level}</span>
+          </div>
+          <span className="flex items-center text-xs font-semibold text-royal transition-transform group-hover:translate-x-1">
+            <ArrowRight size={16} />
+          </span>
+        </div>
+        <h3 className="mt-5 font-serif text-2xl font-semibold text-navy-900 transition-colors group-hover:text-royal">{program.name}</h3>
+        <p className="mt-3 text-sm leading-relaxed text-charcoal/80">{program.description}</p>
+      </div>
+      <div className="mt-6 flex items-center justify-between gap-2 rounded-lg bg-surface border border-slate-200/80 px-3.5 py-2.5 text-xs font-medium text-charcoal">
+        <span className="flex items-center gap-1.5 truncate">
+          <GraduationCap size={14} className="text-gold-600 shrink-0" />
+          <span className="truncate">{program.curriculum}</span>
         </span>
-        <span className="rounded-md bg-royal/10 px-3 py-1 text-xs font-semibold text-royal">{program.level}</span>
+        <span className="text-[11px] font-bold text-royal shrink-0">Details →</span>
       </div>
-      <h3 className="mt-5 font-serif text-2xl font-semibold text-navy-900">{program.name}</h3>
-      <p className="mt-3 text-sm leading-relaxed text-charcoal/80">{program.description}</p>
-      <div className="mt-5 flex items-center gap-2 rounded-lg bg-surface border border-slate-200/80 px-3.5 py-2.5 text-xs font-medium text-charcoal">
-        <GraduationCap size={14} className="text-gold-600" />
-        {program.curriculum}
-      </div>
-    </div>
+    </Link>
   )
 }
 

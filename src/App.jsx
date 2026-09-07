@@ -16,6 +16,8 @@ import StaffDirectory from './pages/StaffDirectory.jsx'
 import StaffProfile from './pages/StaffProfile.jsx'
 import Departments from './pages/Departments.jsx'
 import DepartmentDetail from './pages/DepartmentDetail.jsx'
+import ProgramsIndex from './pages/ProgramsIndex.jsx'
+import ProgramDetail from './pages/ProgramDetail.jsx'
 import Fees from './pages/Fees.jsx'
 import Calendar from './pages/Calendar.jsx'
 import Downloads from './pages/Downloads.jsx'
@@ -88,6 +90,8 @@ export default function App() {
         <Route path="staff/:id" element={<StaffProfile />} />
         <Route path="departments" element={<Departments />} />
         <Route path="departments/:id" element={<DepartmentDetail />} />
+        <Route path="programs" element={<ProgramsIndex />} />
+        <Route path="programs/:id" element={<ProgramDetail />} />
         <Route path="fees" element={<Fees />} />
         <Route path="calendar" element={<Calendar />} />
         <Route path="news" element={<NewsIndex />} />
@@ -96,6 +100,8 @@ export default function App() {
         <Route path="events/:slug" element={<EventDetail />} />
         <Route path="gallery" element={<GalleryIndex />} />
         <Route path="gallery/:album" element={<GalleryAlbumPage />} />
+        <Route path="albums" element={<GalleryIndex />} />
+        <Route path="albums/:album" element={<GalleryAlbumPage />} />
         <Route path="videos" element={<Videos />} />
         <Route path="achievements" element={<Achievements />} />
         <Route path="clubs" element={<Clubs />} />

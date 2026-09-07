@@ -10,9 +10,9 @@ import NotFound from './NotFound.jsx'
 
 export default function DepartmentDetail() {
   const { id } = useParams()
-  const { getBySlug, publishedOnly, db } = useData()
+  const { getBySlug, getRecord, publishedOnly, db } = useData()
   const info = db.schoolInfo
-  const dept = useMemo(() => getBySlug('departments', id), [getBySlug, id])
+  const dept = useMemo(() => getBySlug('departments', id) || getRecord('departments', id), [getBySlug, getRecord, id, db.departments])
 
   if (!dept || ((dept.status !== undefined && dept.status !== 'published') && dept.isVisible !== false)) return <NotFound />
 

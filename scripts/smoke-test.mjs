@@ -38,9 +38,10 @@ console.log('seed version:', db.settings?.seedVersion, '| collections:', Object.
 
 const routes = [
   '/', '/about', '/history', '/vision-mission', '/administration', '/board',
-  '/student-life', '/admissions', '/academics', '/privacy-policy', '/terms',
-  '/staff', '/departments', '/fees', '/calendar', '/news', '/events',
-  '/gallery', '/videos', '/achievements', '/clubs', '/sports', '/downloads',
+  '/student-life', '/admissions', '/academics', '/programs', '/programs/prg1',
+  '/privacy-policy', '/terms',
+  '/staff', '/staff/helena-moreau', '/departments', '/fees', '/calendar', '/news', '/events',
+  '/gallery', '/albums', '/videos', '/achievements', '/clubs', '/sports', '/downloads',
   '/faq', '/contact', '/login', '/no-such-page',
   '/notices', '/apply', '/library', '/magazine', '/magazine/quiet-revolution-science-labs',
   '/careers', '/testimonials', '/emergency', '/campus-map', '/virtual-tour',

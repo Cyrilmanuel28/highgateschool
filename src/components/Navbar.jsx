@@ -100,27 +100,45 @@ export default function Navbar() {
             {top.map((item) => {
               const kids = childrenByParent[item.id]
               if (kids?.length) {
+                const isCurrentActive =
+                  location.pathname === item.url ||
+                  (item.url !== '/' && location.pathname.startsWith(item.url)) ||
+                  kids.some((k) => location.pathname === k.url || (k.url !== '/' && location.pathname.startsWith(k.url)))
+
                 return (
                   <div key={item.id} className="group relative">
                     <Link
                       to={item.url}
-                      className="flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-sm font-medium text-white/90 transition hover:bg-white/10 hover:text-white"
+                      className={cn(
+                        'relative flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-sm font-medium transition',
+                        isCurrentActive
+                          ? 'text-white font-semibold after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:rounded-full after:bg-gold-500'
+                          : 'text-white/80 hover:bg-white/10 hover:text-white'
+                      )}
                     >
                       {item.label}
-                      <ChevronDown size={14} className="text-white/60 transition-transform duration-200 group-hover:rotate-180 group-hover:text-gold-300" />
+                      <ChevronDown size={14} className={cn('transition-transform duration-200 group-hover:rotate-180', isCurrentActive ? 'text-gold-300' : 'text-white/60')} />
                     </Link>
                     <div className="invisible absolute left-0 top-full pt-2 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
                       <div className="w-64 overflow-hidden rounded-xl border border-slate-200/80 bg-white p-2 shadow-dropdown">
-                        {kids.map((k) => (
-                          <Link
-                            key={k.id}
-                            to={k.url}
-                            className="flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm font-medium text-charcoal transition hover:bg-surface hover:text-royal"
-                          >
-                            {k.label}
-                            <ChevronDown size={12} className="-rotate-90 text-gold-500/70" />
-                          </Link>
-                        ))}
+                        {kids.map((k) => {
+                          const isKidActive = location.pathname === k.url || (k.url !== '/' && location.pathname.startsWith(k.url))
+                          return (
+                            <Link
+                              key={k.id}
+                              to={k.url}
+                              className={cn(
+                                'flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm font-medium transition',
+                                isKidActive
+                                  ? 'bg-royal/10 text-royal font-semibold'
+                                  : 'text-charcoal hover:bg-surface hover:text-royal'
+                              )}
+                            >
+                              {k.label}
+                              <ChevronDown size={12} className={cn('-rotate-90', isKidActive ? 'text-royal' : 'text-gold-500/70')} />
+                            </Link>
+                          )
+                        })}
                       </div>
                     </div>
                   </div>
@@ -172,7 +190,7 @@ export default function Navbar() {
 
       <div
         className={cn(
-          'fixed inset-0 z-40 flex flex-col bg-navy-900 transition-all duration-400 xl:hidden',
+          'fixed inset-0 z-40 flex flex-col bg-navy-950 transition-all duration-400 xl:hidden',
           mobileOpen ? 'visible opacity-100' : 'invisible opacity-0'
         )}
       >
@@ -181,39 +199,67 @@ export default function Navbar() {
             {top.map((item) => {
               const kids = childrenByParent[item.id]
               if (kids?.length) {
-                const isOpen = openAccordion === item.id
+                const isCurrentActive =
+                  location.pathname === item.url ||
+                  (item.url !== '/' && location.pathname.startsWith(item.url)) ||
+                  kids.some((k) => location.pathname === k.url || (k.url !== '/' && location.pathname.startsWith(k.url)))
+                const isOpen = openAccordion === item.id || (openAccordion === null && isCurrentActive)
                 return (
-                  <div key={item.id} className="border-b border-white/10">
-                    <button
-                      className="flex w-full items-center justify-between py-4 text-left text-lg font-medium text-white"
-                      onClick={() => setOpenAccordion(isOpen ? null : item.id)}
-                    >
-                      {item.label}
-                      <ChevronDown size={18} className={cn('text-gold-400 transition-transform', isOpen && 'rotate-180')} />
-                    </button>
-                    <div className={cn('grid transition-all duration-300', isOpen ? 'grid-rows-[1fr] pb-3' : 'grid-rows-[0fr]')}>
-                      <div className="overflow-hidden">
-                        <div className="space-y-1 pl-4">
-                          {kids.map((k) => (
+                  <div key={item.id} className="border-b border-white/10 pb-1">
+                    <div className="flex items-center justify-between py-2">
+                      <Link
+                        to={item.url}
+                        onClick={() => setMobileOpen(false)}
+                        className={cn(
+                          'text-lg font-medium transition',
+                          isCurrentActive ? 'text-gold-300 font-semibold' : 'text-white hover:text-gold-300'
+                        )}
+                      >
+                        {item.label}
+                      </Link>
+                      <button
+                        className="p-2 text-gold-400"
+                        onClick={() => setOpenAccordion(openAccordion === item.id ? false : item.id)}
+                        aria-label={`Toggle ${item.label} submenu`}
+                      >
+                        <ChevronDown size={18} className={cn('transition-transform', isOpen && 'rotate-180')} />
+                      </button>
+                    </div>
+                    {isOpen && (
+                      <div className="space-y-1 pl-4 pb-2">
+                        {kids.map((k) => {
+                          const isKidActive = location.pathname === k.url || (k.url !== '/' && location.pathname.startsWith(k.url))
+                          return (
                             <Link
                               key={k.id}
                               to={k.url}
-                              className="block rounded-lg px-4 py-2.5 text-[15px] font-medium text-navy-100 transition hover:bg-white/5 hover:text-gold-300"
+                              onClick={() => setMobileOpen(false)}
+                              className={cn(
+                                'block rounded-lg px-4 py-2 text-[15px] font-medium transition',
+                                isKidActive
+                                  ? 'bg-royal/20 text-gold-300 font-semibold border-l-2 border-gold-400'
+                                  : 'text-navy-100 hover:bg-white/5 hover:text-gold-300'
+                              )}
                             >
                               {k.label}
                             </Link>
-                          ))}
-                        </div>
+                          )
+                        })}
                       </div>
-                    </div>
+                    )}
                   </div>
                 )
               }
+              const isActive = location.pathname === item.url
               return (
                 <Link
                   key={item.id}
                   to={item.url}
-                  className="block border-b border-white/10 py-4 text-lg font-medium text-white transition hover:text-gold-300"
+                  onClick={() => setMobileOpen(false)}
+                  className={cn(
+                    'block border-b border-white/10 py-3.5 text-lg font-medium transition',
+                    isActive ? 'text-gold-300 font-semibold' : 'text-white hover:text-gold-300'
+                  )}
                 >
                   {item.label}
                 </Link>

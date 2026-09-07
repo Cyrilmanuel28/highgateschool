@@ -12,9 +12,9 @@ import NotFound from './NotFound.jsx'
 export default function EventDetail() {
   const { slug } = useParams()
   const [searchParams] = useSearchParams()
-  const { getBySlug, publishedOnly, now, db } = useData()
+  const { getBySlug, getRecord, publishedOnly, now, db } = useData()
   const info = db.schoolInfo
-  const event = useMemo(() => getBySlug('events', slug), [getBySlug, slug])
+  const event = useMemo(() => getBySlug('events', slug) || getRecord('events', slug), [getBySlug, getRecord, slug, db.events])
 
   if (!event || (!searchParams.get('preview') && event.status !== 'published')) return <NotFound />
 

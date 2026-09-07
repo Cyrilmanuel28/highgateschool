@@ -10,9 +10,9 @@ import NotFound from './NotFound.jsx'
 
 export default function StaffProfile() {
   const { id } = useParams()
-  const { getRecord, db } = useData()
+  const { getRecord, getBySlug, db } = useData()
   const info = db.schoolInfo
-  const staff = useMemo(() => getRecord('staff', id), [getRecord, id])
+  const staff = useMemo(() => getRecord('staff', id) || getBySlug('staff', id), [getRecord, getBySlug, id, db.staff])
 
   if (!staff || staff.isVisible === false || (staff.status !== undefined && staff.status !== 'published')) return <NotFound />
 

@@ -11,8 +11,8 @@ import NotFound from './NotFound.jsx'
 export default function GalleryAlbumPage() {
   const { album } = useParams()
   const [searchParams] = useSearchParams()
-  const { getBySlug } = useData()
-  const record = useMemo(() => getBySlug('albums', album), [getBySlug, album])
+  const { getBySlug, getRecord, db } = useData()
+  const record = useMemo(() => getBySlug('albums', album) || getRecord('albums', album), [getBySlug, getRecord, album, db.albums])
   const [lightbox, setLightbox] = useState(null)
 
   useEffect(() => {
