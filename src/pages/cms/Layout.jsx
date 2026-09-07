@@ -91,6 +91,7 @@ export default function DashboardLayout() {
   const { user, logout } = useAuth()
   const { db } = useData()
   const info = db.schoolInfo
+  const logoUrl = info?.logo || null
   const navigate = useNavigate()
   const location = useLocation()
   const [collapsed, setCollapsed] = useState(false)
@@ -105,9 +106,13 @@ export default function DashboardLayout() {
   const sidebar = (
     <div className="flex h-full flex-col">
       <div className="flex items-center gap-3 px-5 py-5">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gold-500 font-serif text-xl font-bold text-slate-900">
-          A
-        </div>
+        {logoUrl ? (
+          <img src={logoUrl} alt={info?.name || 'School'} className="h-10 w-10 shrink-0 rounded-xl object-contain bg-white/10 p-0.5" />
+        ) : (
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gold-500 font-serif text-xl font-bold text-slate-900">
+            {(info?.name || 'H').split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase()}
+          </div>
+        )}
         <div className={cn('min-w-0 transition', collapsed && 'lg:hidden')}>
           <p className="truncate text-sm font-bold text-white">{info?.name || 'Highgate'} CMS</p>
           <p className="truncate text-[10px] font-semibold uppercase tracking-wider text-slate-400">Developer Dashboard</p>
