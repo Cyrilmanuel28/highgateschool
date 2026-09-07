@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { useData } from '../context/DataContext.jsx'
 import SeoHead from '../components/SeoHead.jsx'
 import { StaffCard } from '../components/Cards.jsx'
+import { GridSkeleton } from '../components/Skeletons.jsx'
 import Breadcrumbs from '../components/Breadcrumbs.jsx'
 import Reveal from '../components/Reveal.jsx'
 import EmptyState from '../components/EmptyState.jsx'
@@ -9,7 +10,7 @@ import { Users } from 'lucide-react'
 import { cn } from '../lib/utils.js'
 
 export default function StaffDirectory() {
-  const { publishedOnly, db } = useData()
+  const { publishedOnly, db, loading } = useData()
   const info = db.schoolInfo
   const [department, setDepartment] = useState('All')
 
@@ -66,7 +67,9 @@ export default function StaffDirectory() {
             ))}
           </div>
 
-          {filtered.length === 0 ? (
+          {loading ? (
+            <GridSkeleton count={8} cols="sm:grid-cols-2 lg:grid-cols-4" aspect="aspect-[4/5]" />
+          ) : filtered.length === 0 ? (
             <EmptyState icon={Users} title="No staff found" text="Try another department." />
           ) : (
             <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-4">

@@ -33,8 +33,9 @@ export default function Testimonials() {
   const info = db.schoolInfo
   const { toast } = useToast()
   const [featuredIndex, setFeaturedIndex] = useState(0)
-  const [form, setForm] = useState({ name: '', role: 'Parent', relationship: '', quote: '', rating: 5 })
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [form, setForm] = useState({ name: '', role: 'Parent', relationship: '', quote: '', rating: 5 })
 
   const approved = useMemo(
     () => (db.testimonials || []).filter((t) => t.approved).sort((a, b) => Number(b.featured || 0) - Number(a.featured || 0) || new Date(b.createdAt) - new Date(a.createdAt)),
@@ -52,17 +53,23 @@ export default function Testimonials() {
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }))
   const current = featured[featuredIndex] || null
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault()
+    if (submitting) return
     if (!form.name || !form.quote) return
-    create('testimonials', {
-      ...form,
-      approved: false,
-      featured: false,
-      createdAt: new Date().toISOString()
-    })
-    setSubmitted(true)
-    setForm({ name: '', role: 'Parent', relationship: '', quote: '', rating: 5 })
+    setSubmitting(true)
+    try {
+      await create('testimonials', {
+        ...form,
+        approved: false,
+        featured: false,
+        createdAt: new Date().toISOString()
+      })
+      setSubmitted(true)
+      setForm({ name: '', role: 'Parent', relationship: '', quote: '', rating: 5 })
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -192,8 +199,21 @@ export default function Testimonials() {
                     <textarea rows={4} className={inputCls} value={form.quote} onChange={set('quote')} required placeholder="What has Highgate meant to you or your family?" />
                   </div>
                 </div>
-                <button type="submit" className="btn-royal mt-6">
-                  <Quote size={16} /> Submit testimonial
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="btn-royal mt-6 inline-flex items-center justify-center gap-2 disabled:opacity-50"
+                >
+                  {submitting ? (
+                    <>
+                      <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                      Submitting Testimonial...
+                    </>
+                  ) : (
+                    <>
+                      <Quote size={16} /> Submit testimonial
+                    </>
+                  )}
                 </button>
               </form>
             </div>

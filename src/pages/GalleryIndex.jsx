@@ -2,13 +2,14 @@ import { useMemo, useState } from 'react'
 import { useData } from '../context/DataContext.jsx'
 import SeoHead from '../components/SeoHead.jsx'
 import { AlbumCard } from '../components/Cards.jsx'
+import { GridSkeleton } from '../components/Skeletons.jsx'
 import Breadcrumbs from '../components/Breadcrumbs.jsx'
 import Reveal from '../components/Reveal.jsx'
 import EmptyState from '../components/EmptyState.jsx'
 import { Images, Search } from 'lucide-react'
 
 export default function GalleryIndex() {
-  const { publishedOnly, db } = useData()
+  const { publishedOnly, db, loading } = useData()
   const info = db.schoolInfo
   const [query, setQuery] = useState('')
   const albums = useMemo(() => publishedOnly('albums', 'order'), [publishedOnly])
@@ -55,7 +56,9 @@ export default function GalleryIndex() {
               />
             </label>
           </div>
-          {filtered.length === 0 ? (
+          {loading ? (
+            <GridSkeleton count={6} cols="sm:grid-cols-2 lg:grid-cols-3" aspect="aspect-[16/10]" />
+          ) : filtered.length === 0 ? (
             <EmptyState icon={Images} title="No albums found" text={query ? 'Try a different search term.' : 'Albums will appear here as soon as they are published.'} />
           ) : (
             <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">

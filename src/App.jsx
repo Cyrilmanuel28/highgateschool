@@ -68,14 +68,17 @@ import {
   CampusLocationsCrud, TourScenesCrud, EmergencyAlertsCrud, EventRegistrationsCrud, StatsCrud
 } from './pages/cms/FeatureScreens.jsx'
 import HomeSectionsEdit from './pages/cms/HomeSectionsEdit.jsx'
+import { InitialSiteLoader } from './components/PageLoader.jsx'
 
 const CMS = (el) => <ProtectedRoute>{el}</ProtectedRoute>
 
 export default function App() {
   return (
-    <Routes>
-      <Route element={<PublicLayout />}>
-        <Route index element={<Home />} />
+    <>
+      <InitialSiteLoader />
+      <Routes>
+        <Route element={<PublicLayout />}>
+          <Route index element={<Home />} />
         <Route path="about" element={<ContentPage slug="about" />} />
         <Route path="history" element={<ContentPage slug="history" />} />
         <Route path="vision-mission" element={<ContentPage slug="vision-mission" />} />
@@ -234,5 +237,6 @@ export default function App() {
 
       <Route path="*" element={<NotFound />} />
     </Routes>
+    </>
   )
 }

@@ -12,24 +12,33 @@ export default function Contact() {
   const info = db.schoolInfo
   const settings = useMemo(() => getSingle('settings'), [getSingle])
   const [sent, setSent] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
+    if (submitting) return
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
       toast('Please complete the required fields', 'error')
       return
     }
-    create('messages', {
-      name: form.name.trim(),
-      email: form.email.trim(),
-      subject: form.subject.trim() || 'General enquiry',
-      message: form.message.trim(),
-      submittedAt: new Date().toISOString(),
-      isRead: false
-    })
-    setSent(true)
-    toast('Message sent — we will be in touch within one working day')
+    setSubmitting(true)
+    try {
+      await create('messages', {
+        name: form.name.trim(),
+        email: form.email.trim(),
+        subject: form.subject.trim() || 'General enquiry',
+        message: form.message.trim(),
+        submittedAt: new Date().toISOString(),
+        isRead: false
+      })
+      setSent(true)
+      toast('Message sent — we will be in touch within one working day')
+    } catch {
+      toast('Could not send message. Please try again.', 'error')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -179,8 +188,21 @@ export default function Contact() {
                       />
                     </div>
                     <div className="sm:col-span-2">
-                      <button type="submit" className="btn-royal w-full sm:w-auto">
-                        <Send size={16} /> Send Message
+                      <button
+                        type="submit"
+                        disabled={submitting}
+                        className="btn-royal w-full sm:w-auto inline-flex items-center justify-center gap-2 disabled:opacity-50"
+                      >
+                        {submitting ? (
+                          <>
+                            <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                            Sending...
+                          </>
+                        ) : (
+                          <>
+                            <Send size={16} /> Send Message
+                          </>
+                        )}
                       </button>
                     </div>
                   </form>

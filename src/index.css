@@ -57,6 +57,19 @@
   .label {
     @apply mb-1.5 block text-xs font-semibold uppercase tracking-wide text-charcoal/80;
   }
+  .skeleton-shimmer {
+    background: linear-gradient(90deg, #F0F4FA 0%, #E2E8F0 50%, #F0F4FA 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.8s ease-in-out infinite;
+  }
+  .dark .skeleton-shimmer {
+    background: linear-gradient(90deg, #121E36 0%, #1B2A4A 50%, #121E36 100%);
+    background-size: 200% 100%;
+  }
+  .progress-line {
+    background: linear-gradient(90deg, #174A8B 0%, #2563EB 50%, #C9A227 100%);
+    background-size: 200% 100%;
+  }
 }
 
 /* Quill rich text rendering (public site) */

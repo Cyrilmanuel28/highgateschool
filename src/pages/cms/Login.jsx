@@ -14,15 +14,22 @@ export default function Login() {
   const [password, setPassword] = useState('')
   const [showPass, setShowPass] = useState(false)
   const [error, setError] = useState('')
+  const [submitting, setSubmitting] = useState(false)
 
   if (isAuthed) return <Navigate to="/dashboard" replace />
 
   const onSubmit = async (e) => {
     e.preventDefault()
+    if (submitting) return
     setError('')
-    const res = await login(username.trim(), password)
-    if (res.ok) navigate('/dashboard')
-    else setError(res.error)
+    setSubmitting(true)
+    try {
+      const res = await login(username.trim(), password)
+      if (res.ok) navigate('/dashboard')
+      else setError(res.error)
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -75,8 +82,21 @@ export default function Login() {
             </p>
           )}
 
-          <button type="submit" className="mt-3 flex w-full items-center justify-center gap-2 rounded-lg bg-royal py-3 text-sm font-semibold text-white shadow-royal border border-white/15 transition hover:-translate-y-0.5 hover:bg-royal-hover">
-            <Lock size={15} /> Sign In
+          <button
+            type="submit"
+            disabled={submitting}
+            className="mt-3 flex w-full items-center justify-center gap-2 rounded-lg bg-royal py-3 text-sm font-semibold text-white shadow-royal border border-white/15 transition hover:-translate-y-0.5 hover:bg-royal-hover disabled:opacity-50"
+          >
+            {submitting ? (
+              <>
+                <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                Signing in...
+              </>
+            ) : (
+              <>
+                <Lock size={15} /> Sign In
+              </>
+            )}
           </button>
 
           <p className="mt-5 text-center text-[11px] leading-relaxed text-navy-300">

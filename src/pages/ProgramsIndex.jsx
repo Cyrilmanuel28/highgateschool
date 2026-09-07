@@ -8,6 +8,7 @@ import SectionHeading from '../components/SectionHeading.jsx'
 import Reveal from '../components/Reveal.jsx'
 import EmptyState from '../components/EmptyState.jsx'
 import { ProgramCard } from '../components/Cards.jsx'
+import { GridSkeleton } from '../components/Skeletons.jsx'
 import { cn } from '../lib/utils.js'
 
 export default function ProgramsIndex() {
@@ -26,17 +27,6 @@ export default function ProgramsIndex() {
     if (filter === 'all') return programs
     return programs.filter((p) => p.level === filter)
   }, [programs, filter])
-
-  if (loading) {
-    return (
-      <div className="flex min-h-[60vh] items-center justify-center bg-navy-950">
-        <div className="text-center">
-          <div className="mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-2 border-gold-500 border-t-transparent" />
-          <p className="text-sm text-navy-300">Loading Academic Programmes...</p>
-        </div>
-      </div>
-    )
-  }
 
   return (
     <>
@@ -86,7 +76,9 @@ export default function ProgramsIndex() {
             </div>
           )}
 
-          {filtered.length === 0 ? (
+          {loading ? (
+            <GridSkeleton count={6} cols="md:grid-cols-2 lg:grid-cols-3" aspect="aspect-[16/10]" />
+          ) : filtered.length === 0 ? (
             <EmptyState
               icon={BookOpen}
               title="No Programmes Found"

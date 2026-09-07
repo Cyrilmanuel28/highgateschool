@@ -4,6 +4,7 @@ import { Newspaper, ChevronRight, Search } from 'lucide-react'
 import { useData } from '../context/DataContext.jsx'
 import SeoHead from '../components/SeoHead.jsx'
 import { NewsCard } from '../components/Cards.jsx'
+import { GridSkeleton } from '../components/Skeletons.jsx'
 import Breadcrumbs from '../components/Breadcrumbs.jsx'
 import Reveal from '../components/Reveal.jsx'
 import EmptyState from '../components/EmptyState.jsx'
@@ -12,7 +13,7 @@ import { cn } from '../lib/utils.js'
 const PER_PAGE = 6
 
 export default function NewsIndex() {
-  const { publishedOnly, db } = useData()
+  const { publishedOnly, db, loading } = useData()
   const info = db.schoolInfo
   const [searchParams, setSearchParams] = useSearchParams()
   const [query, setQuery] = useState(searchParams.get('q') || '')
@@ -116,7 +117,9 @@ export default function NewsIndex() {
             ))}
           </div>
 
-          {paged.length === 0 ? (
+          {loading ? (
+            <GridSkeleton count={6} cols="md:grid-cols-2 lg:grid-cols-3" aspect="aspect-[16/10]" />
+          ) : paged.length === 0 ? (
             <EmptyState
               icon={Newspaper}
               title="No articles found"

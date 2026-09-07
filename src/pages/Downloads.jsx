@@ -4,12 +4,13 @@ import { DownloadCloud, Search } from 'lucide-react'
 import { useData } from '../context/DataContext.jsx'
 import SeoHead from '../components/SeoHead.jsx'
 import { DownloadRow } from '../components/Cards.jsx'
+import { TableSkeleton } from '../components/Skeletons.jsx'
 import Breadcrumbs from '../components/Breadcrumbs.jsx'
 import Reveal from '../components/Reveal.jsx'
 import EmptyState from '../components/EmptyState.jsx'
 
 export default function Downloads() {
-  const { db } = useData()
+  const { db, loading } = useData()
   const info = db.schoolInfo
   const [query, setQuery] = useState('')
   const downloads = (db.downloads || [])
@@ -69,7 +70,9 @@ export default function Downloads() {
               />
             </label>
           </div>
-          {filtered.length === 0 ? (
+          {loading ? (
+            <TableSkeleton rows={5} cols={3} />
+          ) : filtered.length === 0 ? (
             <EmptyState icon={DownloadCloud} title="No documents found" text={query ? 'Try a different search term.' : 'Documents will appear here soon.'} />
           ) : (
             categories.map(([cat, items], ci) => (

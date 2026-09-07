@@ -4,13 +4,14 @@ import { CalendarDays, ChevronRight } from 'lucide-react'
 import { useData } from '../context/DataContext.jsx'
 import SeoHead from '../components/SeoHead.jsx'
 import { EventCard } from '../components/Cards.jsx'
+import { GridSkeleton } from '../components/Skeletons.jsx'
 import Breadcrumbs from '../components/Breadcrumbs.jsx'
 import Reveal from '../components/Reveal.jsx'
 import EmptyState from '../components/EmptyState.jsx'
 import { cn } from '../lib/utils.js'
 
 export default function EventsIndex() {
-  const { publishedOnly, now, db } = useData()
+  const { publishedOnly, now, db, loading } = useData()
   const info = db.schoolInfo
   const [filter, setFilter] = useState('upcoming')
 
@@ -62,7 +63,9 @@ export default function EventsIndex() {
             ))}
           </div>
 
-          {shown.length === 0 ? (
+          {loading ? (
+            <GridSkeleton count={6} cols="md:grid-cols-2 lg:grid-cols-3" aspect="aspect-[16/10]" />
+          ) : shown.length === 0 ? (
             <EmptyState
               icon={CalendarDays}
               title="No events here yet"

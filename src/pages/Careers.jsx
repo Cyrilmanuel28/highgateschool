@@ -224,8 +224,15 @@ export default function Careers() {
                       <input ref={fileRef} type="file" accept=".pdf,.doc,.docx" className="hidden" onChange={(e) => pickCv(e.target.files?.[0])} />
                     </div>
                   </div>
-                  <button type="submit" disabled={submitting} className="btn-royal mt-6 w-full">
-                    {submitting ? 'Submitting…' : 'Submit application'}
+                  <button type="submit" disabled={submitting} className="btn-royal mt-6 w-full inline-flex items-center justify-center gap-2 disabled:opacity-50">
+                    {submitting ? (
+                      <>
+                        <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                        Submitting Application...
+                      </>
+                    ) : (
+                      'Submit application'
+                    )}
                   </button>
                 </form>
               )}

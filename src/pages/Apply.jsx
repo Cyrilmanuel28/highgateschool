@@ -270,8 +270,17 @@ export default function Apply() {
                     <input ref={fileRef} type="file" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" className="hidden" onChange={(e) => addFiles(e.target.files)} />
                   </div>
 
-                  <button type="submit" disabled={submitting} className="btn-royal w-full">
-                    <GraduationCap size={17} /> {submitting ? 'Submitting…' : 'Submit application'}
+                  <button type="submit" disabled={submitting} className="btn-royal w-full inline-flex items-center justify-center gap-2 disabled:opacity-50">
+                    {submitting ? (
+                      <>
+                        <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                        Submitting Application...
+                      </>
+                    ) : (
+                      <>
+                        <GraduationCap size={17} /> Submit application
+                      </>
+                    )}
                   </button>
                   <p className="text-center text-xs text-slate-400">
                     By submitting you agree to our <a href="/privacy-policy" className="text-gold-600 underline">privacy policy</a>. The admissions team replies within one working day.

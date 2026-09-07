@@ -87,12 +87,22 @@ export default {
         'scale-in': {
           '0%': { opacity: '0', transform: 'scale(0.97)' },
           '100%': { opacity: '1', transform: 'scale(1)' }
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' }
+        },
+        'spin-reverse': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(-360deg)' }
         }
       },
       animation: {
         'fade-up': 'fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both',
-        'fade-in': 'fade-in 0.4s ease both',
-        'scale-in': 'scale-in 0.25s ease both'
+        'fade-in': 'fade-in 0.35s ease-out both',
+        'scale-in': 'scale-in 0.25s ease both',
+        shimmer: 'shimmer 1.8s ease-in-out infinite',
+        'spin-reverse': 'spin-reverse 1.2s linear infinite'
       }
     }
   },

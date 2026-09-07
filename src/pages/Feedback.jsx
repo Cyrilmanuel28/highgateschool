@@ -28,27 +28,34 @@ export default function Feedback() {
     message: ''
   })
   const [submitted, setSubmitted] = useState(null)
+  const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState('')
   const [tracking, setTracking] = useState({ id: '', email: '' })
   const [status, setStatus] = useState(null)
 
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }))
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    if (submitting) return
     setError('')
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
       setError('Please complete your name, email, and message.')
       return
     }
-    const ref = `FBK-${Date.now().toString().slice(-6)}`
-    const rec = create('feedback', {
-      ...form,
-      ref,
-      status: 'submitted',
-      createdAt: new Date().toISOString()
-    })
-    setSubmitted(rec)
+    setSubmitting(true)
+    try {
+      const ref = `FBK-${Date.now().toString().slice(-6)}`
+      const rec = await create('feedback', {
+        ...form,
+        ref,
+        status: 'submitted',
+        createdAt: new Date().toISOString()
+      })
+      setSubmitted(rec)
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const handleTrack = (e) => {
@@ -128,7 +135,20 @@ export default function Feedback() {
                   </div>
                 </div>
 
-                <button type="submit" className="btn-royal mt-6 w-full sm:w-auto">Submit feedback</button>
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="btn-royal mt-6 w-full sm:w-auto inline-flex items-center justify-center gap-2 disabled:opacity-50"
+                >
+                  {submitting ? (
+                    <>
+                      <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                      Submitting Feedback...
+                    </>
+                  ) : (
+                    'Submit feedback'
+                  )}
+                </button>
                 <p className="mt-3 flex items-center gap-1.5 text-xs text-slate-400">
                   <ShieldCheck size={13} /> Your details are shared only with the feedback team.
                 </p>

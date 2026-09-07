@@ -3,10 +3,11 @@ import { Plus, Trash2, ChevronUp, ChevronDown, GripVertical, Eye as EyeIcon, Pen
 import { cn, uid } from '../../lib/utils.js'
 import { ImagePicker } from './ImagePicker.jsx'
 
-export function Btn({ children, variant = 'primary', size = 'md', className, ...rest }) {
+export function Btn({ children, variant = 'primary', size = 'md', className, loading = false, loadingText, disabled, ...rest }) {
   const styles = {
     primary: 'bg-navy-900 text-white hover:bg-navy-800',
     gold: 'bg-gold-500 text-white hover:bg-gold-600',
+    royal: 'bg-royal text-white hover:bg-navy-900',
     outline: 'border border-slate-300 bg-white text-navy-900 hover:border-navy-900 hover:bg-navy-50',
     ghost: 'text-navy-700 hover:bg-slate-100',
     danger: 'bg-red-50 text-red-600 hover:bg-red-100'
@@ -16,13 +17,21 @@ export function Btn({ children, variant = 'primary', size = 'md', className, ...
     <button
       className={cn(
         'inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 disabled:cursor-not-allowed disabled:opacity-50',
-        styles[variant],
+        styles[variant] || styles.primary,
         sizes[size],
         className
       )}
+      disabled={disabled || loading}
+      aria-busy={loading}
       {...rest}
     >
-      {children}
+      {loading && (
+        <span
+          className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-current border-t-transparent"
+          aria-hidden="true"
+        />
+      )}
+      {loading && loadingText ? loadingText : children}
     </button>
   )
 }
