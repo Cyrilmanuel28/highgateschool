@@ -1,4 +1,5 @@
 import { supabase as _supabase, isRemoteConfigured, remoteSession, ITEMS_TABLE, SINGLES_TABLE } from './supabase'
+import { seedSchoolInfo, seedSettings, seedTheme, seedSocialFeeds } from '../data/seed'
 
 export const COLLECTIONS = [
   'pages','news','homeSections','albums','media',
@@ -15,28 +16,41 @@ export const COLLECTIONS = [
 
 export const SINGLES = {
   schoolInfo: {
-    officeHours: '',
-    saturdayHours: '',
+    ...seedSchoolInfo,
+    officeHours: 'Mon - Fri: 8:00 AM - 4:30 PM',
+    saturdayHours: 'Sat: 9:00 AM - 12:30 PM',
     mapEmbedUrl: '',
-    newsletterTitle: '',
-    newsletterDescription: '',
-    contactHeading: '',
-    contactSubheading: '',
-    paymentBursariesTitle: '',
-    paymentBursariesText: '',
-    paymentMethodsText: '',
-    seoDescription: '',
-    assistantTitle: '',
-    assistantSubtitle: '',
-    assistantWelcome: '',
-    assistantSuggestions: [],
-    footerQuickLinksTitle: '',
-    footerProgrammesTitle: '',
-    footerContactTitle: '',
+    newsletterTitle: 'Subscribe to Highgate Newsletter',
+    newsletterDescription: 'Get the latest school updates and news sent to your inbox.',
+    contactHeading: 'Get in Touch',
+    contactSubheading: 'We are here to answer your questions and welcome you to Highgate School.',
+    paymentBursariesTitle: 'Scholarships & Bursaries',
+    paymentBursariesText: 'We offer means-tested bursaries and academic scholarships.',
+    paymentMethodsText: 'Bank transfer, debit/credit cards, and direct debit.',
+    seoDescription: 'Highgate School — An independent international school for ages 3–18.',
+    assistantTitle: 'Highgate Assistant',
+    assistantSubtitle: 'Ask me anything about Highgate School',
+    assistantWelcome: 'Hello! How can I assist you with Highgate School today?',
+    assistantSuggestions: ['Admissions process', 'Tuition & Fees', 'School Calendar', 'Book a Tour'],
+    footerQuickLinksTitle: 'Quick Links',
+    footerProgrammesTitle: 'Programmes',
+    footerContactTitle: 'Contact Us',
   },
-  settings: { contact: {}, socialLinks: {}, footer: { columns: [], bottomBar: {} }, footerCustomization: {}, home: {} },
-  theme: { primary: '#1B3A5C', secondary: '#C8102E', fonts: { heading: 'Playfair Display', body: 'Inter', accent: 'Lora' } },
-  socialFeeds: { platforms: {} },
+  settings: {
+    ...seedSettings,
+    contact: { phone: seedSchoolInfo.phone, email: seedSchoolInfo.email, address: seedSchoolInfo.address },
+    socialLinks: { ...seedSchoolInfo.socialLinks },
+    footer: { columns: [], bottomBar: {} },
+    footerCustomization: {},
+    home: {}
+  },
+  theme: {
+    ...seedTheme,
+    primary: seedTheme?.primaryColor || '#1B2A4A',
+    secondary: seedTheme?.accentColor || '#C8982A',
+    fonts: { heading: seedTheme?.headingFont || 'Cormorant Garamond', body: seedTheme?.bodyFont || 'Inter', accent: 'Lora' }
+  },
+  socialFeeds: seedSocialFeeds(),
 }
 
 export const PUBLIC_SUBMISSION = new Set([

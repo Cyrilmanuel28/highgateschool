@@ -2,10 +2,11 @@ import { useMemo, useState } from 'react'
 import { useNavigate, useParams, Link, Navigate } from 'react-router-dom'
 import {
   Plus, ArrowLeft, Save, Send, CalendarClock, Trash2, Pencil, ExternalLink, Upload,
-  EyeOff, Archive as ArchiveIcon, ClipboardCheck, History, RotateCcw
+  EyeOff, Archive as ArchiveIcon, ClipboardCheck, History, RotateCcw, Eye
 } from 'lucide-react'
 import { useData } from '../../context/DataContext.jsx'
 import { useToast } from '../../context/ToastContext.jsx'
+import LivePreviewModal from '../../components/cms/LivePreviewModal.jsx'
 import {
   Field, TextInput, TextArea, Select, Toggle, Card, Btn, PageHeader, ConfirmDialog, StatusBadge,
   ItemListEditor, Table
@@ -30,7 +31,7 @@ export default function SimpleCrud({
   showStatus = false,
   publicSlugPath = ''
 }) {
-  const { db, getRecord, update, remove, create, restoreVersion, versionsOf } = useData()
+  const { db, getRecord, update, remove, create, restoreVersion, versionsOf, publishAndVerify, saveDraft, removeAndVerify } = useData()
   const { toast } = useToast()
   const navigate = useNavigate()
   const { id } = useParams()
@@ -38,6 +39,7 @@ export default function SimpleCrud({
 
   const [deleting, setDeleting] = useState(null)
   const [showHistory, setShowHistory] = useState(false)
+  const [previewOpen, setPreviewOpen] = useState(false)
 
   const existing = useMemo(() => (id ? getRecord(collection, id) : null), [id, getRecord, collection])
 
@@ -91,7 +93,7 @@ export default function SimpleCrud({
       return record
     }
 
-    const save = (statusOverride) => {
+    const save = async (statusOverride) => {
       const requireSlug = statusOverride === 'published'
       const check = validateForPublish(item, fields, requireSlug)
       if (!check.ok) {
@@ -101,11 +103,23 @@ export default function SimpleCrud({
       const overrides = { ...(statusOverride ? { status: statusOverride, publishAt: null } : {}) }
       if (statusOverride === 'published' && !item.publishedAt) overrides.publishedAt = new Date().toISOString()
       const record = persist(overrides)
-      if (statusOverride === 'published') toast('Published — now live on the public site', 'success')
-      else if (statusOverride === 'unpublished') toast('Unpublished — no longer visible on the public site', 'info')
-      else if (statusOverride === 'pending') toast('Submitted for review', 'info')
-      else if (statusOverride === 'archived') toast('Archived', 'info')
-      else toast('Saved', 'info')
+
+      if (statusOverride === 'published') {
+        const res = await publishAndVerify(collection, record.id, { fields })
+        if (!res.ok) {
+          toast(`Publication check failed: ${res.errors?.[0] || 'Verification issue'}`, 'error')
+        } else {
+          toast('Published & fully verified live on website', 'success')
+        }
+      } else if (statusOverride === 'unpublished') {
+        toast('Unpublished — no longer visible on the public site', 'info')
+      } else if (statusOverride === 'pending') {
+        toast('Submitted for review', 'info')
+      } else if (statusOverride === 'archived') {
+        toast('Archived', 'info')
+      } else {
+        toast('Draft saved to database', 'info')
+      }
       navigate(`/dashboard/${collection}/${record.id}`, { replace: true })
       return record
     }
@@ -295,9 +309,12 @@ export default function SimpleCrud({
             <Btn variant="gold" onClick={() => save(showStatus ? 'published' : null)}>
               <Send size={14} /> {showStatus ? (item.status === 'published' ? 'Update & Publish' : 'Publish') : 'Save'}
             </Btn>
+            <Btn variant="outline" onClick={() => setPreviewOpen(true)}>
+              <Eye size={14} /> Live Preview
+            </Btn>
             {publicUrl && (
               <Btn variant="outline" onClick={() => window.open(`${publicUrl}${item.slug ? '?preview=1' : ''}`, '_blank')}>
-                <ExternalLink size={14} /> Preview
+                <ExternalLink size={14} /> Open URL
               </Btn>
             )}
           </div>
@@ -426,13 +443,20 @@ export default function SimpleCrud({
       <ConfirmDialog
         open={Boolean(deleting)}
         title={`Delete ${newLabel.toLowerCase()}?`}
-        message="This cannot be undone."
+        message="This cannot be undone. The system will verify removal from the live website."
         onCancel={() => setDeleting(null)}
-        onConfirm={() => {
-          remove(collection, deleting.id)
-          toast('Deleted')
+        onConfirm={async () => {
+          await removeAndVerify(collection, deleting.id)
+          toast('Deleted & verified removal from live website', 'info')
           setDeleting(null)
         }}
+      />
+
+      <LivePreviewModal
+        isOpen={previewOpen}
+        onClose={() => setPreviewOpen(false)}
+        title={item?.title || item?.name || 'Preview'}
+        previewData={item}
       />
     </div>
   )

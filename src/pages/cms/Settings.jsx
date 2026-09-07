@@ -8,7 +8,7 @@ import { ImagePicker } from '../../components/cms/ImagePicker.jsx'
 import { resetDb } from '../../lib/store.js'
 
 export default function Settings() {
-  const { db, saveSingle, getSingle } = useData()
+  const { db, saveSingle, getSingle, saveSingleAndVerify } = useData()
   const { changePassword } = useAuth()
   const { toast } = useToast()
   const [info, setInfo] = useState(() => ({ ...getSingle('schoolInfo') }))
@@ -32,8 +32,12 @@ export default function Settings() {
 
   const saveInfo = async () => {
     try {
-      await saveSingle('schoolInfo', info)
-      toast('School information saved — updated across the whole site')
+      const res = await saveSingleAndVerify('schoolInfo', info)
+      if (res.ok) {
+        toast('School information saved & verified across the website', 'success')
+      } else {
+        toast('Verification warning: ' + (res.error || 'Check stages'), 'error')
+      }
     } catch (e) {
       toast('Failed to save: ' + e.message, 'error')
     }
@@ -41,8 +45,12 @@ export default function Settings() {
 
   const saveSettings = async () => {
     try {
-      await saveSingle('settings', settings)
-      toast('Site settings saved')
+      const res = await saveSingleAndVerify('settings', settings)
+      if (res.ok) {
+        toast('Site settings saved & verified', 'success')
+      } else {
+        toast('Verification warning: ' + (res.error || 'Check stages'), 'error')
+      }
     } catch (e) {
       toast('Failed to save: ' + e.message, 'error')
     }
@@ -50,8 +58,12 @@ export default function Settings() {
 
   const saveTheme = async () => {
     try {
-      await saveSingle('theme', theme)
-      toast('Theme settings saved')
+      const res = await saveSingleAndVerify('theme', theme)
+      if (res.ok) {
+        toast('Theme settings saved & verified', 'success')
+      } else {
+        toast('Verification warning: ' + (res.error || 'Check stages'), 'error')
+      }
     } catch (e) {
       toast('Failed to save: ' + e.message, 'error')
     }

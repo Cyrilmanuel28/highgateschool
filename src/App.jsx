@@ -55,6 +55,7 @@ import Settings from './pages/cms/Settings.jsx'
 import ContactMessages from './pages/cms/ContactMessages.jsx'
 import AuditLog from './pages/cms/AuditLog.jsx'
 import Versions from './pages/cms/Versions.jsx'
+import SystemHealth from './pages/cms/SystemHealth.jsx'
 import {
   EventsCrud, VideosCrud, DownloadsCrud, FaqCrud, AchievementsCrud, ClubsCrud, SportsCrud,
   DepartmentsCrud, ProgramsCrud, FeesCrud, CalendarCrud, StaffCrud
@@ -221,6 +222,8 @@ export default function App() {
         <Route path="stats/:id" element={CMS(<StatsCrud key="edit" />)} />
         <Route path="audit" element={CMS(<AuditLog />)} />
         <Route path="versions" element={CMS(<Versions />)} />
+        <Route path="health" element={CMS(<SystemHealth />)} />
+        <Route path="consistency" element={CMS(<SystemHealth />)} />
       </Route>
 
       <Route path="*" element={<NotFound />} />

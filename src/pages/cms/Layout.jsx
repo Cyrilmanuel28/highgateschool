@@ -6,7 +6,7 @@ import {
   CalendarRange, FolderOpen, Search, Settings as SettingsIcon, MessageSquare, LogOut,
   ExternalLink, PanelLeftClose, PanelLeft, Megaphone, BookOpen, Briefcase, ClipboardList,
   MessageSquareText, Quote, ClipboardCheck, UserPlus, MapPin, Compass, BarChart3, Mail,
-  ScrollText, History, LayoutList
+  ScrollText, History, LayoutList, Activity, ShieldCheck
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext.jsx'
 import { useData } from '../../context/DataContext.jsx'
@@ -67,8 +67,10 @@ const NAV = [
     ]
   },
   {
-    section: 'Publishing',
+    section: 'Publishing & Reliability',
     items: [
+      { to: '/dashboard/health', label: 'System Health', icon: Activity },
+      { to: '/dashboard/consistency', label: 'Consistency Audit', icon: ShieldCheck },
       { to: '/dashboard/audit', label: 'Audit Log', icon: ScrollText },
       { to: '/dashboard/versions', label: 'Version History', icon: History }
     ]

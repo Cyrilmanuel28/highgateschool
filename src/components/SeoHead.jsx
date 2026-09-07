@@ -14,7 +14,7 @@ function upsertMeta(attr, key, content) {
 
 export default function SeoHead({ title, description, ogImage, canonical, type = 'website' }) {
   const { db } = useData()
-  const siteTitle = db.schoolInfo?.name || 'Highgate School'
+  const siteTitle = db.schoolInfo?.name || 'School'
 
   useEffect(() => {
     const finalTitle = title ? `${title} | ${siteTitle}` : siteTitle
@@ -38,6 +38,17 @@ export default function SeoHead({ title, description, ogImage, canonical, type =
     upsertMeta('name', 'twitter:title', finalTitle)
     upsertMeta('name', 'twitter:description', description)
     upsertMeta('name', 'twitter:image', ogImage || db.settings?.defaultOgImage || db.schoolInfo?.logo)
+
+    const faviconUrl = db.schoolInfo?.crest || db.schoolInfo?.logo || db.settings?.favicon
+    if (faviconUrl) {
+      let iconLink = document.head.querySelector('link[rel="icon"]') || document.head.querySelector('link[rel*="icon"]')
+      if (!iconLink) {
+        iconLink = document.createElement('link')
+        iconLink.rel = 'icon'
+        document.head.appendChild(iconLink)
+      }
+      iconLink.href = faviconUrl
+    }
   }, [title, description, ogImage, canonical, type, siteTitle, db.settings, db.schoolInfo])
 
   return null

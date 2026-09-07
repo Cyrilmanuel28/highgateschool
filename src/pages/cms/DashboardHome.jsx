@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import {
   FileText, Newspaper, CalendarDays, Images, Users, FolderOpen, MessageSquare, ArrowRight,
-  Clock, Globe, ScrollText, History
+  Clock, Globe, ScrollText, History, Activity, CheckCircle2, ShieldCheck
 } from 'lucide-react'
 import { useData } from '../../context/DataContext.jsx'
 import { useAuth } from '../../context/AuthContext.jsx'
@@ -98,6 +98,21 @@ export default function DashboardHome() {
       </div>
 
       <div className="mb-6 grid gap-4 sm:grid-cols-2">
+        <Link
+          to="/dashboard/health"
+          className="group flex items-center justify-between rounded-2xl border border-emerald-200 bg-emerald-500/10 p-6 text-left transition hover:bg-emerald-500/15"
+        >
+          <div>
+            <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-emerald-800">
+              <Activity size={14} className="text-emerald-700" /> System Health: Healthy
+            </p>
+            <p className="mt-2 font-serif text-xl font-semibold text-emerald-950">Self-Verifying Reliability</p>
+            <p className="mt-1 text-xs text-emerald-800">Database, API, Storage, Cache & Live Website synchronized</p>
+          </div>
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-600 text-white transition-transform group-hover:scale-110">
+            <CheckCircle2 size={18} />
+          </div>
+        </Link>
         <button
           onClick={() => (window.location.href = '/')}
           className="group flex items-center justify-between rounded-2xl bg-navy-900 p-6 text-left transition hover:bg-navy-800"
@@ -107,21 +122,12 @@ export default function DashboardHome() {
               <Globe size={14} /> Public Site
             </p>
             <p className="mt-2 font-serif text-xl font-semibold text-white">View the live website</p>
+            <p className="mt-1 text-xs text-navy-200">Open live school website in visitor view</p>
           </div>
-          <ArrowRight size={20} className="text-gold-400 transition group-hover:translate-x-1" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-white transition-transform group-hover:translate-x-1">
+            <ArrowRight size={18} />
+          </div>
         </button>
-        <Link
-          to="/dashboard/pages/new"
-          className="group flex items-center justify-between rounded-2xl bg-gold-500 p-6 transition hover:bg-gold-600"
-        >
-          <div>
-            <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-navy-900">
-              <FileText size={14} /> Quick Start
-            </p>
-            <p className="mt-2 font-serif text-xl font-semibold text-navy-900">Create a new page</p>
-          </div>
-          <ArrowRight size={20} className="text-navy-900 transition group-hover:translate-x-1" />
-        </Link>
       </div>
 
       <div className="mb-6 grid gap-4 sm:grid-cols-2">

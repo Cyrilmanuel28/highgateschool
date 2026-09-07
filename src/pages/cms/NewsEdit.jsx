@@ -7,10 +7,11 @@ import { Field, TextInput, TextArea, Card, Btn, PageHeader, ConfirmDialog, Statu
 import RichTextEditor from '../../components/cms/RichTextEditor.jsx'
 import { ImagePicker } from '../../components/cms/ImagePicker.jsx'
 import { uid, slugify, toDateTimeLocal, formatDateTime } from '../../lib/utils.js'
+import LivePreviewModal from '../../components/cms/LivePreviewModal.jsx'
 
 export default function NewsEdit() {
   const { id } = useParams()
-  const { getRecord, update, remove, create, publish: publishAction, unpublish, archive, submitForReview, schedule, restoreVersion, versionsOf, db } = useData()
+  const { getRecord, update, remove, create, publish: publishAction, publishAndVerify, saveDraft: saveDraftAction, removeAndVerify, unpublish, archive, submitForReview, schedule, restoreVersion, versionsOf, db } = useData()
   const info = db.schoolInfo
   const { toast } = useToast()
   const navigate = useNavigate()
@@ -31,6 +32,7 @@ export default function NewsEdit() {
   )
   const [tagsInput, setTagsInput] = useState((article.tags || []).join(', '))
   const [confirmDelete, setConfirmDelete] = useState(false)
+  const [previewOpen, setPreviewOpen] = useState(false)
   const isNew = !existing
 
   const set = (patch) => setArticle((a) => ({ ...a, ...patch }))
@@ -68,23 +70,23 @@ export default function NewsEdit() {
     navigate(`/dashboard/news/${record.id}`, { replace: true })
   }
 
-  const publish = () => {
+  const publish = async () => {
     if (!article.title.trim()) {
       toast('Title is required', 'error')
       return
     }
     const record = persist({ slug: article.slug || slugify(article.title), publishAt: null, publishedAt: article.publishedAt || new Date().toISOString() })
-    const res = publishAction('news', record.id, {
+    const res = await publishAndVerify('news', record.id, {
       fields: [
         { key: 'title', label: 'Title', required: true },
         { key: 'body', label: 'Body', required: true }
       ]
     })
     if (!res.ok) {
-      toast(res.errors?.[0] || 'Publish failed', 'error')
+      toast(res.errors?.[0] || 'Publish check failed', 'error')
       return
     }
-    toast('Article published — live on the public site')
+    toast('Article published & verified live on website', 'success')
     navigate(`/dashboard/news/${record.id}`, { replace: true })
   }
 
@@ -136,6 +138,7 @@ export default function NewsEdit() {
                     : 'Saved but not visible to visitors.'}
         </span>
         <div className="ml-auto flex flex-wrap gap-2">
+          <Btn variant="outline" onClick={() => setPreviewOpen(true)}><Eye size={14} /> Live Preview</Btn>
           <Btn variant="outline" onClick={saveDraft}><Save size={14} /> Save Draft</Btn>
           {['draft', 'pending'].includes(article.status) && (
             <Btn variant="outline" onClick={submitReview}><ClipboardCheck size={14} /> Submit for Review</Btn>
@@ -251,13 +254,20 @@ export default function NewsEdit() {
       <ConfirmDialog
         open={confirmDelete}
         title="Delete article?"
-        message={`"${article.title}" will be permanently removed.`}
+        message={`"${article.title}" will be permanently removed. The system will verify removal from the live website.`}
         onCancel={() => setConfirmDelete(false)}
-        onConfirm={() => {
-          remove('news', article.id)
-          toast('Article deleted')
+        onConfirm={async () => {
+          await removeAndVerify('news', article.id)
+          toast('Article deleted & verified removed from live website')
           navigate('/dashboard/news')
         }}
+      />
+
+      <LivePreviewModal
+        isOpen={previewOpen}
+        onClose={() => setPreviewOpen(false)}
+        title={article.title || 'Article Preview'}
+        previewData={article}
       />
     </div>
   )

@@ -10,10 +10,11 @@ import BlockEditor, { BLOCK_TYPES } from '../../components/cms/BlockEditor.jsx'
 import { ImagePicker } from '../../components/cms/ImagePicker.jsx'
 import { uid, slugify, toDateTimeLocal, formatDateTime } from '../../lib/utils.js'
 import { cn } from '../../lib/utils.js'
+import LivePreviewModal from '../../components/cms/LivePreviewModal.jsx'
 
 export default function PageEdit() {
   const { id } = useParams()
-  const { getRecord, update, remove, create, publish: publishAction, unpublish, archive, submitForReview, schedule, restoreVersion, versionsOf, db } = useData()
+  const { getRecord, update, remove, create, publish: publishAction, publishAndVerify, saveDraft: saveDraftAction, removeAndVerify, unpublish, archive, submitForReview, schedule, restoreVersion, versionsOf, db } = useData()
   const info = db.schoolInfo
   const { toast } = useToast()
   const navigate = useNavigate()
@@ -43,6 +44,7 @@ export default function PageEdit() {
 
   const [tab, setTab] = useState('content')
   const [confirmDelete, setConfirmDelete] = useState(false)
+  const [previewOpen, setPreviewOpen] = useState(false)
   const isNew = !existing
 
   const set = (patch) => setPage((p) => ({ ...p, ...patch }))
@@ -80,18 +82,18 @@ export default function PageEdit() {
     navigate(`/dashboard/pages/${record.id}`, { replace: true })
   }
 
-  const publish = () => {
+  const publish = async () => {
     if (!page.title.trim()) {
       toast('Title is required', 'error')
       return
     }
     const record = persist({ slug: page.slug || slugify(page.title) })
-    const res = publishAction('pages', record.id, { fields: [{ key: 'title', label: 'Title', required: true }] })
+    const res = await publishAndVerify('pages', record.id, { fields: [{ key: 'title', label: 'Title', required: true }] })
     if (!res.ok) {
       toast(res.errors?.[0] || 'Publish failed', 'error')
       return
     }
-    toast('Page published — live on the public site')
+    toast('Page published & verified live on public website', 'success')
     navigate(`/dashboard/pages/${record.id}`, { replace: true })
   }
 
@@ -184,6 +186,9 @@ export default function PageEdit() {
                     : 'Saved but not visible to visitors.'}
         </span>
         <div className="ml-auto flex flex-wrap gap-2">
+          <Btn variant="outline" onClick={() => setPreviewOpen(true)}>
+            <Eye size={14} /> Live Preview
+          </Btn>
           <Btn variant="outline" onClick={saveDraft}>
             <Save size={14} /> Save Draft
           </Btn>
@@ -379,13 +384,20 @@ export default function PageEdit() {
       <ConfirmDialog
         open={confirmDelete}
         title="Delete page?"
-        message={`"${page.title}" and all its versions will be permanently removed.`}
+        message={`"${page.title}" and all its versions will be permanently removed. The system will verify removal from the live website.`}
         onCancel={() => setConfirmDelete(false)}
-        onConfirm={() => {
-          remove('pages', page.id)
-          toast('Page deleted')
+        onConfirm={async () => {
+          await removeAndVerify('pages', page.id)
+          toast('Page deleted & verified removed from live website')
           navigate('/dashboard/pages')
         }}
+      />
+
+      <LivePreviewModal
+        isOpen={previewOpen}
+        onClose={() => setPreviewOpen(false)}
+        title={page.title || 'Page Preview'}
+        previewData={page}
       />
     </div>
   )

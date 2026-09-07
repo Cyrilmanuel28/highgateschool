@@ -59,12 +59,12 @@ const cmsRoutes = [
   '/dashboard/seo', '/dashboard/contact-messages', '/dashboard/settings',
   '/dashboard/events/nonexistent-id',
   '/dashboard/notices', '/dashboard/notices/new', '/dashboard/applications/new',
-  '/dashboard/library/new', '/dashboard/magazine/new', '/dashboard/careers/new',
+  '/dashboard/library/new', '/dashboard/magazine/new', '/dashboard/vacancies/new',
   '/dashboard/job-applications/new', '/dashboard/feedback/new', '/dashboard/testimonials/new',
   '/dashboard/newsletter-subscribers/new', '/dashboard/newsletter-campaigns/new',
   '/dashboard/campus/new', '/dashboard/tour/new', '/dashboard/emergency/new',
   '/dashboard/event-registrations/new', '/dashboard/stats/new',
-  '/dashboard/audit', '/dashboard/versions'
+  '/dashboard/audit', '/dashboard/versions', '/dashboard/health', '/dashboard/consistency'
 ]
 
 sessionStorage.setItem('aia_session', JSON.stringify({ username: 'admin', role: 'admin', loginAt: new Date().toISOString() }))
