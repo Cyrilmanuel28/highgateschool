@@ -1,5 +1,28 @@
 import { supabase as _supabase, isRemoteConfigured, remoteSession, ITEMS_TABLE, SINGLES_TABLE } from './supabase'
-import { seedSchoolInfo, seedSettings, seedTheme, seedSocialFeeds } from '../data/seed'
+import {
+  seedSchoolInfo, seedSettings, seedTheme, seedMenus, seedPages, seedDepartments, seedStaff,
+  seedPrograms, seedNews, seedEvents, seedAlbums, seedVideos, seedDownloads, seedFaqs,
+  seedAchievements, seedClubs, seedSports, seedHomeSections, seedFees, seedCalendarEvents,
+  seedMessages, seedMedia, seedNotices, seedApplications, seedLibrary, seedMagazineArticles,
+  seedVacancies, seedJobApplications, seedFeedback, seedTestimonials, seedNewsletterSubscribers,
+  seedNewsletterCampaigns, seedCampusLocations, seedTourScenes, seedEmergencyAlerts,
+  seedEventRegistrations, seedStats, seedSocialFeeds
+} from '../data/seed'
+
+export const SEEDERS = {
+  pages: seedPages, menus: seedMenus, staff: seedStaff, departments: seedDepartments,
+  news: seedNews, events: seedEvents, albums: seedAlbums, videos: seedVideos,
+  programs: seedPrograms, downloads: seedDownloads, faqs: seedFaqs,
+  achievements: seedAchievements, clubs: seedClubs, sports: seedSports,
+  homeSections: seedHomeSections, fees: seedFees, calendarEvents: seedCalendarEvents,
+  messages: seedMessages, media: seedMedia, notices: seedNotices,
+  applications: seedApplications, library: seedLibrary, magazineArticles: seedMagazineArticles,
+  vacancies: seedVacancies, jobApplications: seedJobApplications, feedback: seedFeedback,
+  testimonials: seedTestimonials, newsletterSubscribers: seedNewsletterSubscribers,
+  newsletterCampaigns: seedNewsletterCampaigns, campusLocations: seedCampusLocations,
+  tourScenes: seedTourScenes, emergencyAlerts: seedEmergencyAlerts,
+  eventRegistrations: seedEventRegistrations, stats: seedStats
+}
 
 export const COLLECTIONS = [
   'pages','news','homeSections','albums','media',
@@ -65,7 +88,20 @@ const IMAGE_MAX_BYTES = 4 * 1024 * 1024
 export function loadDb() {
   const db = {}
   for (const key of COLLECTIONS) {
-    try { db[key] = JSON.parse(localStorage.getItem(DB_KEY + key)) || [] } catch { db[key] = [] }
+    try {
+      const raw = localStorage.getItem(DB_KEY + key)
+      if (raw != null) {
+        db[key] = JSON.parse(raw) || []
+      } else if (SEEDERS[key]) {
+        const initial = SEEDERS[key]()
+        db[key] = initial
+        try { localStorage.setItem(DB_KEY + key, JSON.stringify(initial)) } catch {}
+      } else {
+        db[key] = []
+      }
+    } catch {
+      db[key] = SEEDERS[key] ? SEEDERS[key]() : []
+    }
   }
   for (const key of Object.keys(SINGLES)) {
     try {
@@ -85,6 +121,8 @@ export function readJson(key, fallback) {
 export function writeJson(key, data) {
   try { localStorage.setItem(DB_KEY + key, JSON.stringify(data)) } catch {}
 }
+export const saveSingle = writeJson
+
 
 export function saveCollection(key, value) {
   if (!value || !Array.isArray(value)) throw new Error(`saveCollection expects an array for key "${key}"`)
