@@ -89,7 +89,7 @@ export function seedMenus() {
     { id: 'm27', label: 'Testimonials', url: '/testimonials', parentId: 'm2', order: 7, isVisible: true, target: '_self' },
     { id: 'm28', label: 'School Statistics', url: '/statistics', parentId: 'm2', order: 8, isVisible: true, target: '_self' },
     { id: 'm3', label: 'Academics', url: '/academics', parentId: null, order: 3, isVisible: true, target: '_self' },
-    { id: 'm31', label: 'Academic Programmes', url: '/academics', parentId: 'm3', order: 1, isVisible: true, target: '_self' },
+    { id: 'm31', label: 'Academic Programmes', url: '/programs', parentId: 'm3', order: 1, isVisible: true, target: '_self' },
     { id: 'm32', label: 'Departments', url: '/departments', parentId: 'm3', order: 2, isVisible: true, target: '_self' },
     { id: 'm33', label: 'Admissions', url: '/admissions', parentId: 'm3', order: 3, isVisible: true, target: '_self' },
     { id: 'm34', label: 'School Fees', url: '/fees', parentId: 'm3', order: 4, isVisible: true, target: '_self' },
@@ -455,11 +455,13 @@ export function seedHomeSections() {
     b('hwelcome', 'welcome', { title: 'A School Where Children Are Known by Name', body: '<p>Highgate is an international day school in London for students aged 3 to 18. We pair the rigour of Cambridge IGCSE and the International Baccalaureate with a warmth families feel from their very first visit.</p>', image: IMG.kidsClassroom }, 2),
     b('hstats', 'stats', { items: [{ value: '1,150+', label: 'Students' }, { value: '42', label: 'Nationalities' }, { value: '96%', label: 'IB Pass Rate' }, { value: '40+', label: 'Clubs & Teams' }] }, 3),
     b('hprograms', 'programs', { title: 'One Journey, Every Stage' }, 4),
-    b('hnews', 'latestNews', { title: 'From the Newsroom' }, 5),
-    b('hevents', 'upcomingEvents', { title: 'Mark Your Calendar' }, 6),
-    b('hquote', 'quote', { quote: 'We measure success not only in exam results but in the kindness of our corridors, the courage of our questions, and the character of our graduates.', author: 'Dr. Helena Moreau', role: 'Head of School' }, 7),
-    b('hgallery', 'galleryPreview', { title: 'Life in Pictures' }, 8),
-    b('hcta', 'cta', { title: 'Begin Your Highgate Story', text: 'Book a campus tour, attend an Open Morning, or simply start a conversation with our admissions team.', cta1: { label: 'Book a Tour', to: '/contact' }, cta2: { label: 'Explore Admissions', to: '/admissions' } }, 9)
+    b('hquote', 'quote', { quote: 'We measure success not only in exam results but in the kindness of our corridors, the courage of our questions, and the character of our graduates.', author: 'Dr. Helena Moreau', role: 'Head of School' }, 5),
+    b('hnews', 'latestNews', { title: 'From the Newsroom' }, 6),
+    b('hevents', 'upcomingEvents', { title: 'Mark Your Calendar' }, 7),
+    b('hfacilities', 'facilities', { title: 'World-Class Learning Spaces', subtitle: 'Purpose-built for inquiry, creativity, and athletic excellence.' }, 8),
+    b('hgallery', 'galleryPreview', { title: 'Life in Pictures' }, 9),
+    b('htestimonials', 'testimonials', { title: 'What Parents & Students Say', subtitle: 'Real perspectives from families who call Highgate their school community.' }, 10),
+    b('hcta', 'cta', { title: 'Begin Your Highgate Story', text: 'Book a campus tour, attend an Open Morning, or simply start a conversation with our admissions team.', cta1: { label: 'Book a Tour', to: '/contact' }, cta2: { label: 'Explore Admissions', to: '/admissions' } }, 11)
   ]
 }
 

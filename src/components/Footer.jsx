@@ -147,7 +147,7 @@ export default function Footer() {
               .slice(0, 6)
               .map((p) => (
                 <li key={p.id}>
-                  <Link to="/academics" className="text-sm text-navy-200 transition hover:text-gold-400">
+                  <Link to={`/programs/${p.slug || p.id}`} className="text-sm text-navy-200 transition hover:text-gold-400">
                     {p.name}
                   </Link>
                 </li>

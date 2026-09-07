@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { ChevronDown, Menu, X, Phone, Mail, Search as SearchIcon } from 'lucide-react'
 import { useData } from '../context/DataContext.jsx'
+import { seedMenus } from '../data/seed.js'
 import { cn } from '../lib/utils.js'
 import GlobalSearch from './GlobalSearch.jsx'
 
@@ -76,10 +77,10 @@ export default function Navbar() {
     }
   }, [mobileOpen])
 
-  const menus = useMemo(
-    () => (db.menus || []).filter((m) => m.isVisible),
-    [db.menus]
-  )
+  const menus = useMemo(() => {
+    const list = (db.menus || []).filter((m) => m.isVisible)
+    return list.length > 0 ? list : seedMenus().filter((m) => m.isVisible)
+  }, [db.menus])
   const { top, childrenByParent } = useMemo(() => buildTree(menus), [menus])
   const schoolInfo = db.schoolInfo
 

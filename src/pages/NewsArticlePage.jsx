@@ -22,13 +22,15 @@ export default function NewsArticlePage() {
     .filter((n) => n.id !== article.id && (n.tags || []).some((t) => article.tags?.includes(t)))
     .slice(0, 3)
 
+  const origin = typeof window !== 'undefined' ? window.location.origin : ''
+
   return (
     <>
       <SeoHead
         title={article.title}
         description={truncate(stripHtml(article.body), 160)}
         ogImage={article.featuredImage}
-        canonical={`${window.location.origin}/news/${article.slug}`}
+        canonical={origin ? `${origin}/news/${article.slug}` : `/news/${article.slug}`}
         type="article"
       />
       <div className="relative overflow-hidden bg-navy-950 pb-16 pt-36">

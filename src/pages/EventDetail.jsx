@@ -24,13 +24,15 @@ export default function EventDetail() {
     .sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
     .slice(0, 3)
 
+  const origin = typeof window !== 'undefined' ? window.location.origin : ''
+
   return (
     <>
       <SeoHead
         title={event.title}
         description={truncate(stripHtml(event.description), 160)}
         ogImage={event.featuredImage}
-        canonical={`${window.location.origin}/events/${event.slug}`}
+        canonical={origin ? `${origin}/events/${event.slug}` : `/events/${event.slug}`}
       />
       <div className="relative overflow-hidden bg-navy-950 pb-16 pt-36">
         <div className="absolute -right-24 top-0 h-72 w-72 rounded-full bg-gold-500/10 blur-3xl" />

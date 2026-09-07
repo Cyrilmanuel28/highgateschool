@@ -1,8 +1,9 @@
+import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import {
   GraduationCap, Globe2, HeartHandshake, Sparkles, Phone, Mail, ShieldCheck, Music4, Trophy,
   Users, Baby, BookOpen, Compass, Camera, Target, Award, Quote as QuoteIcon, CalendarDays,
-  ChevronRight
+  ChevronRight, MapPin
 } from 'lucide-react'
 import { useData } from '../context/DataContext.jsx'
 import Reveal from './Reveal.jsx'
@@ -35,42 +36,67 @@ const ICONS = {
 export function BlockHero({ block }) {
   const { db } = useData()
   const c = block
-  const tagline = db.schoolInfo?.tagline
+  const info = db.schoolInfo
+  const tagline = info?.tagline || 'Knowledge Without Borders'
+  const schoolName = info?.name || 'Highgate School'
+
+  const cta1 = c.cta1 || { label: 'Apply for Admission', to: '/admissions' }
+  const cta2 = c.cta2 || { label: 'Explore Our School', to: '/about' }
+
   return (
-    <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden bg-navy-950">
+    <section className="relative flex min-h-[92vh] items-center justify-center overflow-hidden bg-navy-950">
       <div className="absolute inset-0">
-        <Img src={c.image} alt="" className="opacity-45" eager fetchpriority="high" />
+        <Img src={c.image} alt={schoolName} className="opacity-40" eager fetchpriority="high" />
         <div className="absolute inset-0 bg-gradient-to-b from-navy-950/90 via-navy-950/65 to-navy-950/95" />
       </div>
       <div className="container-x relative z-10 py-32 text-center">
-        <div className="animate-fade-up inline-flex items-center gap-2 rounded-full border border-gold-400/40 bg-navy-900/80 px-4 py-1.5 backdrop-blur-md shadow-sm">
-          <span className="h-1.5 w-1.5 rounded-full bg-gold-400" />
+        {/* School Emblem / Kicker */}
+        <div className="animate-fade-up mb-5 inline-flex items-center gap-3 rounded-full border border-gold-400/30 bg-navy-900/80 px-4 py-1.5 shadow-sm backdrop-blur-md">
+          {info?.logo ? (
+            <img src={info.logo} alt="" className="h-5 w-5 object-contain" />
+          ) : (
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-royal text-[10px] font-bold text-gold-300">
+              {schoolName[0] || 'H'}
+            </span>
+          )}
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold-200">
-            {c.kicker || tagline}
+            {c.kicker || `${schoolName} · ${tagline}`}
           </p>
         </div>
-        <h1 className="mx-auto mt-6 max-w-4xl animate-fade-up font-serif text-5xl font-semibold leading-[1.08] text-white sm:text-6xl lg:text-7xl [animation-delay:120ms]">
+
+        <h1 className="mx-auto mt-4 max-w-4xl animate-fade-up font-serif text-5xl font-semibold leading-[1.08] text-white sm:text-6xl lg:text-7xl [animation-delay:120ms]">
           {c.title}
         </h1>
+
         {c.subtitle && (
           <p className="mx-auto mt-6 max-w-2xl animate-fade-up text-lg leading-relaxed text-slate-200 [animation-delay:240ms]">
             {c.subtitle}
           </p>
         )}
-        {(c.cta1 || c.cta2) && (
-          <div className="mt-10 flex animate-fade-up flex-wrap items-center justify-center gap-4 [animation-delay:360ms]">
-            {c.cta1 && (
-              <Link to={c.cta1.to || '/'} className="btn-royal rounded-lg px-7 py-3.5 text-sm font-semibold shadow-royal">
-                {c.cta1.label}
-              </Link>
-            )}
-            {c.cta2 && (
-              <Link to={c.cta2.to || '/'} className="btn-outline-light rounded-lg px-7 py-3.5 text-sm font-semibold">
-                {c.cta2.label}
-              </Link>
-            )}
-          </div>
-        )}
+
+        <div className="mt-10 flex animate-fade-up flex-wrap items-center justify-center gap-4 [animation-delay:360ms]">
+          <Link to={cta1.to || '/admissions'} className="btn-royal rounded-lg px-7 py-3.5 text-sm font-semibold shadow-royal">
+            {cta1.label}
+          </Link>
+          <Link to={cta2.to || '/about'} className="btn-outline-light rounded-lg px-7 py-3.5 text-sm font-semibold">
+            {cta2.label}
+          </Link>
+        </div>
+
+        {/* Quick Identity Badges */}
+        <div className="animate-fade-up mt-14 inline-flex flex-wrap items-center justify-center gap-6 rounded-2xl border border-white/10 bg-white/5 px-6 py-3 text-xs font-medium text-slate-200 backdrop-blur-sm [animation-delay:480ms]">
+          <span className="inline-flex items-center gap-2">
+            <GraduationCap size={15} className="text-gold-400" /> Ages 3–18 Co-educational
+          </span>
+          <span className="hidden h-3 w-px bg-white/20 sm:inline" />
+          <span className="inline-flex items-center gap-2">
+            <Globe2 size={15} className="text-gold-400" /> Cambridge & IB World School
+          </span>
+          <span className="hidden h-3 w-px bg-white/20 sm:inline" />
+          <span className="inline-flex items-center gap-2">
+            <ShieldCheck size={15} className="text-gold-400" /> Founded {info?.founded || '1998'} · London
+          </span>
+        </div>
       </div>
     </section>
   )
@@ -455,6 +481,119 @@ export function BlockWelcome({ block }) {
   )
 }
 
+export function BlockFacilities({ block }) {
+  const { db } = useData()
+  const scenes = useMemo(
+    () => (db.tourScenes || []).filter((s) => s.isVisible !== false).slice(0, 4),
+    [db.tourScenes]
+  )
+
+  if (scenes.length === 0) return null
+
+  return (
+    <section className="bg-white py-20 lg:py-24">
+      <div className="container-x">
+        <SectionHeading
+          eyebrow={block.eyebrow || 'Campus & Facilities'}
+          title={block.title || 'World-Class Learning Spaces'}
+          subtitle={block.subtitle || 'Purpose-built for inquiry, creativity, and athletic excellence.'}
+        />
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {scenes.map((s, i) => (
+            <Reveal key={s.id || i} delay={i * 70} className="h-full">
+              <Link to="/virtual-tour" className="card-hover group flex h-full flex-col overflow-hidden">
+                <div className="relative aspect-[4/3] overflow-hidden bg-navy-950">
+                  <Img src={s.image} alt={s.title} className="transition duration-500 group-hover:scale-105" />
+                  <span className="absolute left-3 top-3 rounded-md bg-navy-950/80 px-2.5 py-1 text-[11px] font-semibold text-gold-300 backdrop-blur-sm">
+                    {s.location || s.category}
+                  </span>
+                </div>
+                <div className="flex flex-1 flex-col p-5">
+                  <h3 className="font-serif text-lg font-semibold text-navy-900 transition-colors group-hover:text-royal">
+                    {s.title}
+                  </h3>
+                  <p className="mt-2 flex-1 text-xs leading-relaxed text-charcoal/70">
+                    {s.description}
+                  </p>
+                  <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-royal transition group-hover:text-navy-900">
+                    Explore Space <ChevronRight size={13} />
+                  </span>
+                </div>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+        <div className="mt-12 flex flex-wrap justify-center gap-4 text-center">
+          <Link to="/virtual-tour" className="btn-royal">
+            Take Virtual Tour <ChevronRight size={16} />
+          </Link>
+          <Link to="/campus-map" className="btn-outline">
+            <MapPin size={16} /> View Campus Map
+          </Link>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export function BlockTestimonials({ block }) {
+  const { db } = useData()
+  const testimonials = useMemo(
+    () => (db.testimonials || []).filter((t) => t.approved && (t.status === undefined || t.status === 'published')),
+    [db.testimonials]
+  )
+
+  if (testimonials.length === 0) return null
+
+  return (
+    <section className="bg-surface border-y border-slate-200/70 py-20 lg:py-24">
+      <div className="container-x">
+        <SectionHeading
+          eyebrow={block.eyebrow || 'Community Voices'}
+          title={block.title || 'What Parents & Students Say'}
+          subtitle={block.subtitle || 'Real perspectives from families who call Highgate their school community.'}
+        />
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {testimonials.slice(0, 3).map((t, i) => (
+            <Reveal key={t.id || i} delay={i * 80} className="h-full">
+              <div className="card-hover flex h-full flex-col justify-between bg-white p-8">
+                <div>
+                  <div className="mb-4 flex items-center gap-1 text-gold-500">
+                    {Array.from({ length: t.rating || 5 }).map((_, r) => (
+                      <span key={r} className="text-base">★</span>
+                    ))}
+                  </div>
+                  <p className="font-serif text-base italic leading-relaxed text-navy-900">
+                    "{t.quote}"
+                  </p>
+                </div>
+                <div className="mt-6 flex items-center gap-3.5 border-t border-slate-100 pt-4">
+                  {t.photo ? (
+                    <img src={t.photo} alt={t.name} className="h-11 w-11 rounded-full border border-slate-200 object-cover" />
+                  ) : (
+                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-royal font-serif text-sm font-bold text-white">
+                      {t.name[0]}
+                    </div>
+                  )}
+                  <div>
+                    <p className="font-serif text-sm font-semibold text-navy-900">{t.name}</p>
+                    <p className="text-xs text-charcoal/60">{t.role} · {t.relationship}</p>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+        <div className="mt-12 text-center">
+          <Link to="/testimonials" className="btn-outline">
+            {block.viewAllLabel || 'Read All Testimonials'} <ChevronRight size={16} />
+          </Link>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 export default function renderBlock(block, i = 0) {
   switch (block.type) {
     case 'hero':
@@ -485,6 +624,10 @@ export default function renderBlock(block, i = 0) {
       return <BlockUpcomingEvents key={block.id || i} block={block} />
     case 'galleryPreview':
       return <BlockGalleryPreview key={block.id || i} block={block} />
+    case 'facilities':
+      return <BlockFacilities key={block.id || i} block={block} />
+    case 'testimonials':
+      return <BlockTestimonials key={block.id || i} block={block} />
     case 'welcome':
       return <BlockWelcome key={block.id || i} block={block} />
     case 'cta':

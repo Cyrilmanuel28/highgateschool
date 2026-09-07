@@ -29,13 +29,15 @@ export default function GalleryAlbumPage() {
 
   if (!record || (!searchParams.get('preview') && record.status !== 'published')) return <NotFound />
 
+  const origin = typeof window !== 'undefined' ? window.location.origin : ''
+
   return (
     <>
       <SeoHead
         title={record.title}
         description={record.description}
         ogImage={record.coverImage}
-        canonical={`${window.location.origin}/gallery/${record.slug}`}
+        canonical={origin ? `${origin}/gallery/${record.slug}` : `/gallery/${record.slug}`}
       />
       <div className="relative overflow-hidden bg-navy-950 pb-16 pt-36">
         <div className="absolute -right-24 top-0 h-72 w-72 rounded-full bg-gold-500/10 blur-3xl" />
