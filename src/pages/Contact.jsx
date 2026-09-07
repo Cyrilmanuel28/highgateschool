@@ -50,7 +50,7 @@ export default function Contact() {
         </div>
       </div>
 
-      <div className="bg-cream py-16">
+      <div className="bg-surface py-16">
         <div className="container-x grid gap-10 lg:grid-cols-5">
           <div className="space-y-5 lg:col-span-2">
             <Reveal>
@@ -58,44 +58,44 @@ export default function Contact() {
                 <h2 className="font-serif text-2xl font-semibold text-navy-900">{info?.contactReachUsHeading || 'Reach Us Directly'}</h2>
                 <ul className="mt-6 space-y-5 text-sm">
                   <li className="flex gap-4">
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gold-50 text-gold-600">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-royal/10 border border-royal/20 text-royal">
                       <MapPin size={19} />
                     </span>
                     <div>
                       <p className="font-semibold text-navy-900">Visit Us</p>
-                      <p className="mt-1 leading-relaxed text-slate-600">{info?.address}</p>
+                      <p className="mt-1 leading-relaxed text-charcoal/80">{info?.address}</p>
                     </div>
                   </li>
                   <li className="flex gap-4">
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gold-50 text-gold-600">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-royal/10 border border-royal/20 text-royal">
                       <Phone size={19} />
                     </span>
                     <div>
                       <p className="font-semibold text-navy-900">Call Us</p>
-                      <a href={`tel:${info?.phone?.replace(/[^+\d]/g, '')}`} className="mt-1 block text-slate-600 hover:text-gold-700">
+                      <a href={`tel:${info?.phone?.replace(/[^+\d]/g, '')}`} className="mt-1 block text-charcoal/80 hover:text-royal">
                         {info?.phone}
                       </a>
                     </div>
                   </li>
                   <li className="flex gap-4">
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gold-50 text-gold-600">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-royal/10 border border-royal/20 text-royal">
                       <Mail size={19} />
                     </span>
                     <div>
                       <p className="font-semibold text-navy-900">Email Us</p>
-                      <a href={`mailto:${info?.email}`} className="mt-1 block text-slate-600 hover:text-gold-700">
+                      <a href={`mailto:${info?.email}`} className="mt-1 block text-charcoal/80 hover:text-royal">
                         {info?.email}
                       </a>
                     </div>
                   </li>
                   <li className="flex gap-4">
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gold-50 text-gold-600">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-royal/10 border border-royal/20 text-royal">
                       <Clock size={19} />
                     </span>
                     <div>
                       <p className="font-semibold text-navy-900">{info?.contactOfficeHoursLabel || 'Office Hours'}</p>
-                      <p className="mt-1 text-slate-600">{info?.officeHours || 'Monday–Friday, 7:30–17:30'}</p>
-                      {info?.saturdayHours && <p className="text-slate-600">{info.saturdayHours}</p>}
+                      <p className="mt-1 text-charcoal/80">{info?.officeHours || 'Monday–Friday, 7:30–17:30'}</p>
+                      {info?.saturdayHours && <p className="text-charcoal/80">{info.saturdayHours}</p>}
                     </div>
                   </li>
                 </ul>
@@ -179,7 +179,7 @@ export default function Contact() {
                       />
                     </div>
                     <div className="sm:col-span-2">
-                      <button type="submit" className="btn-gold w-full sm:w-auto">
+                      <button type="submit" className="btn-royal w-full sm:w-auto">
                         <Send size={16} /> Send Message
                       </button>
                     </div>

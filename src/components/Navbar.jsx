@@ -24,20 +24,20 @@ function Logo({ light, logo, name, shortName }) {
   const subName = shortName || displayName
   const initials = displayName.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase()
   return (
-    <Link to="/" className="group flex items-center gap-3">
+    <Link to="/" className="group flex items-center gap-3.5">
       {logo ? (
-        <img src={logo} alt={displayName} className="h-11 w-11 rounded-xl object-cover shadow-gold transition-transform duration-300 group-hover:scale-105" />
+        <img src={logo} alt={displayName} className="h-11 w-11 rounded-lg object-contain shadow-subtle transition-transform duration-300 group-hover:scale-105" />
       ) : (
-        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gold-500 font-serif text-2xl font-bold text-navy-900 shadow-gold transition-transform duration-300 group-hover:scale-105">
-          {initials}
+        <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-royal font-serif text-xl font-bold text-white border border-gold-500/30 shadow-subtle transition-transform duration-300 group-hover:scale-105">
+          <span className="text-gold-300">{initials}</span>
         </div>
       )}
       <div className="leading-tight">
-        <p className={cn('font-serif text-lg font-semibold tracking-wide', light ? 'text-white' : 'text-white')}>
+        <p className="font-serif text-lg font-semibold tracking-wide text-white">
           {displayName}
         </p>
         {subName !== displayName && (
-          <p className={cn('text-[10px] font-semibold uppercase tracking-[0.22em]', light ? 'text-gold-300' : 'text-gold-300')}>
+          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-gold-300">
             {subName}
           </p>
         )}
@@ -87,8 +87,10 @@ export default function Navbar() {
     <>
       <header
         className={cn(
-          'fixed inset-x-0 top-0 z-50 transition-all duration-500',
-          solid ? 'bg-navy-900/95 shadow-lg backdrop-blur-md' : 'bg-gradient-to-b from-navy-950/70 to-transparent'
+          'fixed inset-x-0 top-0 z-50 transition-all duration-300',
+          solid
+            ? 'border-b border-white/10 bg-navy-900/95 shadow-lg backdrop-blur-md'
+            : 'bg-gradient-to-b from-navy-950/80 via-navy-950/40 to-transparent'
         )}
       >
         <div className="container-x flex h-[76px] items-center justify-between gap-6">
@@ -102,21 +104,21 @@ export default function Navbar() {
                   <div key={item.id} className="group relative">
                     <Link
                       to={item.url}
-                      className="flex items-center gap-1.5 rounded-full px-4 py-2.5 text-sm font-medium text-white/90 transition hover:bg-white/10 hover:text-white"
+                      className="flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-sm font-medium text-white/90 transition hover:bg-white/10 hover:text-white"
                     >
                       {item.label}
-                      <ChevronDown size={14} className="transition-transform duration-300 group-hover:rotate-180" />
+                      <ChevronDown size={14} className="text-white/60 transition-transform duration-200 group-hover:rotate-180 group-hover:text-gold-300" />
                     </Link>
                     <div className="invisible absolute left-0 top-full pt-2 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
-                      <div className="w-64 overflow-hidden rounded-2xl border border-navy-100 bg-white p-2 shadow-cardHover">
+                      <div className="w-64 overflow-hidden rounded-xl border border-slate-200/80 bg-white p-2 shadow-dropdown">
                         {kids.map((k) => (
                           <Link
                             key={k.id}
                             to={k.url}
-                            className="flex items-center justify-between rounded-xl px-4 py-2.5 text-sm font-medium text-navy-800 transition hover:bg-navy-50 hover:text-navy-900"
+                            className="flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm font-medium text-charcoal transition hover:bg-surface hover:text-royal"
                           >
                             {k.label}
-                            <ChevronDown size={12} className="-rotate-90 text-gold-500" />
+                            <ChevronDown size={12} className="-rotate-90 text-gold-500/70" />
                           </Link>
                         ))}
                       </div>
@@ -131,9 +133,9 @@ export default function Navbar() {
                   end
                   className={({ isActive }) =>
                     cn(
-                      'rounded-full px-4 py-2.5 text-sm font-medium transition',
+                      'relative rounded-lg px-3.5 py-2 text-sm font-medium transition',
                       isActive
-                        ? 'bg-gold-500/15 text-gold-300'
+                        ? 'text-gold-300 after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:rounded-full after:bg-gold-500'
                         : 'text-white/90 hover:bg-white/10 hover:text-white'
                     )
                   }
@@ -144,7 +146,7 @@ export default function Navbar() {
             })}
             <button
               onClick={() => setSearchOpen(true)}
-              className="flex h-10 w-10 items-center justify-center rounded-full text-white/90 transition hover:bg-white/10 hover:text-white"
+              className="flex h-10 w-10 items-center justify-center rounded-lg text-white/90 transition hover:bg-white/10 hover:text-white"
               aria-label="Search the site"
               title="Search"
             >
@@ -152,14 +154,14 @@ export default function Navbar() {
             </button>
             <Link
               to="/contact"
-              className="ml-1 rounded-full bg-gold-500 px-6 py-2.5 text-sm font-semibold text-navy-900 shadow-gold transition hover:-translate-y-0.5 hover:bg-gold-400"
+              className="ml-2 rounded-lg bg-gold-500 px-5 py-2.5 text-sm font-bold text-navy-950 shadow-gold transition hover:-translate-y-0.5 hover:bg-gold-400"
             >
               {schoolInfo?.contactButtonLabel || 'Contact Us'}
             </Link>
           </nav>
 
           <button
-            className="flex h-11 w-11 items-center justify-center rounded-xl text-white transition hover:bg-white/10 xl:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-lg text-white transition hover:bg-white/10 xl:hidden"
             onClick={() => setMobileOpen((v) => !v)}
             aria-label="Toggle menu"
           >

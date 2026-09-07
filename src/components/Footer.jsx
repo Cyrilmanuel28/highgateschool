@@ -67,17 +67,21 @@ export default function Footer() {
 
       <div className="container-x grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
         <div>
-          <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gold-500 font-serif text-2xl font-bold text-navy-900">
-              A
-            </div>
+          <div className="flex items-center gap-3.5">
+            {info?.logo ? (
+              <img src={info.logo} alt={info.name} className="h-12 w-12 rounded-lg object-contain shadow-subtle" />
+            ) : (
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-royal font-serif text-xl font-bold text-white border border-gold-500/30 shadow-subtle">
+                <span className="text-gold-300">{(info?.name || 'Highgate').split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase()}</span>
+              </div>
+            )}
             <div>
               <p className="font-serif text-xl font-semibold text-white">{info?.name}</p>
               <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-gold-400">{info?.tagline}</p>
             </div>
           </div>
           <p className="mt-5 text-sm leading-relaxed text-navy-200">{info?.footerText}</p>
-          <div className="mt-5 flex gap-2.5">
+          <div className="mt-5 flex gap-2">
             {Object.entries(info?.socialLinks || {}).map(([key, url]) => {
               const Icon = SOCIAL_ICONS[key]
               if (!Icon) return null
@@ -88,7 +92,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={key}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-navy-100 transition hover:border-gold-500 hover:bg-gold-500 hover:text-navy-900"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 bg-white/5 text-navy-100 transition hover:border-gold-500/60 hover:bg-gold-500/15 hover:text-gold-300"
                 >
                   <Icon size={15} />
                 </a>

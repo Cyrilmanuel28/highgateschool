@@ -40,14 +40,14 @@ export default function StaffDirectory() {
         </div>
       </div>
 
-      <div className="bg-cream py-16">
+      <div className="bg-surface py-16">
         <div className="container-x">
           <div className="mb-10 flex flex-wrap gap-2">
             <button
               onClick={() => setDepartment('All')}
               className={cn(
-                'rounded-full px-4 py-2 text-xs font-semibold transition',
-                department === 'All' ? 'bg-navy-900 text-white' : 'bg-white text-navy-800 shadow-card hover:bg-navy-50'
+                'rounded-lg px-4 py-2 text-xs font-semibold transition',
+                department === 'All' ? 'bg-royal text-white shadow-royal' : 'bg-white text-charcoal border border-slate-200/80 shadow-subtle hover:bg-surface hover:text-royal'
               )}
             >
               All Departments
@@ -57,8 +57,8 @@ export default function StaffDirectory() {
                 key={d}
                 onClick={() => setDepartment(d)}
                 className={cn(
-                  'rounded-full px-4 py-2 text-xs font-semibold transition',
-                  department === d ? 'bg-navy-900 text-white' : 'bg-white text-navy-800 shadow-card hover:bg-navy-50'
+                  'rounded-lg px-4 py-2 text-xs font-semibold transition',
+                  department === d ? 'bg-royal text-white shadow-royal' : 'bg-white text-charcoal border border-slate-200/80 shadow-subtle hover:bg-surface hover:text-royal'
                 )}
               >
                 {deptNames[d] || d}

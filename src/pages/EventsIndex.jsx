@@ -43,7 +43,7 @@ export default function EventsIndex() {
         </div>
       </div>
 
-      <div className="bg-cream py-16">
+      <div className="bg-surface py-16">
         <div className="container-x">
           <div className="mb-10 flex gap-2">
             {['upcoming', 'past'].map((f) => (
@@ -51,8 +51,10 @@ export default function EventsIndex() {
                 key={f}
                 onClick={() => setFilter(f)}
                 className={cn(
-                  'rounded-full px-5 py-2.5 text-sm font-semibold capitalize transition',
-                  filter === f ? 'bg-navy-900 text-white' : 'bg-white text-navy-800 shadow-card hover:bg-navy-50'
+                  'rounded-lg px-5 py-2.5 text-xs font-semibold capitalize transition',
+                  filter === f
+                    ? 'bg-royal text-white shadow-royal'
+                    : 'bg-white text-charcoal border border-slate-200/80 shadow-subtle hover:bg-surface hover:text-royal'
                 )}
               >
                 {f === 'upcoming' ? 'Upcoming Events' : 'Past Events'}

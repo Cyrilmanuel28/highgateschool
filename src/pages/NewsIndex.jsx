@@ -75,14 +75,14 @@ export default function NewsIndex() {
                   setPage(1)
                 }}
                 placeholder="Search articles…"
-                className="w-full rounded-full border border-white/20 bg-white/10 py-3 pl-11 pr-4 text-sm text-white placeholder-navy-200 outline-none backdrop-blur transition focus:border-gold-400 focus:bg-white/15"
+                className="w-full rounded-lg border border-white/20 bg-white/10 py-2.5 pl-11 pr-4 text-sm text-white placeholder-navy-200 outline-none backdrop-blur transition focus:border-gold-400 focus:bg-white/15"
               />
             </div>
           </div>
         </div>
       </div>
 
-      <div className="bg-cream py-16">
+      <div className="bg-surface py-16">
         <div className="container-x">
           <div className="mb-10 flex flex-wrap items-center gap-2">
             <button
@@ -91,8 +91,8 @@ export default function NewsIndex() {
                 setSearchParams(searchParams)
               }}
               className={cn(
-                'rounded-full px-4 py-2 text-xs font-semibold transition',
-                !tag ? 'bg-navy-900 text-white' : 'bg-white text-navy-800 shadow-card hover:bg-navy-50'
+                'rounded-lg px-4 py-2 text-xs font-semibold transition',
+                !tag ? 'bg-royal text-white shadow-royal' : 'bg-white text-charcoal border border-slate-200/80 shadow-subtle hover:bg-surface hover:text-royal'
               )}
             >
               All
@@ -107,8 +107,8 @@ export default function NewsIndex() {
                   setSearchParams(searchParams)
                 }}
                 className={cn(
-                  'rounded-full px-4 py-2 text-xs font-semibold transition',
-                  tag === t ? 'bg-navy-900 text-white' : 'bg-white text-navy-800 shadow-card hover:bg-navy-50'
+                  'rounded-lg px-4 py-2 text-xs font-semibold transition',
+                  tag === t ? 'bg-royal text-white shadow-royal' : 'bg-white text-charcoal border border-slate-200/80 shadow-subtle hover:bg-surface hover:text-royal'
                 )}
               >
                 {t}

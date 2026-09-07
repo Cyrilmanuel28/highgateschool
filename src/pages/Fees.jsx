@@ -35,7 +35,7 @@ export default function Fees() {
         </div>
       </div>
 
-      <div className="bg-cream py-16">
+      <div className="bg-surface py-16">
         <div className="container-x">
           {structures.length === 0 ? (
             <EmptyState icon={Wallet} title="No fee structures published" />
@@ -47,8 +47,8 @@ export default function Fees() {
                     key={f.id}
                     onClick={() => setActive(i)}
                     className={cn(
-                      'rounded-full px-6 py-3 text-sm font-semibold transition',
-                      active === i ? 'bg-gold-500 text-white shadow-gold' : 'bg-white text-navy-800 shadow-card hover:bg-navy-50'
+                      'rounded-lg px-5 py-2.5 text-xs font-semibold transition',
+                      active === i ? 'bg-royal text-white shadow-royal' : 'bg-white text-charcoal border border-slate-200/80 shadow-subtle hover:bg-surface hover:text-royal'
                     )}
                   >
                     {f.level}
@@ -66,7 +66,7 @@ export default function Fees() {
                           <h2 className="font-serif text-2xl font-semibold text-white">{f.level}</h2>
                           <p className="mt-0.5 text-sm text-navy-200">Academic Year {f.academicYear}</p>
                         </div>
-                        <span className="rounded-full bg-gold-500 px-4 py-1.5 text-xs font-bold text-navy-900">
+                        <span className="rounded-md bg-gold-500 px-3.5 py-1 text-xs font-bold text-navy-950 shadow-sm">
                           {f.items.length} items
                         </span>
                       </div>
@@ -74,16 +74,16 @@ export default function Fees() {
                         {f.items.map((item, j) => (
                           <div key={j} className="flex items-center justify-between gap-4 py-5">
                             <p className="font-medium text-navy-900">{item.label}</p>
-                            <p className="font-serif text-xl font-semibold text-gold-700">
+                            <p className="font-serif text-xl font-semibold text-royal">
                               {item.amount === 0 ? 'Included' : GBP.format(item.amount)}
                             </p>
                           </div>
                         ))}
                       </div>
                       {f.notes && (
-                        <div className="flex gap-3 border-t border-slate-100 bg-gold-50/60 px-8 py-5">
+                        <div className="flex gap-3 border-t border-gold-200/50 bg-gold-50/70 px-8 py-5">
                           <Info size={18} className="mt-0.5 shrink-0 text-gold-600" />
-                          <p className="text-sm leading-relaxed text-navy-800">{f.notes}</p>
+                          <p className="text-sm leading-relaxed text-navy-950">{f.notes}</p>
                         </div>
                       )}
                     </div>
@@ -94,13 +94,13 @@ export default function Fees() {
               <div className="mt-14 grid gap-6 md:grid-cols-2">
                 <div className="card p-8">
                   <h3 className="font-serif text-xl font-semibold text-navy-900">{info?.paymentBursariesTitle || 'Payment & Bursaries'}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                  <p className="mt-3 text-sm leading-relaxed text-charcoal/80">
                     {info?.paymentBursariesText || 'Fees are payable termly in advance. Annual payment attracts a 2% discount, and a confidential bursary fund supports families facing financial hardship. Full details are available from the finance office.'}
                   </p>
                 </div>
                 <div className="card p-8">
                   <h3 className="font-serif text-xl font-semibold text-navy-900">Download the Fee Brochure</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                  <p className="mt-3 text-sm leading-relaxed text-charcoal/80">
                     The complete fee schedule is also available as a PDF in the downloads section.
                   </p>
                   <Link to="/downloads" className="btn-outline mt-5">
@@ -111,7 +111,7 @@ export default function Fees() {
 
               <div className="mt-14">
                 <h3 className="font-serif text-2xl font-semibold text-navy-900">{info?.paymentMethodsTitle || 'Ways to Pay'}</h3>
-                <p className="mt-2 max-w-2xl text-sm text-slate-500">
+                <p className="mt-2 max-w-2xl text-sm text-charcoal/70">
                   {info?.paymentMethodsText || 'Fees are payable termly in advance. Pay the full year upfront and receive a 2% discount; a confidential bursary fund also supports families facing financial hardship.'}
                 </p>
                 <div className="mt-6 grid gap-6 md:grid-cols-3">
@@ -121,11 +121,11 @@ export default function Fees() {
                     { icon: Repeat, title: 'Standing Order', text: 'Spread termly fees with a monthly standing order arrangement for eligible families.' }
                   ].map((m) => (
                     <div key={m.title} className="card-hover p-6">
-                      <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-gold-50 text-gold-600">
+                      <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-royal/10 border border-royal/20 text-royal">
                         <m.icon size={22} />
                       </span>
                       <h4 className="mt-4 font-serif text-lg font-semibold text-navy-900">{m.title}</h4>
-                      <p className="mt-2 text-sm leading-relaxed text-slate-600">{m.text}</p>
+                      <p className="mt-2 text-sm leading-relaxed text-charcoal/80">{m.text}</p>
                     </div>
                   ))}
                 </div>
