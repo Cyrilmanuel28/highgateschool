@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import {
   GraduationCap, Globe2, HeartHandshake, Sparkles, Phone, Mail, ShieldCheck, Music4, Trophy,
   Users, Baby, BookOpen, Compass, Camera, Target, Award, Quote as QuoteIcon, CalendarDays,
-  ChevronRight, MapPin
+  ChevronRight, MapPin, Lightbulb, Handshake, Eye, Star, Brain, Leaf, HandHelping, Zap
 } from 'lucide-react'
 import { useData } from '../context/DataContext.jsx'
 import Reveal from './Reveal.jsx'
@@ -30,7 +30,15 @@ const ICONS = {
   compass: Compass,
   camera: Camera,
   target: Target,
-  award: Award
+  award: Award,
+  lightbulb: Lightbulb,
+  handshake: Handshake,
+  eye: Eye,
+  star: Star,
+  brain: Brain,
+  leaf: Leaf,
+  help: HandHelping,
+  zap: Zap
 }
 
 export function BlockHero({ block }) {
@@ -594,6 +602,159 @@ export function BlockTestimonials({ block }) {
   )
 }
 
+export function BlockHeadOfSchool({ block }) {
+  return (
+    <section className="bg-white py-24 lg:py-28">
+      <div className="container-x grid items-center gap-14 lg:grid-cols-2">
+        <Reveal>
+          <div className="relative">
+            <div className="absolute -left-3 -top-3 h-36 w-36 rounded-xl bg-gold-100/60 border border-gold-500/20" />
+            <div className="absolute -bottom-3 -right-3 h-28 w-28 rounded-xl bg-navy-100/50" />
+            <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-slate-200/80 shadow-cardHover">
+              <Img src={block.image} alt={block.author || 'Head of School'} />
+            </div>
+          </div>
+        </Reveal>
+        <Reveal delay={120}>
+          <p className="eyebrow mb-3">{block.eyebrow || 'Leadership'}</p>
+          <h2 className="font-serif text-4xl font-semibold leading-tight text-navy-900 sm:text-[2.6rem]">{block.title}</h2>
+          <div className="mt-4 h-1 w-16 rounded-full bg-gold-500" />
+          <div className="ql-rendered mt-6 text-lg leading-relaxed text-charcoal/80" dangerouslySetInnerHTML={{ __html: block.body || '' }} />
+          <div className="mt-8 border-t border-slate-200 pt-6">
+            <p className="font-serif text-lg font-semibold text-navy-900">{block.author}</p>
+            <p className="mt-1 text-sm text-charcoal/60">{block.role}</p>
+          </div>
+          {block.signature && (
+            <p className="mt-6 font-serif text-xl italic text-navy-900">{block.signature}</p>
+          )}
+        </Reveal>
+      </div>
+    </section>
+  )
+}
+
+export function BlockPhilosophy({ block }) {
+  return (
+    <section className="bg-surface py-20 lg:py-24">
+      <div className="container-x">
+        <SectionHeading eyebrow={block.eyebrow || 'Our Approach'} title={block.title} subtitle={block.subtitle} />
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {(block.items || []).map((item, i) => {
+            const Icon = ICONS[item.icon] || Lightbulb
+            return (
+              <Reveal key={i} delay={i * 90} className="h-full">
+                <div className="card-hover group flex h-full flex-col p-8">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-navy-900 text-gold-400 transition-all duration-300 group-hover:bg-royal group-hover:text-white group-hover:shadow-royal">
+                    <Icon size={26} />
+                  </div>
+                  <h3 className="mt-5 font-serif text-2xl font-semibold text-navy-900 transition-colors group-hover:text-royal">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-charcoal/80">{item.text}</p>
+                </div>
+              </Reveal>
+            )
+          })}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export function BlockDistinctive({ block }) {
+  return (
+    <section className="relative overflow-hidden bg-navy-950 py-24 lg:py-28">
+      <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-gold-500/10 blur-3xl" />
+      <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-royal/20 blur-3xl" />
+      <div className="container-x relative">
+        <Reveal>
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="eyebrow mb-3 text-gold-400">{block.eyebrow || 'What Sets Us Apart'}</p>
+            <h2 className="font-serif text-4xl font-semibold leading-tight text-white sm:text-5xl">{block.title}</h2>
+            <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-gold-500" />
+            {block.subtitle && <p className="mt-6 text-lg text-navy-200">{block.subtitle}</p>}
+          </div>
+        </Reveal>
+        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {(block.items || []).map((item, i) => {
+            const Icon = ICONS[item.icon] || Star
+            return (
+              <Reveal key={i} delay={i * 80} className="h-full">
+                <div className="group flex h-full flex-col rounded-xl border border-white/10 bg-white/5 p-7 backdrop-blur-sm transition-all duration-300 hover:border-gold-500/30 hover:bg-white/10">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gold-500/20 text-gold-400 transition-colors group-hover:bg-gold-500 group-hover:text-navy-950">
+                    <Icon size={22} />
+                  </div>
+                  <h3 className="mt-5 font-serif text-xl font-semibold text-white">{item.title}</h3>
+                  <p className="mt-2.5 flex-1 text-sm leading-relaxed text-navy-200">{item.text}</p>
+                </div>
+              </Reveal>
+            )
+          })}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export function BlockStudentExperience({ block }) {
+  return (
+    <section className="bg-white py-20 lg:py-24">
+      <div className="container-x">
+        <SectionHeading eyebrow={block.eyebrow || 'Student Life'} title={block.title} subtitle={block.subtitle} />
+        <div className="grid gap-6 md:grid-cols-2">
+          {(block.items || []).map((item, i) => (
+            <Reveal key={i} delay={i * 80} className="h-full">
+              <div className="group relative overflow-hidden rounded-xl border border-slate-200/80 shadow-card transition-shadow hover:shadow-cardHover">
+                {item.image && (
+                  <div className="aspect-[16/9] overflow-hidden">
+                    <Img src={item.image} alt={item.title} className="transition duration-500 group-hover:scale-105" />
+                  </div>
+                )}
+                <div className="p-7">
+                  <h3 className="font-serif text-xl font-semibold text-navy-900 transition-colors group-hover:text-royal">{item.title}</h3>
+                  <p className="mt-2.5 text-sm leading-relaxed text-charcoal/80">{item.text}</p>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export function BlockCommunity({ block }) {
+  return (
+    <section className="bg-surface py-20 lg:py-24">
+      <div className="container-x grid items-center gap-14 lg:grid-cols-2">
+        <Reveal>
+          <div className="relative">
+            <div className="absolute -left-3 -top-3 h-36 w-36 rounded-xl bg-gold-100/60 border border-gold-500/20" />
+            <div className="absolute -bottom-3 -right-3 h-28 w-28 rounded-xl bg-navy-100/50" />
+            <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-slate-200/80 shadow-cardHover">
+              <Img src={block.image} alt={block.title || 'Our Community'} />
+            </div>
+          </div>
+        </Reveal>
+        <Reveal delay={120}>
+          <p className="eyebrow mb-3">{block.eyebrow || 'Together We Thrive'}</p>
+          <h2 className="font-serif text-4xl font-semibold leading-tight text-navy-900 sm:text-[2.6rem]">{block.title}</h2>
+          <div className="mt-4 h-1 w-16 rounded-full bg-gold-500" />
+          <div className="ql-rendered mt-6 text-lg leading-relaxed text-charcoal/80" dangerouslySetInnerHTML={{ __html: block.body || '' }} />
+          {(block.stats || []).length > 0 && (
+            <div className="mt-8 grid grid-cols-3 gap-4 border-t border-slate-200 pt-8">
+              {block.stats.map((s, i) => (
+                <div key={i} className="text-center">
+                  <p className="font-serif text-2xl font-semibold text-royal">{s.value}</p>
+                  <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-charcoal/60">{s.label}</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </Reveal>
+      </div>
+    </section>
+  )
+}
+
 export default function renderBlock(block, i = 0) {
   switch (block.type) {
     case 'hero':
@@ -628,6 +789,16 @@ export default function renderBlock(block, i = 0) {
       return <BlockFacilities key={block.id || i} block={block} />
     case 'testimonials':
       return <BlockTestimonials key={block.id || i} block={block} />
+    case 'headOfSchool':
+      return <BlockHeadOfSchool key={block.id || i} block={block} />
+    case 'philosophy':
+      return <BlockPhilosophy key={block.id || i} block={block} />
+    case 'distinctive':
+      return <BlockDistinctive key={block.id || i} block={block} />
+    case 'studentExperience':
+      return <BlockStudentExperience key={block.id || i} block={block} />
+    case 'community':
+      return <BlockCommunity key={block.id || i} block={block} />
     case 'welcome':
       return <BlockWelcome key={block.id || i} block={block} />
     case 'cta':

@@ -141,32 +141,39 @@ export function seedPages() {
       'about',
       'About Us',
       [
-        { id: 'b1', type: 'hero', kicker: 'Welcome to Highgate', title: 'A School That Feels Like Home, With Standards That Reach the World', subtitle: 'For more than two decades we have nurtured curious minds from over forty nations, blending academic rigour with genuine care.', image: IMG.campus, cta1: { label: 'Explore Admissions', to: '/admissions' }, cta2: { label: 'Visit Us', to: '/contact' } },
+        { id: 'b1', type: 'hero', kicker: 'Welcome to Highgate', title: 'A School That Feels Like Home, With Standards That Reach the World', subtitle: 'For more than two decades we have nurtured curious minds from over forty nations, blending academic rigour with genuine care. From the moment you arrive, you will feel it — in the energy of our classrooms, the curiosity of our students, and the warmth of our community.', image: IMG.campus, cta1: { label: 'Explore Admissions', to: '/admissions' }, cta2: { label: 'Visit Us', to: '/contact' } },
         { id: 'b2', type: 'stats', items: [
           { value: '1998', label: 'Year Founded' },
           { value: '40+', label: 'Nationalities' },
           { value: '1:8', label: 'Student–Teacher Ratio' },
           { value: '96%', label: 'IB Pass Rate 2025' }
         ] },
-        { id: 'b3', type: 'richText', html: '<p><strong>Highgate School</strong> is an independent, co-educational day school for students aged 3 to 18. We offer the International Baccalaureate (IB) and Cambridge IGCSE programmes alongside a rich national curriculum, taught by an outstanding faculty drawn from six continents.</p><p>Our campus in Meridian Park blends modern learning spaces with acres of green playing fields, a performing arts centre, and a state-of-the-art STEAM wing. But what families remember most is the warmth — a school where every child is known by name and every achievement is celebrated.</p>' },
-        { id: 'b4', type: 'imageText', title: 'A Campus Built for Curiosity', text: 'From the Discovery Garden for our youngest learners to the university-grade laboratories and design studios of the Upper School, every space is designed to spark inquiry, collaboration, and joy in learning.', image: IMG.lab, reversed: false },
-        { id: 'b5', type: 'quote', quote: 'Highgate is where international-mindedness stops being a slogan and becomes the daily experience of every child — in the classroom, on the pitch, and across our forty nationalities.', author: 'Dr. Helena Moreau', role: 'Head of School' },
-        { id: 'b6', type: 'features', title: 'Why Families Choose Highgate', subtitle: 'The pillars that shape our community', items: [
+        { id: 'b3', type: 'headOfSchool', eyebrow: 'A Personal Welcome', title: 'From Our Head of School', body: '<p>Akwaaba — and welcome. That word, which means "welcome" in Twi, captures something essential about who we are. At Highgate, welcome is not just a greeting. It is a promise that your child will be known, valued, and celebrated from their very first day.</p><p>My name is Dr. Helena Moreau, and it is my privilege to lead this community. I have had the honour of serving as Head of School since 2019, and what inspires me most is the same thing that drew me here: the genuine warmth of this community and the boundless curiosity of our students.</p><p>We are a school of approximately 1,150 students, from Early Years through to the IB Diploma, drawn from over forty countries and rooted right here in London. That blend of global perspective and deep local connection is something we treasure. Our students do not just learn about the world — they learn from each other, every single day.</p><p>I invite you to explore our website, reach out with your questions, and come and visit us in person. There is truly no substitute for walking through our doors and experiencing the Highgate community for yourself.</p>', image: IMG.port1, author: 'Dr. Helena Moreau', role: 'Head of School', signature: 'We would love to welcome your family into ours.' },
+        { id: 'b4', type: 'richText', html: '<h3>Who We Are</h3><p><strong>Highgate School</strong> is an independent, co-educational day school for students aged 3 to 18. Founded in 1998, we are one of London\'s leading international schools, offering the International Baccalaureate (IB) and Cambridge IGCSE programmes alongside a rich national curriculum.</p><p>Our campus in Meridian Park blends modern learning spaces with acres of green playing fields, a performing arts centre, and a state-of-the-art STEAM wing. But what families remember most is the warmth — a school where every child is known by name and every achievement is celebrated.</p><p>We are a school of approximately 1,150 students from over forty nationalities. That diversity is not something we simply acknowledge — it is something we celebrate. Our students learn to see the world through multiple perspectives, to listen with empathy, and to lead with integrity.</p>' },
+        { id: 'b5', type: 'imageText', title: 'A Campus Built for Curiosity', text: 'From the Discovery Garden for our youngest learners to the university-grade laboratories and design studios of the Upper School, every space is designed to spark inquiry, collaboration, and joy in learning. Our campus is not just a place where learning happens — it is a place where learning comes alive.', image: IMG.lab, reversed: false },
+        { id: 'b6', type: 'community', eyebrow: 'Our Community', title: 'Students, Teachers, Parents — One Family', body: '<p>At Highgate, community is not a word we use lightly. It is the way our teachers know every student by name. It is the way parents are welcomed into classrooms, invited to forums, and encouraged to be active partners in their child\'s education. It is the way our leadership team walks the corridors every morning, greeting families.</p><p>From the International Food & Culture Fair to the termly parent forums, from the house system to the annual Arts Festival — we build connections that make Highgate feel less like a school and more like a family.</p>', image: IMG.studentsGroup, stats: [
+          { value: '4', label: 'Houses' },
+          { value: '120+', label: 'Events Per Year' },
+          { value: '95%', label: 'Parent Satisfaction' }
+        ] },
+        { id: 'b7', type: 'quote', quote: 'Highgate is where international-mindedness stops being a slogan and becomes the daily experience of every child — in the classroom, on the pitch, and across our forty nationalities.', author: 'Dr. Helena Moreau', role: 'Head of School' },
+        { id: 'b8', type: 'features', title: 'Why Families Choose Highgate', subtitle: 'The pillars that shape our community', items: [
           { icon: 'graduation', title: 'Academic Excellence', text: 'Consistently strong IB and IGCSE results, with personalised pathways from Early Years to Diploma.' },
           { icon: 'globe', title: 'True Internationalism', text: 'An IB World School where over forty nationalities learn together in genuine mutual respect.' },
           { icon: 'heart', title: 'Pastoral Care', text: 'A house system, dedicated counsellors, and a family-like culture that supports every child.' },
           { icon: 'spark', title: 'Creativity & Character', text: 'Forty clubs, competitive sport, performing arts, and service learning build confident leaders.' }
         ] },
-        { id: 'b7', type: 'cta', title: 'Come and See Us for Yourself', text: 'Book a private tour of campus, meet our teachers, and discover whether Highgate is the right home for your family.', cta1: { label: 'Book a Tour', to: '/contact' }, cta2: { label: 'Download Prospectus', to: '/downloads' } }
+        { id: 'b9', type: 'cta', title: 'Come and See Us for Yourself', text: 'Book a private tour of campus, meet our teachers, and discover whether Highgate is the right home for your family.', cta1: { label: 'Book a Tour', to: '/contact' }, cta2: { label: 'Download Prospectus', to: '/downloads' } }
       ],
-      { metaDescription: 'Highgate School is an independent international school in London for ages 3–18, offering IB and IGCSE within a warm, global community.' }
+      { metaDescription: 'Highgate School is an independent international school in London for ages 3–18, offering IB and IGCSE within a warm, global community. Founded in 1998, serving 40+ nationalities.' }
     ),
     mk(
       'history',
       'Our History',
       [
         { id: 'b1', type: 'hero', kicker: 'Our Story', title: 'Two Decades of Opening Minds', subtitle: 'From a single classroom to an international campus — the story of Highgate, told in moments that matter.', image: IMG.studentsGroup },
-        { id: 'b2', type: 'timeline', title: 'Milestones', items: [
+        { id: 'b2', type: 'richText', html: '<p>Highgate School was founded in 1998 with a bold idea: that world-class international education could be built on care. What began in a Victorian townhouse with 38 students has grown into a thriving campus of 1,150 students from over forty nations.</p><p>Every milestone in our history has been shaped by the same conviction — that when you invest in people, when you build a community rooted in respect and curiosity, extraordinary things happen. Our longevity speaks to something real: generations of families have trusted us with what matters most to them.</p><p>As we look ahead, we draw on that legacy — blending tradition with innovation, and always asking how we can do better for the young people in our care.</p>' },
+        { id: 'b3', type: 'timeline', title: 'Milestones', items: [
           { year: '1998', title: 'A Modest Beginning', text: 'Highgate opens its doors in a Victorian townhouse with 38 students and a bold idea: world-class international education built on care.' },
           { year: '2005', title: 'The Primary Campus', text: 'Our purpose-built Junior School opens, growing the community past 300 students across 20 nationalities.' },
           { year: '2012', title: 'IB World School', text: 'Highgate is authorised as an IB World School and introduces the IB Diploma alongside Cambridge IGCSE.' },
@@ -174,7 +181,8 @@ export function seedPages() {
           { year: '2021', title: 'New Sports Complex', text: 'A six-lane pool, multi-sport hall, and all-weather pitches double our sporting capacity.' },
           { year: '2025', title: 'Forty Nations, One School', text: 'The community reaches 1,150 students from 42 countries, and 96% of Diploma graduates enter their first-choice university.' }
         ] },
-        { id: 'b3', type: 'cta', title: 'History in the Making', text: 'Our archive of milestone moments grows every term — explore the newsroom to see the latest chapter.', cta1: { label: 'Read Our News', to: '/news' } }
+        { id: 'b4', type: 'quote', quote: 'The longevity of this institution speaks to something real: generations of families have trusted us with what matters most to them. We honour that trust every day.', author: 'Dr. Helena Moreau', role: 'Head of School' },
+        { id: 'b5', type: 'cta', title: 'History in the Making', text: 'Our archive of milestone moments grows every term — explore the newsroom to see the latest chapter.', cta1: { label: 'Read Our News', to: '/news' } }
       ],
       { metaDescription: 'From its founding in 1998 to a thriving international campus, discover the milestones that shaped Highgate School.' }
     ),
@@ -185,14 +193,23 @@ export function seedPages() {
         { id: 'b1', type: 'hero', kicker: 'Purpose & Values', title: 'Our Vision, Mission, and the Values We Live By', subtitle: 'What we believe about learning, community, and the future our students will shape.', image: IMG.kidsClassroom },
         { id: 'b2', type: 'values', title: 'Our Values', subtitle: 'Four commitments that guide every decision we make', items: [
           { title: 'Excellence', text: 'We pursue rigorous, joyful learning and hold every member of our community to high standards — because we believe every child is capable of more than they know.' },
-          { title: 'Curiosity', text: 'We ask questions before we give answers. Inquiry is the engine of the Highgate classroom at every age.' },
-          { title: 'Respect', text: 'With forty-two nationalities in one community, respect is not optional. We listen, we include, and we learn from each other.' },
-          { title: 'Courage', text: 'We take intellectual and ethical risks. Our students learn to lead with conviction and to stand up for what is right.' }
+          { title: 'Curiosity', text: 'We ask questions before we give answers. Inquiry is the engine of the Highgate classroom at every age. We celebrate the questions as much as the answers.' },
+          { title: 'Respect', text: 'With forty-two nationalities in one community, respect is not optional. We listen, we include, and we learn from each other — in the classroom, on the pitch, and beyond.' },
+          { title: 'Courage', text: 'We take intellectual and ethical risks. Our students learn to lead with conviction, to stand up for what is right, and to embrace the discomfort that comes with growth.' }
         ] },
-        { id: 'b3', type: 'richText', html: '<h3>Our Vision</h3><p>To be a school where every child discovers their brilliance — an international community of learners who shape a more peaceful, more curious, more generous world.</p><h3>Our Mission</h3><p>We deliver a rigorous international education that balances academic ambition with wellbeing, creativity, and character. We nurture students who think critically, act ethically, and belong confidently to a world beyond any single culture.</p>' },
-        { id: 'b4', type: 'quote', quote: 'We measure success not only in exam results but in the kindness of our corridors, the courage of our questions, and the character of our graduates.', author: 'Dr. Helena Moreau', role: 'Head of School' }
+        { id: 'b3', type: 'richText', html: '<h3>Our Vision</h3><p>To be a school where every child discovers their brilliance — an international community of learners who shape a more peaceful, more curious, more generous world.</p><p>We imagine a future where our graduates lead with empathy, create with confidence, and serve with purpose. A future where the skills, values, and relationships forged at Highgate ripple outward into communities across the globe.</p><h3>Our Mission</h3><p>We deliver a rigorous international education that balances academic ambition with wellbeing, creativity, and character. We nurture students who think critically, act ethically, and belong confidently to a world beyond any single culture.</p><p>When we learn, we grow. When we lead, we empower. When we connect, we thrive.</p>' },
+        { id: 'b4', type: 'philosophy', eyebrow: 'Our Educational Philosophy', title: 'How We Approach Education', subtitle: 'Six principles that shape every classroom, every lesson, and every relationship at Highgate.', items: [
+          { icon: 'brain', title: 'Inquiry-Driven Learning', text: 'Every lesson begins with curiosity. Our students learn to ask powerful questions, investigate deeply, and construct understanding through exploration and discovery — not passive reception.' },
+          { icon: 'heart', title: 'Character & Wellbeing', text: 'Academic achievement matters, but so does kindness, resilience, and self-awareness. We nurture the whole child — mind, body, and character — because the two are inseparable.' },
+          { icon: 'globe', title: 'International-Mindedness', text: 'With forty-two nationalities learning together, our students develop the empathy, perspective, and cultural fluency the modern world demands. Diversity is not a challenge — it is our greatest strength.' },
+          { icon: 'lightbulb', title: 'Innovation & Creativity', text: 'From the STEAM Wing to the art studio, we give students the tools and freedom to imagine, prototype, and bring ideas to life. Failure is not feared — it is the first step toward mastery.' },
+          { icon: 'users', title: 'Leadership & Service', text: 'Every student has a voice. Through the house system, student council, and service learning, they learn to lead with purpose and compassion — not for recognition, but for impact.' },
+          { icon: 'spark', title: 'Joy in Learning', text: 'The best learning is joyful. Our classrooms buzz with energy, laughter, and the delight of understanding something new for the first time. That joy is not a luxury — it is essential.' }
+        ] },
+        { id: 'b5', type: 'quote', quote: 'We measure success not only in exam results but in the kindness of our corridors, the courage of our questions, and the character of our graduates.', author: 'Dr. Helena Moreau', role: 'Head of School' },
+        { id: 'b6', type: 'cta', title: 'Live Our Values Every Day', text: 'Visit Highgate and see how our values come to life in every classroom, every corridor, and every conversation.', cta1: { label: 'Book a Tour', to: '/contact' }, cta2: { label: 'Meet Our Team', to: '/administration' } }
       ],
-      { metaDescription: 'The vision, mission and values of Highgate School — excellence, curiosity, respect and courage in an international learning community.' }
+      { metaDescription: 'The vision, mission, values and educational philosophy of Highgate School — excellence, curiosity, respect and courage in an international learning community.' }
     ),
     mk(
       'administration',
@@ -229,44 +246,57 @@ export function seedPages() {
       'student-life',
       'Student Life',
       [
-        { id: 'b1', type: 'hero', kicker: 'Beyond the Classroom', title: 'Life at Highgate Is a Life Well Lived', subtitle: 'Houses, clubs, music, sport, service — a school day that ends at 3:30 but a school life that stays with you.', image: IMG.studentsLaptop },
+        { id: 'b1', type: 'hero', kicker: 'Beyond the Classroom', title: 'Life at Highgate Is a Life Well Lived', subtitle: 'Houses, clubs, music, sport, service — a school day that ends at 3:30 but a school life that stays with you forever.', image: IMG.studentsLaptop },
         { id: 'b2', type: 'stats', items: [
           { value: '40+', label: 'Clubs & Societies' },
           { value: '25', label: 'Sports Teams' },
           { value: '4', label: 'Houses' },
           { value: '120+', label: 'Events Per Year' }
         ] },
-        { id: 'b3', type: 'imageText', title: 'The House System', text: 'Every student belongs to one of four houses — Amber, Meridian, Phoenix, and Solent. Houses compete in sports, arts, and academics, and above all they become family: older students mentor younger ones for the entire journey through Highgate.', image: IMG.team, reversed: false },
-        { id: 'b4', type: 'imageText', title: 'Music & Performing Arts', text: 'From the award-winning Chamber Orchestra to musical theatre productions in the 300-seat Highgate Theatre, the arts are woven into school life — nearly half of our students learn an instrument.', image: IMG.music, reversed: true },
-        { id: 'b5', type: 'features', title: 'Every Day Counts', items: [
-          { icon: 'music', title: 'Arts', text: 'Orchestras, choirs, theatre, dance and studio art — with termly showcases and an annual Arts Festival.' },
-          { icon: 'trophy', title: 'Sport', text: 'Football, rugby, netball, swimming, athletics and more, from recreational to county-representative level.' },
-          { icon: 'globe', title: 'Service Learning', text: 'Every student completes service hours, from local volunteering to international service trips.' },
-          { icon: 'users', title: 'Leadership', text: 'Student council, house captains, eco-committee and the Model United Nations team.' }
+        { id: 'b3', type: 'community', eyebrow: 'Our Community', title: 'Students, Teachers, Parents — One Family', body: '<p>At Highgate, community is not a word we use lightly. It is the way our teachers know every student by name. It is the way parents are welcomed into classrooms, invited to forums, and encouraged to be active partners in their child\'s education. It is the way our leadership team walks the corridors every morning, greeting families.</p><p>From the International Food & Culture Fair to the termly parent forums, from the house system to the annual Arts Festival — we build connections that make Highgate feel less like a school and more like a family.</p><p>The true heart of Highgate is not any single programme or accolade. It is the community itself — the energy in our corridors, the curiosity of our students, the dedication of our faculty, and the warmth of our parent community.</p>', image: IMG.studentsGroup, stats: [
+          { value: '4', label: 'Houses' },
+          { value: '120+', label: 'Events Per Year' },
+          { value: '95%', label: 'Parent Satisfaction' }
         ] },
-        { id: 'b6', type: 'cta', title: 'See Life at Highgate', text: 'Browse the gallery and videos to see our campus and community in action.', cta1: { label: 'Visit the Gallery', to: '/gallery' }, cta2: { label: 'Watch Videos', to: '/videos' } }
+        { id: 'b4', type: 'imageText', title: 'The House System', text: 'Every student belongs to one of four houses — Amber, Meridian, Phoenix, and Solent. Houses compete in sports, arts, and academics, and above all they become family: older students mentor younger ones for the entire journey through Highgate. The house system creates bonds that last beyond graduation and a sense of belonging that every child deserves.', image: IMG.team, reversed: false },
+        { id: 'b5', type: 'imageText', title: 'Music & Performing Arts', text: 'From the award-winning Chamber Orchestra to musical theatre productions in the 300-seat Highgate Theatre, the arts are woven into school life — nearly half of our students learn an instrument. Termly showcases, an annual Arts Festival, and visiting artists ensure every student has the chance to perform, create, and express themselves.', image: IMG.music, reversed: true },
+        { id: 'b6', type: 'studentExperience', eyebrow: 'Life Beyond the Classroom', title: 'The Student Experience', subtitle: 'Beyond academics, our students discover who they are and who they want to become.', items: [
+          { title: 'House System & Belonging', text: 'Every student belongs to one of four houses — Amber, Meridian, Phoenix, or Solent. Houses compete, celebrate, and support each other through every year at Highgate. Older students mentor younger ones, creating bonds that last beyond graduation.', image: IMG.team },
+          { title: 'Arts & Performance', text: 'From the award-winning Chamber Orchestra to musical theatre in the 300-seat Highgate Theatre, the arts are woven into daily life. Nearly half of our students learn an instrument, and termly showcases give every performer a stage.', image: IMG.music },
+          { title: 'Sport & Adventure', text: 'Twenty-five teams, a six-lane pool, all-weather pitches, and expeditions to the mountains — sport at Highgate is for everyone, from recreational to county-representative level. We measure success in participation as much as podiums.', image: IMG.soccer },
+          { title: 'Service & Leadership', text: 'Every student completes service hours, from local volunteering to international trips. Student council, eco-committee, and Model UN develop the leaders our world needs. Leadership is not a position — it is a practice.', image: IMG.studentsGroup }
+        ] },
+        { id: 'b7', type: 'features', title: 'Every Day Counts', items: [
+          { icon: 'music', title: 'Arts', text: 'Orchestras, choirs, theatre, dance and studio art — with termly showcases and an annual Arts Festival that brings the whole community together.' },
+          { icon: 'trophy', title: 'Sport', text: 'Football, rugby, netball, swimming, athletics and more, from recreational to county-representative level. Every child finds their sport.' },
+          { icon: 'globe', title: 'Service Learning', text: 'Every student completes service hours, from local volunteering to international service trips. Learning to give back is part of who we are.' },
+          { icon: 'users', title: 'Leadership', text: 'Student council, house captains, eco-committee and the Model United Nations team — every student has the chance to lead.' }
+        ] },
+        { id: 'b8', type: 'cta', title: 'See Life at Highgate', text: 'Browse the gallery and videos to see our campus and community in action.', cta1: { label: 'Visit the Gallery', to: '/gallery' }, cta2: { label: 'Watch Videos', to: '/videos' } }
       ],
-      { metaDescription: 'Student life at Highgate School — houses, clubs, music, sport, and a community that feels like family.' }
+      { metaDescription: 'Student life at Highgate School — houses, clubs, music, sport, service learning, and a community that feels like family. Discover what makes life at Highgate special.' }
     ),
     mk(
       'admissions',
       'Admissions',
       [
-        { id: 'b1', type: 'hero', kicker: 'Join Our Community', title: 'Admissions: A Warm Welcome, A Clear Path', subtitle: 'We welcome applications year-round for students aged 3–18 from every corner of the world.', image: IMG.study, cta1: { label: 'Enquire Now', to: '/contact' }, cta2: { label: 'See Fees', to: '/fees' } },
-        { id: 'b2', type: 'timeline', title: 'The Admissions Journey', items: [
-          { year: 'Step 1', title: 'Enquire & Visit', text: 'Submit an enquiry or call the admissions office. We invite every family to tour the campus and meet our team.' },
+        { id: 'b1', type: 'hero', kicker: 'Join Our Community', title: 'Admissions: A Warm Welcome, A Clear Path', subtitle: 'We welcome applications year-round for students aged 3–18 from every corner of the world. Choosing the right school is one of the most important decisions a family can make — and we are here to guide you every step of the way.', image: IMG.study, cta1: { label: 'Enquire Now', to: '/contact' }, cta2: { label: 'See Fees', to: '/fees' } },
+        { id: 'b2', type: 'richText', html: '<p>At Highgate, admissions is not a transaction — it is the beginning of a relationship. From your first enquiry to your child\'s first day, our admissions team is here to answer questions, arrange visits, and help your family find the right fit.</p><p>We welcome families from over forty nationalities, and our admissions process is designed to be warm, transparent, and thorough. Every family that joins Highgate becomes part of a community that knows them by name.</p>' },
+        { id: 'b3', type: 'timeline', title: 'The Admissions Journey', items: [
+          { year: 'Step 1', title: 'Enquire & Visit', text: 'Submit an enquiry or call the admissions office. We invite every family to tour the campus and meet our team — there is truly no substitute for walking through our doors.' },
           { year: 'Step 2', title: 'Submit the Application', text: 'Complete the online application with student details, previous school reports, and a family statement.' },
           { year: 'Step 3', title: 'Assessment & Interview', text: 'Age-appropriate assessments in English and Mathematics, plus a friendly conversation with our admissions team.' },
           { year: 'Step 4', title: 'Offer & Enrolment', text: 'Successful applicants receive an offer within two weeks. Enrolment is confirmed with the deposit and required documents.' }
         ] },
-        { id: 'b3', type: 'features', title: 'Entry Points & Requirements', items: [
+        { id: 'b4', type: 'features', title: 'Entry Points & Requirements', items: [
           { icon: 'baby', title: 'Early Years (3–5)', text: 'Play-based learning in our Discovery Garden. No assessment required — a warm welcome visit is all we need.' },
           { icon: 'book', title: 'Primary (6–11)', text: 'Entry at Year 1 or above. Informal assessment of readiness in English and numeracy.' },
           { icon: 'compass', title: 'Secondary (12–16)', text: 'Cambridge IGCSE pathway. Assessment in English, Maths and a science, plus references.' },
           { icon: 'graduation', title: 'IB Diploma (16–18)', text: 'Strong prior attainment and a personal statement required. Interview with the Head of Upper School.' }
         ] },
-        { id: 'b4', type: 'richText', html: '<h3>Key Dates</h3><p>Applications for September entry open on <strong>1 October</strong> and close on <strong>31 January</strong>. Mid-year applications are welcome subject to places. Scholarships for academic merit, music, and sport are available at Years 7 and 12.</p><p>All families new to Highgate are warmly invited to attend one of our monthly <strong>Open Mornings</strong>.</p>' },
-        { id: 'b5', type: 'cta', title: 'Begin Your Journey', text: 'Questions about admissions? Our team responds within one working day.', cta1: { label: 'Contact Admissions', to: '/contact' }, cta2: { label: 'Download Prospectus', to: '/downloads' } }
+        { id: 'b5', type: 'richText', html: '<h3>Key Dates</h3><p>Applications for September entry open on <strong>1 October</strong> and close on <strong>31 January</strong>. Mid-year applications are welcome subject to places. Scholarships for academic merit, music, and sport are available at Years 7 and 12.</p><p>All families new to Highgate are warmly invited to attend one of our monthly <strong>Open Mornings</strong> — a chance to tour campus, meet teachers, and experience the Highgate community for yourself.</p>' },
+        { id: 'b6', type: 'quote', quote: 'The moment I saw a student walk up to us unprompted and offer a tour, I knew this was a school where children feel at home. We applied that week.', author: 'Priya Anand', role: 'Open Morning Visitor' },
+        { id: 'b7', type: 'cta', title: 'Begin Your Journey', text: 'Questions about admissions? Our team responds within one working day. We would love to hear from you.', cta1: { label: 'Contact Admissions', to: '/contact' }, cta2: { label: 'Download Prospectus', to: '/downloads' } }
       ],
       { metaDescription: 'Admissions at Highgate School — a warm, clear process for students aged 3–18, with tours, assessments, and scholarships available year-round.' }
     ),
@@ -276,11 +306,19 @@ export function seedPages() {
       [
         { id: 'b1', type: 'hero', kicker: 'Learning for Life', title: 'Academic Programmes for Every Stage', subtitle: 'A seamless international pathway from Early Years to the IB Diploma — rigorous, joyful, and personal.', image: IMG.library },
         { id: 'b2', type: 'programs', title: 'Our Programmes' },
-        { id: 'b3', type: 'richText', html: '<h3>The Highgate Approach</h3><p>Learning at Highgate is inquiry-driven and concept-based. Classes are small, teachers know every student, and assessment focuses on growth as well as attainment. We combine the depth of Cambridge IGCSE with the breadth of the International Baccalaureate, and we support every student with learning enrichment, EAL, and university counselling from Year 10.</p>' },
-        { id: 'b4', type: 'quote', quote: 'The moment I saw students teaching students in the STEAM lab, I knew this was a school of genuine learning — not just teaching.', author: 'Dr. Amara Okonkwo', role: 'Vice-Chair, Board of Governors' },
-        { id: 'b5', type: 'cta', title: 'Find Your Programme', text: 'Talk to our admissions team about the right path for your child at every stage.', cta1: { label: 'Contact Us', to: '/contact' }, cta2: { label: 'Explore Departments', to: '/departments' } }
+        { id: 'b3', type: 'richText', html: '<h3>The Highgate Approach</h3><p>Learning at Highgate is inquiry-driven and concept-based. Classes are small, teachers know every student, and assessment focuses on growth as well as attainment. We combine the depth of Cambridge IGCSE with the breadth of the International Baccalaureate, and we support every student with learning enrichment, EAL, and university counselling from Year 10.</p><p>Our educational philosophy rests on six pillars: inquiry-driven learning, character and wellbeing, international-mindedness, innovation and creativity, leadership and service, and — above all — joy in learning. These are not aspirations we print on a page. They are the convictions that shape how we design learning experiences, how we welcome families, and how we show up for one another.</p>' },
+        { id: 'b4', type: 'philosophy', eyebrow: 'Our Approach', title: 'How We Teach', subtitle: 'Six principles that guide every classroom at Highgate.', items: [
+          { icon: 'brain', title: 'Inquiry-Driven', text: 'Questions come before answers. Our students learn to investigate, hypothesize, and construct understanding through exploration.' },
+          { icon: 'heart', title: 'Whole-Child Focus', text: 'We nurture mind, body, and character. Academic growth and personal wellbeing are inseparable.' },
+          { icon: 'globe', title: 'Global Perspective', text: 'Forty-two nationalities in our classrooms means learning is enriched by diverse viewpoints and cultural understanding.' },
+          { icon: 'lightbulb', title: 'Innovation', text: 'From robotics to sustainable design, our students use cutting-edge tools to solve real-world problems.' },
+          { icon: 'users', title: 'Collaborative', text: 'Learning is social. Our students teach each other, challenge each other, and celebrate each other\'s growth.' },
+          { icon: 'spark', title: 'Joyful', text: 'The best classrooms are alive with curiosity and laughter. We believe joy is not a luxury — it is essential to deep learning.' }
+        ] },
+        { id: 'b5', type: 'quote', quote: 'The moment I saw students teaching students in the STEAM lab, I knew this was a school of genuine learning — not just teaching.', author: 'Dr. Amara Okonkwo', role: 'Vice-Chair, Board of Governors' },
+        { id: 'b6', type: 'cta', title: 'Find Your Programme', text: 'Talk to our admissions team about the right path for your child at every stage.', cta1: { label: 'Contact Us', to: '/contact' }, cta2: { label: 'Explore Departments', to: '/departments' } }
       ],
-      { metaDescription: 'Academic programmes at Highgate School — Early Years, Primary, Middle School, Cambridge IGCSE and the IB Diploma.' }
+      { metaDescription: 'Academic programmes at Highgate School — Early Years, Primary, Middle School, Cambridge IGCSE and the IB Diploma, with an inquiry-driven, joyful approach.' }
     ),
     mk(
       'privacy-policy',
@@ -452,16 +490,44 @@ export function seedHomeSections() {
   const b = (id, type, content, order) => ({ id, sectionKey: id, content: { type, ...content }, order, isVisible: true })
   return [
     b('hhero', 'hero', { kicker: 'International Private School · Ages 3–18', title: 'Knowledge Without Borders', subtitle: 'A community of forty-two nationalities, a tradition of academic excellence, and a culture of genuine care — welcome to Highgate School.', image: IMG.hero, cta1: { label: 'Explore Admissions', to: '/admissions' }, cta2: { label: 'Learn About Us', to: '/about' } }, 1),
-    b('hwelcome', 'welcome', { title: 'A School Where Children Are Known by Name', body: '<p>Highgate is an international day school in London for students aged 3 to 18. We pair the rigour of Cambridge IGCSE and the International Baccalaureate with a warmth families feel from their very first visit.</p>', image: IMG.kidsClassroom }, 2),
+    b('hwelcome', 'welcome', { title: 'A School Where Children Are Known by Name', body: '<p>Highgate is an international day school in London for students aged 3 to 18. We pair the rigour of Cambridge IGCSE and the International Baccalaureate with a warmth families feel from their very first visit. Every child who walks through our doors becomes part of a community that knows them, challenges them, and celebrates them.</p><p>From the Discovery Garden to the IB Centre, our students grow in confidence, curiosity, and character — and our families tell us they feel at home from day one.</p>', image: IMG.kidsClassroom }, 2),
     b('hstats', 'stats', { items: [{ value: '1,150+', label: 'Students' }, { value: '42', label: 'Nationalities' }, { value: '96%', label: 'IB Pass Rate' }, { value: '40+', label: 'Clubs & Teams' }] }, 3),
-    b('hprograms', 'programs', { title: 'One Journey, Every Stage' }, 4),
-    b('hquote', 'quote', { quote: 'We measure success not only in exam results but in the kindness of our corridors, the courage of our questions, and the character of our graduates.', author: 'Dr. Helena Moreau', role: 'Head of School' }, 5),
-    b('hnews', 'latestNews', { title: 'From the Newsroom' }, 6),
-    b('hevents', 'upcomingEvents', { title: 'Mark Your Calendar' }, 7),
-    b('hfacilities', 'facilities', { title: 'World-Class Learning Spaces', subtitle: 'Purpose-built for inquiry, creativity, and athletic excellence.' }, 8),
-    b('hgallery', 'galleryPreview', { title: 'Life in Pictures' }, 9),
-    b('htestimonials', 'testimonials', { title: 'What Parents & Students Say', subtitle: 'Real perspectives from families who call Highgate their school community.' }, 10),
-    b('hcta', 'cta', { title: 'Begin Your Highgate Story', text: 'Book a campus tour, attend an Open Morning, or simply start a conversation with our admissions team.', cta1: { label: 'Book a Tour', to: '/contact' }, cta2: { label: 'Explore Admissions', to: '/admissions' } }, 11)
+    b('hheadofschool', 'headOfSchool', { eyebrow: 'From Our Head of School', title: 'Welcome to Highgate', body: '<p>Thank you for your interest in Highgate School. Choosing the right school for your child is one of the most important decisions a family can make, and I am honoured that you are considering us.</p><p>At Highgate, we believe that every child deserves to be known — not just as a student, but as a person. Our teachers see the whole child: their strengths, their curiosities, and the unique perspective they bring to our community. With forty-two nationalities in our classrooms, diversity is not something we teach about — it is something we live every day.</p><p>Our academic programme is rigorous and joyful. From our youngest learners in the Discovery Garden to our IB Diploma students preparing for university, we challenge every child to think deeply, create boldly, and lead with integrity. But what truly sets Highgate apart is the warmth — the way our community wraps around every family.</p><p>I invite you to visit our campus, meet our teachers, and experience the Highgate difference for yourself.</p>', image: IMG.port1, author: 'Dr. Helena Moreau', role: 'Head of School', signature: 'Welcome to our community.' }, 4),
+    b('hprograms', 'programs', { title: 'One Journey, Every Stage' }, 5),
+    b('hphilosophy', 'philosophy', { eyebrow: 'Our Educational Philosophy', title: 'Learning That Goes Beyond the Classroom', subtitle: 'We believe education is not just about what students know, but who they become.', items: [
+      { icon: 'brain', title: 'Inquiry-Driven Learning', text: 'Every lesson begins with curiosity. Our students learn to ask powerful questions, investigate deeply, and construct understanding through exploration and discovery.' },
+      { icon: 'heart', title: 'Character & Wellbeing', text: 'Academic achievement matters, but so does kindness, resilience, and self-awareness. We nurture the whole child — mind, body, and character.' },
+      { icon: 'globe', title: 'International-Mindedness', text: 'With forty-two nationalities learning together, our students develop the empathy, perspective, and cultural fluency the modern world demands.' },
+      { icon: 'lightbulb', title: 'Innovation & Creativity', text: 'From the STEAM Wing to the art studio, we give students the tools and freedom to imagine, prototype, and bring ideas to life.' },
+      { icon: 'users', title: 'Leadership & Service', text: 'Every student has a voice. Through the house system, student council, and service learning, they learn to lead with purpose and compassion.' },
+      { icon: 'spark', title: 'Joy in Learning', text: 'The best learning is joyful. Our classrooms buzz with energy, laughter, and the delight of understanding something new for the first time.' }
+    ] }, 6),
+    b('hquote', 'quote', { quote: 'We measure success not only in exam results but in the kindness of our corridors, the courage of our questions, and the character of our graduates.', author: 'Dr. Helena Moreau', role: 'Head of School' }, 7),
+    b('hnews', 'latestNews', { title: 'From the Newsroom' }, 8),
+    b('hevents', 'upcomingEvents', { title: 'Mark Your Calendar' }, 9),
+    b('hdistinctive', 'distinctive', { eyebrow: 'The Highgate Difference', title: 'What Makes Our School Different', subtitle: 'The true heart of Highgate is not any single programme or accolade — it is the community itself.', items: [
+      { icon: 'graduation', title: 'Small Classes, Known by Name', text: 'With an 8:1 student-teacher ratio, our teachers know every child — their strengths, their challenges, and the way they learn best.' },
+      { icon: 'globe', title: 'A Truly Global Community', text: 'Forty-two nationalities, six continents, one school. Our students develop international-mindedness not as a concept, but as a daily experience.' },
+      { icon: 'award', title: 'Rigorous & Joyful Academics', text: 'Cambridge IGCSE and the IB Diploma, taught by specialists who make every lesson engaging, challenging, and deeply personal.' },
+      { icon: 'spark', title: 'Facilities That Inspire', text: 'A 300-seat theatre, six-lane pool, STEAM Wing, and Discovery Garden — purpose-built spaces for every kind of learner.' },
+      { icon: 'heart', title: 'Pastoral Care That Matters', text: 'A house system, dedicated counsellors, and a culture where every child feels safe, supported, and truly at home.' },
+      { icon: 'trophy', title: 'Excellence Beyond the Classroom', text: 'Forty clubs, competitive sport, performing arts, and service learning — building confident, capable, compassionate leaders.' }
+    ] }, 10),
+    b('hstudentexperience', 'studentExperience', { eyebrow: 'Life at Highgate', title: 'The Student Experience', subtitle: 'Beyond the classroom, our students discover who they are and who they want to become.', items: [
+      { title: 'House System & Belonging', text: 'Every student belongs to one of four houses — Amber, Meridian, Phoenix, or Solent. Houses compete, celebrate, and support each other through every year at Highgate. Older students mentor younger ones, creating bonds that last beyond graduation.', image: IMG.team },
+      { title: 'Arts & Performance', text: 'From the award-winning Chamber Orchestra to musical theatre in the 300-seat Highgate Theatre, the arts are woven into daily life. Nearly half of our students learn an instrument, and termly showcases give every performer a stage.', image: IMG.music },
+      { title: 'Sport & Adventure', text: 'Twenty-five teams, a six-lane pool, all-weather pitches, and expeditions to the mountains — sport at Highgate is for everyone, from recreational to county-representative level.', image: IMG.soccer },
+      { title: 'Service & Leadership', text: 'Every student completes service hours, from local volunteering to international trips. Student council, eco-committee, and Model UN develop the leaders our world needs.', image: IMG.studentsGroup }
+    ] }, 11),
+    b('hcommunity', 'community', { eyebrow: 'Our Community', title: 'Students, Teachers, Parents — One Family', body: '<p>At Highgate, community is not a word we use lightly. It is the way our teachers know every student by name. It is the way parents are welcomed into classrooms, invited to forums, and encouraged to be active partners in their child\'s education. It is the way our leadership team walks the corridors every morning, greeting families by name.</p><p>From the International Food & Culture Fair to the termly parent forums, from the house system to the annual Arts Festival — we build connections that make Highgate feel less like a school and more like a family.</p>', image: IMG.studentsGroup, stats: [
+      { value: '4', label: 'Houses' },
+      { value: '120+', label: 'Events Per Year' },
+      { value: '95%', label: 'Parent Satisfaction' }
+    ] }, 12),
+    b('hfacilities', 'facilities', { title: 'World-Class Learning Spaces', subtitle: 'Purpose-built for inquiry, creativity, and athletic excellence.' }, 13),
+    b('hgallery', 'galleryPreview', { title: 'Life in Pictures' }, 14),
+    b('htestimonials', 'testimonials', { title: 'What Parents & Students Say', subtitle: 'Real perspectives from families who call Highgate their school community.' }, 15),
+    b('hcta', 'cta', { title: 'Begin Your Highgate Story', text: 'Book a campus tour, attend an Open Morning, or simply start a conversation with our admissions team. We would love to welcome your family into ours.', cta1: { label: 'Book a Tour', to: '/contact' }, cta2: { label: 'Explore Admissions', to: '/admissions' } }, 16)
   ]
 }
 
