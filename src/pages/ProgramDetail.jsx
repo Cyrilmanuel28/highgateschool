@@ -75,7 +75,7 @@ export default function ProgramDetail() {
         </div>
       </div>
 
-      <div className="bg-surface py-16">
+      <div className="bg-surface py-8 sm:py-16">
         <div className="container-x">
           <div className="grid gap-12 lg:grid-cols-3">
             <div className="space-y-10 lg:col-span-2">

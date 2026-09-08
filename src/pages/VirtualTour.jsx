@@ -45,7 +45,7 @@ export default function VirtualTour() {
         </div>
       </div>
 
-      <div className="bg-cream py-16">
+      <div className="bg-cream py-8 sm:py-16">
         <div className="container-x">
           <div className="mx-auto max-w-4xl">
             <p className="text-sm text-slate-500">

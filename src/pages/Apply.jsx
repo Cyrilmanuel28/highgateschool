@@ -133,7 +133,7 @@ export default function Apply() {
         </div>
       </div>
 
-      <div className="bg-cream py-16">
+      <div className="bg-cream py-8 sm:py-16">
         <div className="container-x">
           <div className="mx-auto max-w-3xl">
             <div className="mb-8 grid grid-cols-2 rounded-2xl bg-white p-1.5 shadow-card">

@@ -84,7 +84,7 @@ export default function Feedback() {
         </div>
       </div>
 
-      <div className="bg-cream py-16">
+      <div className="bg-cream py-8 sm:py-16">
         <div className="container-x grid gap-8 lg:grid-cols-5">
           <div className="lg:col-span-3">
             {submitted ? (

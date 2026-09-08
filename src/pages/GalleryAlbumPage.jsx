@@ -41,14 +41,14 @@ export default function GalleryAlbumPage() {
         ogImage={record.coverImage}
         canonical={origin ? `${origin}/gallery/${record.slug}` : `/gallery/${record.slug}`}
       />
-      <div className="relative overflow-hidden bg-navy-950 pb-16 pt-36">
+      <div className="relative overflow-hidden bg-navy-950 pb-12 sm:pb-16 pt-28 sm:pt-36">
         <div className="absolute -right-24 top-0 h-72 w-72 rounded-full bg-gold-500/10 blur-3xl" />
         <div className="container-x relative">
           <Breadcrumbs items={[{ label: 'Gallery', to: '/gallery' }, { label: record.title }]} />
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
               <p className="eyebrow">{record.photos?.length || 0} Photos</p>
-              <h1 className="mt-3 font-serif text-5xl font-semibold text-white">{record.title}</h1>
+               <h1 className="mt-3 font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-white">{record.title}</h1>
               <p className="mt-4 max-w-xl text-navy-100">{record.description}</p>
             </div>
             <Link to="/gallery" className="btn-outline-light">
@@ -58,7 +58,7 @@ export default function GalleryAlbumPage() {
         </div>
       </div>
 
-      <div className="bg-cream py-16">
+      <div className="bg-cream py-8 sm:py-16">
         <div className="container-x">
           {!record.photos?.length ? (
             <EmptyState icon={Images} title="This album is empty" text="Photos will be added here soon." />

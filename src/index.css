@@ -5,11 +5,13 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
   body {
     @apply bg-surface text-charcoal font-sans antialiased;
     font-size: 16px;
     letter-spacing: -0.011em;
+    overflow-x: hidden;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif text-navy-900 tracking-tight;
@@ -26,6 +28,7 @@
   }
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98];
+    min-height: 44px;
   }
   .btn-gold {
     @apply btn bg-gold-500 text-navy-950 font-bold shadow-gold hover:bg-gold-400 hover:-translate-y-0.5;
@@ -79,9 +82,9 @@
 .ql-rendered h2, .ql-rendered h3, .ql-rendered h4 {
   @apply font-serif text-navy-900 mt-8 mb-3;
 }
-.ql-rendered h2 { @apply text-3xl; }
-.ql-rendered h3 { @apply text-2xl; }
-.ql-rendered h4 { @apply text-xl; }
+.ql-rendered h2 { @apply text-2xl sm:text-3xl; }
+.ql-rendered h3 { @apply text-xl sm:text-2xl; }
+.ql-rendered h4 { @apply text-lg sm:text-xl; }
 .ql-rendered p { @apply my-4; }
 .ql-rendered strong { @apply font-semibold text-navy-900; }
 .ql-rendered em { @apply italic; }

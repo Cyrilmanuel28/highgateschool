@@ -37,7 +37,7 @@ export default function StaffProfile() {
         </div>
       </div>
 
-      <div className="bg-cream py-16">
+      <div className="bg-cream py-8 sm:py-16">
         <div className="container-x">
           <div className="card overflow-hidden">
             <div className="grid lg:grid-cols-3">

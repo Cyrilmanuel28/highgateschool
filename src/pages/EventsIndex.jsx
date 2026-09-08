@@ -44,7 +44,7 @@ export default function EventsIndex() {
         </div>
       </div>
 
-      <div className="bg-surface py-16">
+      <div className="bg-surface py-8 sm:py-16">
         <div className="container-x">
           <div className="mb-10 flex gap-2">
             {['upcoming', 'past'].map((f) => (

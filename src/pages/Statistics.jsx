@@ -38,7 +38,7 @@ export default function Statistics() {
             <h1 className="mt-3 font-serif text-5xl font-semibold text-white sm:text-6xl">{info?.statisticsHeading || 'School Statistics'}</h1>
           </div>
         </div>
-        <div className="bg-cream py-16"><div className="container-x"><GridSkeleton count={10} columns={5} /></div></div>
+        <div className="bg-cream py-8 sm:py-16"><div className="container-x"><GridSkeleton count={10} columns={5} /></div></div>
       </>
     )
   }
@@ -61,7 +61,7 @@ export default function Statistics() {
         </div>
       </div>
 
-      <div className="bg-cream py-16">
+      <div className="bg-cream py-8 sm:py-16">
         <div className="container-x">
           {stats.length === 0 ? (
             <EmptyState icon={Target} title="No statistics yet" text="Statistics will appear here." />

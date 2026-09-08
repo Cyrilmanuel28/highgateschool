@@ -28,7 +28,7 @@ export default function Departments() {
             <h1 className="mt-3 font-serif text-5xl font-semibold text-white sm:text-6xl">{info?.departmentsHeading || 'Academic Departments'}</h1>
           </div>
         </div>
-        <div className="bg-cream py-16"><div className="container-x"><GridSkeleton count={6} /></div></div>
+        <div className="bg-cream py-8 sm:py-16"><div className="container-x"><GridSkeleton count={6} /></div></div>
       </>
     )
   }
@@ -51,7 +51,7 @@ export default function Departments() {
         </div>
       </div>
 
-      <div className="bg-cream py-16">
+      <div className="bg-cream py-8 sm:py-16">
         <div className="container-x">
           {departments.length === 0 ? (
             <EmptyState icon={Library} title="No departments yet" />

@@ -90,7 +90,7 @@ export default function Testimonials() {
         </div>
       </div>
 
-      <div className="bg-cream py-16">
+      <div className="bg-cream py-8 sm:py-16">
         <div className="container-x">
           <div className="mx-auto max-w-4xl">
             {current && (

@@ -93,7 +93,7 @@ export default function Careers() {
         </div>
       </div>
 
-      <div className="bg-cream py-16">
+      <div className="bg-cream py-8 sm:py-16">
         <div className="container-x">
           <div className="mx-auto max-w-4xl">
             <div className="rounded-2xl bg-navy-900 p-8 text-center sm:p-10">

@@ -55,7 +55,7 @@ export default function ProgramsIndex() {
         </div>
       </div>
 
-      <div className="bg-surface py-16">
+      <div className="bg-surface py-8 sm:py-16">
         <div className="container-x">
           {levels.length > 2 && (
             <div className="mb-10 flex flex-wrap items-center gap-2">

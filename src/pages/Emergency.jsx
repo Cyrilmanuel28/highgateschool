@@ -53,7 +53,7 @@ export default function Emergency() {
         </div>
       </div>
 
-      <div className="bg-cream py-16">
+      <div className="bg-cream py-8 sm:py-16">
         <div className="container-x">
           <div className="grid gap-8 lg:grid-cols-3">
             <div className="lg:col-span-2">

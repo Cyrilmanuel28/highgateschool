@@ -52,12 +52,12 @@ export function BlockHero({ block }) {
   const cta2 = c.cta2 || { label: 'Explore Our School', to: '/about' }
 
   return (
-    <section className="relative flex min-h-[92vh] items-center justify-center overflow-hidden bg-navy-950">
+    <section className="relative flex min-h-[80vh] sm:min-h-[92vh] items-center justify-center overflow-hidden bg-navy-950">
       <div className="absolute inset-0">
         <Img src={c.image} alt={schoolName} className="opacity-40" eager fetchpriority="high" />
         <div className="absolute inset-0 bg-gradient-to-b from-navy-950/90 via-navy-950/65 to-navy-950/95" />
       </div>
-      <div className="container-x relative z-10 py-32 text-center">
+      <div className="container-x relative z-10 py-20 sm:py-28 lg:py-32 text-center">
         {/* School Emblem / Kicker */}
         <div className="animate-fade-up mb-5 inline-flex items-center gap-3 rounded-full border border-gold-400/30 bg-navy-900/80 px-4 py-1.5 shadow-sm backdrop-blur-md">
           {info?.logo ? (
@@ -72,27 +72,27 @@ export function BlockHero({ block }) {
           </p>
         </div>
 
-        <h1 className="mx-auto mt-4 max-w-4xl animate-fade-up font-serif text-5xl font-semibold leading-[1.08] text-white sm:text-6xl lg:text-7xl [animation-delay:120ms]">
+        <h1 className="mx-auto mt-4 max-w-4xl animate-fade-up font-serif text-3xl sm:text-5xl lg:text-7xl font-semibold leading-[1.08] text-white [animation-delay:120ms]">
           {c.title}
         </h1>
 
         {c.subtitle && (
-          <p className="mx-auto mt-6 max-w-2xl animate-fade-up text-lg leading-relaxed text-slate-200 [animation-delay:240ms]">
+          <p className="mx-auto mt-6 max-w-2xl animate-fade-up text-base sm:text-lg leading-relaxed text-slate-200 [animation-delay:240ms]">
             {c.subtitle}
           </p>
         )}
 
-        <div className="mt-10 flex animate-fade-up flex-wrap items-center justify-center gap-4 [animation-delay:360ms]">
-          <Link to={cta1.to || '/admissions'} className="btn-royal rounded-lg px-7 py-3.5 text-sm font-semibold shadow-royal">
+        <div className="mt-8 sm:mt-10 flex animate-fade-up flex-wrap items-center justify-center gap-3 sm:gap-4 [animation-delay:360ms]">
+          <Link to={cta1.to || '/admissions'} className="btn-royal rounded-lg px-6 sm:px-7 py-3.5 text-sm font-semibold shadow-royal">
             {cta1.label}
           </Link>
-          <Link to={cta2.to || '/about'} className="btn-outline-light rounded-lg px-7 py-3.5 text-sm font-semibold">
+          <Link to={cta2.to || '/about'} className="btn-outline-light rounded-lg px-6 sm:px-7 py-3.5 text-sm font-semibold">
             {cta2.label}
           </Link>
         </div>
 
         {/* Quick Identity Badges */}
-        <div className="animate-fade-up mt-14 inline-flex flex-wrap items-center justify-center gap-6 rounded-2xl border border-white/10 bg-white/5 px-6 py-3 text-xs font-medium text-slate-200 backdrop-blur-sm [animation-delay:480ms]">
+        <div className="animate-fade-up mt-10 sm:mt-14 inline-flex flex-wrap items-center justify-center gap-3 sm:gap-6 rounded-2xl border border-white/10 bg-white/5 px-4 sm:px-6 py-3 text-[11px] sm:text-xs font-medium text-slate-200 backdrop-blur-sm [animation-delay:480ms]">
           <span className="inline-flex items-center gap-2">
             <GraduationCap size={15} className="text-gold-400" /> Ages 3–18 Co-educational
           </span>
@@ -112,8 +112,8 @@ export function BlockHero({ block }) {
 
 export function BlockRichText({ block }) {
   return (
-    <section className="bg-cream py-20">
-      <div className="container-x max-w-4xl">
+    <section className="bg-cream py-12 sm:py-20">
+      <div className="container-x max-w-4xl px-5 sm:px-6 lg:px-8">
         <Reveal>
           <RichTextRenderer html={block.html} />
         </Reveal>
@@ -124,7 +124,7 @@ export function BlockRichText({ block }) {
 
 export function BlockFeatures({ block }) {
   return (
-    <section className={cn('py-20 lg:py-24', block.alt ? 'bg-white' : 'bg-surface')}>
+    <section className={cn('py-12 sm:py-20 lg:py-24', block.alt ? 'bg-white' : 'bg-surface')}>
       <div className="container-x">
         <SectionHeading eyebrow={block.eyebrow || 'What We Offer'} title={block.title} subtitle={block.subtitle} />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -150,13 +150,13 @@ export function BlockFeatures({ block }) {
 
 export function BlockStats({ block }) {
   return (
-    <section className="relative overflow-hidden bg-navy-900 border-y border-white/10 py-20">
+    <section className="relative overflow-hidden bg-navy-900 border-y border-white/10 py-12 sm:py-20">
       <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-gold-500/10 blur-3xl" />
       <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-royal/20 blur-3xl" />
       <div className="container-x relative grid grid-cols-2 gap-10 lg:grid-cols-4">
         {(block.items || []).map((s, i) => (
           <Reveal key={i} delay={i * 100} className="text-center">
-            <p className="font-serif text-5xl font-semibold text-gold-400 lg:text-6xl">{s.value}</p>
+            <p className="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold text-gold-400">{s.value}</p>
             <p className="mt-2.5 text-xs font-semibold uppercase tracking-[0.22em] text-navy-100">{s.label}</p>
           </Reveal>
         ))}
@@ -167,7 +167,7 @@ export function BlockStats({ block }) {
 
 export function BlockImageText({ block }) {
   return (
-    <section className="bg-white py-20 lg:py-24">
+    <section className="bg-white py-12 sm:py-20 lg:py-24">
       <div className="container-x grid items-center gap-12 lg:grid-cols-2">
         <Reveal className={cn(block.reversed && 'lg:order-2')}>
           <div className="relative">
@@ -179,7 +179,7 @@ export function BlockImageText({ block }) {
         </Reveal>
         <Reveal delay={120} className={cn(block.reversed && 'lg:order-1')}>
           <p className="eyebrow mb-3">{block.eyebrow || 'Discover'}</p>
-          <h2 className="font-serif text-4xl font-semibold leading-tight text-navy-900 sm:text-[2.6rem]">{block.title}</h2>
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-[2.6rem] font-semibold leading-tight text-navy-900">{block.title}</h2>
           <div className="mt-4 h-1 w-16 rounded-full bg-gold-500" />
           <p className="mt-6 text-lg leading-relaxed text-charcoal/80">{block.text}</p>
           {block.link && (
@@ -195,11 +195,11 @@ export function BlockImageText({ block }) {
 
 export function BlockQuote({ block }) {
   return (
-    <section className="bg-navy-950 py-24">
+    <section className="bg-navy-950 py-16 sm:py-24">
       <div className="container-x mx-auto max-w-4xl text-center">
         <Reveal>
           <QuoteIcon size={44} className="mx-auto text-gold-500" />
-          <p className="mt-8 font-serif text-2xl font-medium italic leading-relaxed text-white sm:text-3xl">
+          <p className="mt-8 font-serif text-xl sm:text-2xl md:text-3xl font-medium italic leading-relaxed text-white">
             "{block.quote}"
           </p>
           <div className="mt-8">
@@ -214,7 +214,7 @@ export function BlockQuote({ block }) {
 
 export function BlockCards({ block }) {
   return (
-    <section className="bg-cream py-20">
+    <section className="bg-cream py-12 sm:py-20">
       <div className="container-x">
         <SectionHeading title={block.title} subtitle={block.subtitle} />
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -247,7 +247,7 @@ export function BlockCards({ block }) {
 
 export function BlockTimeline({ block }) {
   return (
-    <section className="bg-white py-20">
+    <section className="bg-white py-12 sm:py-20">
       <div className="container-x max-w-4xl">
         <SectionHeading eyebrow={block.eyebrow || 'Through the Years'} title={block.title} />
         <div className="relative">
@@ -277,7 +277,7 @@ export function BlockTimeline({ block }) {
 
 export function BlockValues({ block }) {
   return (
-    <section className="bg-surface py-20 lg:py-24">
+    <section className="bg-surface py-12 sm:py-20 lg:py-24">
       <div className="container-x">
         <SectionHeading eyebrow={block.eyebrow || 'Our Values'} title={block.title} subtitle={block.subtitle} />
         <div className="grid gap-6 md:grid-cols-2">
@@ -304,7 +304,7 @@ export function BlockPrograms({ block }) {
   const { publishedOnly } = useData()
   const programs = publishedOnly('programs', 'order')
   return (
-    <section className="bg-surface py-20 lg:py-24">
+    <section className="bg-surface py-12 sm:py-20 lg:py-24">
       <div className="container-x">
         <SectionHeading eyebrow={block.eyebrow || 'Academics'} title={block.title || 'Our Programmes'} subtitle={block.subtitle} />
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -327,7 +327,7 @@ export function BlockStaffGrid({ block }) {
   const depts = useData().db.departments || []
   const deptName = (d) => depts.find((x) => x.name === d)?.name || d
   return (
-    <section className="bg-surface py-20 lg:py-24">
+    <section className="bg-surface py-12 sm:py-20 lg:py-24">
       <div className="container-x">
         <SectionHeading eyebrow={block.eyebrow || 'Our People'} title={block.title || 'Meet Our Team'} subtitle={block.subtitle} />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -346,7 +346,7 @@ export function BlockLatestNews({ block }) {
   const { publishedOnly } = useData()
   const news = publishedOnly('news', 'publishedAt', true).slice(0, 3)
   return (
-    <section className="bg-white py-20 lg:py-24">
+    <section className="bg-white py-12 sm:py-20 lg:py-24">
       <div className="container-x">
         <SectionHeading eyebrow={block.eyebrow || 'Newsroom'} title={block.title || 'Latest News'} />
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -374,7 +374,7 @@ export function BlockUpcomingEvents({ block }) {
     .sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
     .slice(0, 3)
   return (
-    <section className="bg-surface py-20 lg:py-24">
+    <section className="bg-surface py-12 sm:py-20 lg:py-24">
       <div className="container-x">
         <SectionHeading eyebrow={block.eyebrow || "What's On"} title={block.title || 'Upcoming Events'} />
         {upcomingFiltered.length === 0 ? (
@@ -402,7 +402,7 @@ export function BlockGalleryPreview({ block }) {
   const { publishedOnly } = useData()
   const albums = publishedOnly('albums').slice(0, 3)
   return (
-    <section className="bg-white py-20 lg:py-24">
+    <section className="bg-white py-12 sm:py-20 lg:py-24">
       <div className="container-x">
         <SectionHeading eyebrow={block.eyebrow || 'Gallery'} title={block.title || 'Life in Pictures'} />
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -424,15 +424,15 @@ export function BlockGalleryPreview({ block }) {
 
 export function BlockCta({ block, dark }) {
   return (
-    <section className={dark ? 'bg-navy-950 py-20 lg:py-24' : 'bg-surface py-20 lg:py-24'}>
+    <section className={dark ? 'bg-navy-950 py-12 sm:py-20 lg:py-24' : 'bg-surface py-12 sm:py-20 lg:py-24'}>
       <div className="container-x">
         <Reveal>
           <div
-            className="relative overflow-hidden rounded-2xl bg-navy-900 border border-white/10 px-8 py-16 text-center shadow-cardHover sm:px-16"
+            className="relative overflow-hidden rounded-2xl bg-navy-900 border border-white/10 px-5 sm:px-8 py-12 sm:py-16 text-center shadow-cardHover md:px-16"
           >
             <div className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-gold-500/15 blur-3xl" />
             <div className="absolute -bottom-24 -right-16 h-64 w-64 rounded-full bg-royal/20 blur-3xl" />
-            <h2 className="relative font-serif text-3xl font-semibold text-white sm:text-4xl">{block.title}</h2>
+            <h2 className="relative font-serif text-2xl sm:text-3xl md:text-4xl font-semibold text-white">{block.title}</h2>
             {block.text && <p className="relative mx-auto mt-4 max-w-2xl text-navy-100">{block.text}</p>}
             {(block.cta1 || block.cta2) && (
               <div className="relative mt-8 flex flex-wrap items-center justify-center gap-4">
@@ -457,11 +457,11 @@ export function BlockCta({ block, dark }) {
 
 export function BlockWelcome({ block }) {
   return (
-    <section className="bg-white py-24">
+    <section className="bg-white py-16 sm:py-24">
       <div className="container-x grid items-center gap-14 lg:grid-cols-2">
         <Reveal>
           <p className="eyebrow mb-3">{block.eyebrow || 'Welcome'}</p>
-          <h2 className="font-serif text-4xl font-semibold leading-tight text-navy-900 sm:text-[2.7rem]">{block.title}</h2>
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-[2.7rem] font-semibold leading-tight text-navy-900">{block.title}</h2>
           <div className="mt-4 h-1 w-16 rounded-full bg-gold-500" />
           <div className="ql-rendered mt-6 text-lg text-charcoal/80" dangerouslySetInnerHTML={{ __html: block.body || '' }} />
           <div className="mt-8 flex flex-wrap gap-4">
@@ -499,7 +499,7 @@ export function BlockFacilities({ block }) {
   if (scenes.length === 0) return null
 
   return (
-    <section className="bg-white py-20 lg:py-24">
+    <section className="bg-white py-12 sm:py-20 lg:py-24">
       <div className="container-x">
         <SectionHeading
           eyebrow={block.eyebrow || 'Campus & Facilities'}
@@ -554,7 +554,7 @@ export function BlockTestimonials({ block }) {
   if (testimonials.length === 0) return null
 
   return (
-    <section className="bg-surface border-y border-slate-200/70 py-20 lg:py-24">
+    <section className="bg-surface border-y border-slate-200/70 py-12 sm:py-20 lg:py-24">
       <div className="container-x">
         <SectionHeading
           eyebrow={block.eyebrow || 'Community Voices'}
@@ -604,7 +604,7 @@ export function BlockTestimonials({ block }) {
 
 export function BlockHeadOfSchool({ block }) {
   return (
-    <section className="bg-white py-24 lg:py-28">
+    <section className="bg-white py-16 sm:py-24 lg:py-28">
       <div className="container-x grid items-center gap-14 lg:grid-cols-2">
         <Reveal>
           <div className="relative">
@@ -617,7 +617,7 @@ export function BlockHeadOfSchool({ block }) {
         </Reveal>
         <Reveal delay={120}>
           <p className="eyebrow mb-3">{block.eyebrow || 'Leadership'}</p>
-          <h2 className="font-serif text-4xl font-semibold leading-tight text-navy-900 sm:text-[2.6rem]">{block.title}</h2>
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-[2.6rem] font-semibold leading-tight text-navy-900">{block.title}</h2>
           <div className="mt-4 h-1 w-16 rounded-full bg-gold-500" />
           <div className="ql-rendered mt-6 text-lg leading-relaxed text-charcoal/80" dangerouslySetInnerHTML={{ __html: block.body || '' }} />
           <div className="mt-8 border-t border-slate-200 pt-6">
@@ -635,7 +635,7 @@ export function BlockHeadOfSchool({ block }) {
 
 export function BlockPhilosophy({ block }) {
   return (
-    <section className="bg-surface py-20 lg:py-24">
+    <section className="bg-surface py-12 sm:py-20 lg:py-24">
       <div className="container-x">
         <SectionHeading eyebrow={block.eyebrow || 'Our Approach'} title={block.title} subtitle={block.subtitle} />
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -661,14 +661,14 @@ export function BlockPhilosophy({ block }) {
 
 export function BlockDistinctive({ block }) {
   return (
-    <section className="relative overflow-hidden bg-navy-950 py-24 lg:py-28">
+    <section className="relative overflow-hidden bg-navy-950 py-16 sm:py-24 lg:py-28">
       <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-gold-500/10 blur-3xl" />
       <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-royal/20 blur-3xl" />
       <div className="container-x relative">
         <Reveal>
           <div className="mx-auto max-w-3xl text-center">
             <p className="eyebrow mb-3 text-gold-400">{block.eyebrow || 'What Sets Us Apart'}</p>
-            <h2 className="font-serif text-4xl font-semibold leading-tight text-white sm:text-5xl">{block.title}</h2>
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight text-white">{block.title}</h2>
             <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-gold-500" />
             {block.subtitle && <p className="mt-6 text-lg text-navy-200">{block.subtitle}</p>}
           </div>
@@ -696,7 +696,7 @@ export function BlockDistinctive({ block }) {
 
 export function BlockStudentExperience({ block }) {
   return (
-    <section className="bg-white py-20 lg:py-24">
+    <section className="bg-white py-12 sm:py-20 lg:py-24">
       <div className="container-x">
         <SectionHeading eyebrow={block.eyebrow || 'Student Life'} title={block.title} subtitle={block.subtitle} />
         <div className="grid gap-6 md:grid-cols-2">
@@ -723,7 +723,7 @@ export function BlockStudentExperience({ block }) {
 
 export function BlockCommunity({ block }) {
   return (
-    <section className="bg-surface py-20 lg:py-24">
+    <section className="bg-surface py-12 sm:py-20 lg:py-24">
       <div className="container-x grid items-center gap-14 lg:grid-cols-2">
         <Reveal>
           <div className="relative">
@@ -736,11 +736,11 @@ export function BlockCommunity({ block }) {
         </Reveal>
         <Reveal delay={120}>
           <p className="eyebrow mb-3">{block.eyebrow || 'Together We Thrive'}</p>
-          <h2 className="font-serif text-4xl font-semibold leading-tight text-navy-900 sm:text-[2.6rem]">{block.title}</h2>
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-[2.6rem] font-semibold leading-tight text-navy-900">{block.title}</h2>
           <div className="mt-4 h-1 w-16 rounded-full bg-gold-500" />
           <div className="ql-rendered mt-6 text-lg leading-relaxed text-charcoal/80" dangerouslySetInnerHTML={{ __html: block.body || '' }} />
           {(block.stats || []).length > 0 && (
-            <div className="mt-8 grid grid-cols-3 gap-4 border-t border-slate-200 pt-8">
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-slate-200 pt-8">
               {block.stats.map((s, i) => (
                 <div key={i} className="text-center">
                   <p className="font-serif text-2xl font-semibold text-royal">{s.value}</p>

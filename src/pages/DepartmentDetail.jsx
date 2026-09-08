@@ -36,7 +36,7 @@ export default function DepartmentDetail() {
         </div>
       </div>
 
-      <div className="bg-cream py-16">
+      <div className="bg-cream py-8 sm:py-16">
         <div className="container-x">
           <div className="overflow-hidden rounded-2xl shadow-cardHover">
             <Img src={dept.featuredImage} alt={dept.name} className="aspect-[21/8]" />

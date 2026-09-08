@@ -110,7 +110,7 @@ export default function EventDetail() {
 
           {others.length > 0 && (
             <div className="mt-20">
-              <div className="mb-8 flex items-end justify-between">
+              <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
                 <h2 className="font-serif text-3xl font-semibold text-navy-900">More Events</h2>
                 <Link to="/events" className="text-sm font-semibold text-gold-600 hover:text-gold-700">
                   View all →

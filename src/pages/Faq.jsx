@@ -43,7 +43,7 @@ export default function Faq() {
         </div>
       </div>
 
-      <div className="bg-cream py-16">
+      <div className="bg-cream py-8 sm:py-16">
         <div className="container-x max-w-4xl">
           {faqs.length === 0 ? (
             <EmptyState icon={HelpCircle} title="No FAQs yet" />

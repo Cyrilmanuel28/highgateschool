@@ -48,7 +48,7 @@ export default function MagazineArticle() {
         </div>
       </div>
 
-      <div className="bg-cream py-16">
+      <div className="bg-cream py-8 sm:py-16">
         <div className="container-x">
           <article className="mx-auto max-w-3xl">
             <div className="overflow-hidden rounded-2xl shadow-card">

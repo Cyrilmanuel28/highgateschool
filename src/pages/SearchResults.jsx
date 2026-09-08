@@ -75,7 +75,7 @@ export default function SearchResults() {
         </div>
       </div>
 
-      <div className="bg-cream py-16">
+      <div className="bg-cream py-8 sm:py-16">
         <div className="container-x">
           <div className="flex flex-wrap gap-2">
             {FILTERS.map((f) => (

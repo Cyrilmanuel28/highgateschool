@@ -29,7 +29,7 @@ export default function Fees() {
             <h1 className="mt-3 font-serif text-5xl font-semibold text-white sm:text-6xl">{info?.feesHeading || 'School Fees'}</h1>
           </div>
         </div>
-        <div className="bg-surface py-16"><div className="container-x"><GridSkeleton count={4} /></div></div>
+        <div className="bg-surface py-8 sm:py-16"><div className="container-x"><GridSkeleton count={4} /></div></div>
       </>
     )
   }
@@ -52,7 +52,7 @@ export default function Fees() {
         </div>
       </div>
 
-      <div className="bg-surface py-16">
+      <div className="bg-surface py-8 sm:py-16">
         <div className="container-x">
           {structures.length === 0 ? (
             <EmptyState icon={Wallet} title="No fee structures published" />

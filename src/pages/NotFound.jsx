@@ -4,16 +4,16 @@ import SeoHead from '../components/SeoHead.jsx'
 
 export default function NotFound() {
   return (
-    <div className="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-navy-950 py-32">
+    <div className="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-navy-950 py-20 sm:py-32">
       <div className="absolute -left-24 top-1/4 h-80 w-80 rounded-full bg-gold-500/10 blur-3xl" />
       <div className="absolute -right-24 bottom-1/4 h-80 w-80 rounded-full bg-navy-400/20 blur-3xl" />
       <div className="container-x relative text-center">
         <SeoHead title="Page Not Found" description="The page you were looking for could not be found." />
-        <p className="font-serif text-[9rem] font-bold leading-none text-gold-500/90 sm:text-[12rem]">404</p>
-        <div className="mx-auto -mt-8 flex h-16 w-16 items-center justify-center rounded-full bg-navy-800 text-gold-400 shadow-gold sm:-mt-12">
+        <p className="font-serif text-[5rem] sm:text-[9rem] lg:text-[12rem] font-bold leading-none text-gold-500/90">404</p>
+        <div className="mx-auto -mt-6 sm:-mt-8 lg:-mt-12 flex h-16 w-16 items-center justify-center rounded-full bg-navy-800 text-gold-400 shadow-gold">
           <Compass size={30} />
         </div>
-        <h1 className="mt-6 font-serif text-4xl font-semibold text-white">This Path Leads Nowhere… Yet</h1>
+        <h1 className="mt-6 font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold text-white">This Path Leads Nowhere… Yet</h1>
         <p className="mx-auto mt-4 max-w-md text-navy-100">
           The page you're looking for may have moved, been renamed, or never existed. Let's get you back on track.
         </p>

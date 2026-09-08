@@ -37,7 +37,7 @@ export default function GalleryIndex() {
         </div>
       </div>
 
-      <div className="bg-cream py-16">
+      <div className="bg-cream py-8 sm:py-16">
         <div className="container-x">
           <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
             <p className="text-sm text-slate-500">

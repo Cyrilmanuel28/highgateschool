@@ -59,7 +59,7 @@ export default function Contact() {
         </div>
       </div>
 
-      <div className="bg-surface py-16">
+      <div className="bg-surface py-8 sm:py-16">
         <div className="container-x grid gap-10 lg:grid-cols-5">
           <div className="space-y-5 lg:col-span-2">
             <Reveal>
@@ -126,7 +126,7 @@ export default function Contact() {
           <Reveal delay={120} className="lg:col-span-3">
             <div className="card p-8 sm:p-10">
               {sent ? (
-                <div className="flex flex-col items-center py-16 text-center">
+                <div className="flex flex-col items-center py-8 sm:py-16 text-center">
                   <span className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-50 text-emerald-500">
                     <CheckCircle2 size={32} />
                   </span>
