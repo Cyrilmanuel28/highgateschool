@@ -78,7 +78,7 @@ export const SINGLES = {
 
 export const PUBLIC_SUBMISSION = new Set([
   'messages','feedback','testimonials','newsletterSubscribers',
-  'applications','jobApplications',
+  'applications','jobApplications','eventRegistrations',
 ])
 
 export const DB_KEY = 'aia_v1_'
@@ -183,13 +183,6 @@ function rowFromRecord(key, record) {
 export function storeRemote() { return isRemoteConfigured() }
 
 export { remoteSession }
-
-export async function remoteSignIn(email, password) {
-  const sb = getClient()
-  if (!sb) throw new Error('Supabase not configured')
-  const { error } = await sb.auth.signInWithPassword({ email, password })
-  if (error) throw error
-}
 
 export async function remoteSignOut() {
   const sb = getClient()

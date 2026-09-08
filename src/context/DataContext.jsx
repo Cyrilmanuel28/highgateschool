@@ -4,7 +4,6 @@ import { supabase as sbClient, ITEMS_TABLE, uploadToStorage, deleteFromStorage, 
 import { processSchedule } from '../lib/scheduler.js'
 import { uid } from '../lib/utils.js'
 import { compressImage } from '../lib/media.js'
-import { api } from '../lib/api.js'
 import { saveVersion, listVersions, getVersion, listAllVersions } from '../lib/versions.js'
 import { appendAudit, listAudit, clearAudit } from '../lib/audit.js'
 import {
