@@ -6,15 +6,17 @@ import SeoHead from '../components/SeoHead.jsx'
 import Img from '../components/Img.jsx'
 import Breadcrumbs from '../components/Breadcrumbs.jsx'
 import { Avatar } from '../components/Cards.jsx'
+import { DetailSkeleton } from '../components/Skeletons.jsx'
 import NotFound from './NotFound.jsx'
 
 export default function DepartmentDetail() {
   const { id } = useParams()
-  const { getBySlug, getRecord, publishedOnly, db } = useData()
+  const { getBySlug, getRecord, publishedOnly, db, loading } = useData()
   const info = db.schoolInfo
   const dept = useMemo(() => getBySlug('departments', id) || getRecord('departments', id), [getBySlug, getRecord, id, db.departments])
 
-  if (!dept || ((dept.status !== undefined && dept.status !== 'published') && dept.isVisible !== false)) return <NotFound />
+  if (loading) return <DetailSkeleton />
+  if (!dept || (dept.status !== undefined && dept.status !== 'published') || dept.isVisible === false) return <NotFound />
 
   const head = (db.staff || []).find((s) => s.id === dept.headStaff)
   const team = publishedOnly('staff', 'order').filter((s) => s.department === dept.name)
@@ -45,9 +47,7 @@ export default function DepartmentDetail() {
               <h2 className="font-serif text-3xl font-semibold text-navy-900">{info?.departmentsAboutHeading || 'About the Department'}</h2>
               <div className="mt-4 h-1 w-16 rounded-full bg-gold-500" />
               <p className="mt-6 text-lg leading-relaxed text-slate-700">{dept.description}</p>
-              <p className="mt-6 text-lg leading-relaxed text-slate-700">
-                Our teachers are specialists and practitioners — writers, researchers, athletes, and artists — who bring the discipline to life. Classes are small, and every student is known by name.
-              </p>
+              {dept.about && <p className="mt-6 text-lg leading-relaxed text-slate-700">{dept.about}</p>}
 
               {team.length > 0 && (
                 <div className="mt-12">

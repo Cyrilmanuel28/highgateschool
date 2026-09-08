@@ -6,14 +6,16 @@ import SeoHead from '../components/SeoHead.jsx'
 import Img from '../components/Img.jsx'
 import Breadcrumbs from '../components/Breadcrumbs.jsx'
 import { Avatar } from '../components/Cards.jsx'
+import { DetailSkeleton } from '../components/Skeletons.jsx'
 import NotFound from './NotFound.jsx'
 
 export default function StaffProfile() {
   const { id } = useParams()
-  const { getRecord, getBySlug, db } = useData()
+  const { getRecord, getBySlug, db, loading } = useData()
   const info = db.schoolInfo
   const staff = useMemo(() => getRecord('staff', id) || getBySlug('staff', id), [getRecord, getBySlug, id, db.staff])
 
+  if (loading) return <DetailSkeleton />
   if (!staff || staff.isVisible === false || (staff.status !== undefined && staff.status !== 'published')) return <NotFound />
 
   const dept = (db.departments || []).find((d) => d.name === staff.department)

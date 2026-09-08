@@ -19,7 +19,7 @@ const TYPE_META = {
 const SEVERITY_DOT = { info: 'bg-sky-500', warning: 'bg-amber-500', critical: 'bg-red-600' }
 
 export default function Emergency() {
-  const { db } = useData()
+  const { db, loading } = useData()
   const now = Date.now()
 
   const active = useMemo(

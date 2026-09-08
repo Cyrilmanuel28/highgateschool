@@ -8,14 +8,16 @@ import Breadcrumbs from '../components/Breadcrumbs.jsx'
 import RichTextRenderer from '../components/RichTextRenderer.jsx'
 import { NewsCard } from '../components/Cards.jsx'
 import { formatDate, stripHtml, truncate } from '../lib/utils.js'
+import { DetailSkeleton } from '../components/Skeletons.jsx'
 import NotFound from './NotFound.jsx'
 
 export default function NewsArticlePage() {
   const { slug } = useParams()
   const [searchParams] = useSearchParams()
-  const { getBySlug, getRecord, publishedOnly, db } = useData()
+  const { getBySlug, getRecord, publishedOnly, db, loading } = useData()
   const article = useMemo(() => getBySlug('news', slug) || getRecord('news', slug), [getBySlug, getRecord, slug, db.news])
 
+  if (loading) return <DetailSkeleton />
   if (!article || (!searchParams.get('preview') && article.status !== 'published')) return <NotFound />
 
   const related = publishedOnly('news', 'publishedAt', true)

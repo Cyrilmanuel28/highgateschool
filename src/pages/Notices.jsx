@@ -5,6 +5,7 @@ import SeoHead from '../components/SeoHead.jsx'
 import Breadcrumbs from '../components/Breadcrumbs.jsx'
 import Reveal from '../components/Reveal.jsx'
 import EmptyState from '../components/EmptyState.jsx'
+import { GridSkeleton } from '../components/Skeletons.jsx'
 import { formatDate, cn } from '../lib/utils.js'
 
 const CATEGORIES = ['All', 'General', 'Admissions', 'Examinations', 'PTA', 'Emergency']
@@ -16,7 +17,7 @@ const PRIORITY_TONE = {
 const PRIORITY_DOT = { normal: 'bg-sky-500', high: 'bg-amber-500', urgent: 'bg-red-500' }
 
 export default function Notices() {
-  const { db } = useData()
+  const { db, loading } = useData()
   const info = db.schoolInfo
   const [category, setCategory] = useState('All')
   const [query, setQuery] = useState('')

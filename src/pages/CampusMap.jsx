@@ -3,6 +3,7 @@ import { MapPin, Search, Plus, Minus, DoorOpen, FlaskConical, BookOpen, Pencil, 
 import { useData } from '../context/DataContext.jsx'
 import SeoHead from '../components/SeoHead.jsx'
 import Breadcrumbs from '../components/Breadcrumbs.jsx'
+import { GridSkeleton } from '../components/Skeletons.jsx'
 import { cn } from '../lib/utils.js'
 
 const CATEGORIES = ['All', 'Academic', 'Sports', 'Community', 'Arts & Community', 'Administration', 'Services']
@@ -32,7 +33,7 @@ const CAT_COLORS = {
 }
 
 export default function CampusMap() {
-  const { db } = useData()
+  const { db, loading } = useData()
   const info = db.schoolInfo
   const [category, setCategory] = useState('All')
   const [query, setQuery] = useState('')

@@ -6,12 +6,13 @@ import SeoHead from '../components/SeoHead.jsx'
 import Img from '../components/Img.jsx'
 import Breadcrumbs from '../components/Breadcrumbs.jsx'
 import EmptyState from '../components/EmptyState.jsx'
+import { DetailSkeleton } from '../components/Skeletons.jsx'
 import NotFound from './NotFound.jsx'
 
 export default function GalleryAlbumPage() {
   const { album } = useParams()
   const [searchParams] = useSearchParams()
-  const { getBySlug, getRecord, db } = useData()
+  const { getBySlug, getRecord, db, loading } = useData()
   const record = useMemo(() => getBySlug('albums', album) || getRecord('albums', album), [getBySlug, getRecord, album, db.albums])
   const [lightbox, setLightbox] = useState(null)
 
@@ -27,6 +28,7 @@ export default function GalleryAlbumPage() {
     return () => window.removeEventListener('keydown', onKey)
   }, [lightbox, record])
 
+  if (loading) return <DetailSkeleton />
   if (!record || (!searchParams.get('preview') && record.status !== 'published')) return <NotFound />
 
   const origin = typeof window !== 'undefined' ? window.location.origin : ''
@@ -84,6 +86,7 @@ export default function GalleryAlbumPage() {
         >
           <button
             className="absolute right-5 top-5 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
+            onClick={(e) => { e.stopPropagation(); setLightbox(null) }}
             aria-label="Close"
           >
             <X size={20} />

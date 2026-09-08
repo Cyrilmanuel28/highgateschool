@@ -5,10 +5,11 @@ import { VideoCard } from '../components/Cards.jsx'
 import Breadcrumbs from '../components/Breadcrumbs.jsx'
 import Reveal from '../components/Reveal.jsx'
 import EmptyState from '../components/EmptyState.jsx'
+import { GridSkeleton } from '../components/Skeletons.jsx'
 import { Clapperboard, Search } from 'lucide-react'
 
 export default function Videos() {
-  const { publishedOnly, db } = useData()
+  const { publishedOnly, db, loading } = useData()
   const info = db.schoolInfo
   const [query, setQuery] = useState('')
   const [activeId, setActiveId] = useState(null)

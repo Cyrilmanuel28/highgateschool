@@ -7,15 +7,17 @@ import Img from '../components/Img.jsx'
 import Breadcrumbs from '../components/Breadcrumbs.jsx'
 import { EventCard } from '../components/Cards.jsx'
 import { formatDate, stripHtml, truncate } from '../lib/utils.js'
+import { DetailSkeleton } from '../components/Skeletons.jsx'
 import NotFound from './NotFound.jsx'
 
 export default function EventDetail() {
   const { slug } = useParams()
   const [searchParams] = useSearchParams()
-  const { getBySlug, getRecord, publishedOnly, now, db } = useData()
+  const { getBySlug, getRecord, publishedOnly, now, db, loading } = useData()
   const info = db.schoolInfo
   const event = useMemo(() => getBySlug('events', slug) || getRecord('events', slug), [getBySlug, getRecord, slug, db.events])
 
+  if (loading) return <DetailSkeleton />
   if (!event || (!searchParams.get('preview') && event.status !== 'published')) return <NotFound />
 
   const start = new Date(event.startDate)

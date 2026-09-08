@@ -6,10 +6,11 @@ import Breadcrumbs from '../components/Breadcrumbs.jsx'
 import Reveal from '../components/Reveal.jsx'
 import EmptyState from '../components/EmptyState.jsx'
 import RichTextRenderer from '../components/RichTextRenderer.jsx'
+import { GridSkeleton } from '../components/Skeletons.jsx'
 import { cn } from '../lib/utils.js'
 
 export default function Faq() {
-  const { publishedOnly, db } = useData()
+  const { publishedOnly, db, loading } = useData()
   const info = db.schoolInfo
   const [open, setOpen] = useState(null)
 

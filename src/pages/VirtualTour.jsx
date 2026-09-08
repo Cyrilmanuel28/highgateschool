@@ -6,10 +6,11 @@ import Breadcrumbs from '../components/Breadcrumbs.jsx'
 import Img from '../components/Img.jsx'
 import Reveal from '../components/Reveal.jsx'
 import EmptyState from '../components/EmptyState.jsx'
+import { GridSkeleton } from '../components/Skeletons.jsx'
 import { cn } from '../lib/utils.js'
 
 export default function VirtualTour() {
-  const { db } = useData()
+  const { db, loading } = useData()
   const info = db.schoolInfo
   const scenes = (db.tourScenes || []).filter((s) => (s.status === undefined || s.status === 'published') && s.isVisible !== false).sort((a, b) => (a.order || 0) - (b.order || 0))
   const [activeIndex, setActiveIndex] = useState(scenes.length ? 0 : null)

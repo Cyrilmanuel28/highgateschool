@@ -27,7 +27,7 @@ export function useData() {
 
 export function DataProvider({ children }) {
   const [db, setDb] = useState(() => loadDb())
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const dbRef = useRef(db)
   dbRef.current = db
   const [auditLog, setAuditLog] = useState(() => listAudit())

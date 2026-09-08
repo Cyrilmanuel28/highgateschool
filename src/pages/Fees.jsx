@@ -6,16 +6,33 @@ import SeoHead from '../components/SeoHead.jsx'
 import Breadcrumbs from '../components/Breadcrumbs.jsx'
 import Reveal from '../components/Reveal.jsx'
 import EmptyState from '../components/EmptyState.jsx'
+import { GridSkeleton } from '../components/Skeletons.jsx'
 import { cn } from '../lib/utils.js'
 
 const GBP = new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', maximumFractionDigits: 0 })
 
 export default function Fees() {
-  const { publishedOnly, db } = useData()
+  const { publishedOnly, db, loading } = useData()
   const info = db.schoolInfo
   const [active, setActive] = useState(0)
 
   const structures = useMemo(() => publishedOnly('fees', 'order'), [publishedOnly])
+
+  if (loading) {
+    return (
+      <>
+        <SeoHead title={info?.feesPageTitle || 'School Fees'} />
+        <div className="relative overflow-hidden bg-navy-950 pb-16 pt-36">
+          <div className="absolute -right-24 top-0 h-72 w-72 rounded-full bg-gold-500/10 blur-3xl" />
+          <div className="container-x relative">
+            <p className="eyebrow">{info?.feesEyebrow || 'Fees & Finance'}</p>
+            <h1 className="mt-3 font-serif text-5xl font-semibold text-white sm:text-6xl">{info?.feesHeading || 'School Fees'}</h1>
+          </div>
+        </div>
+        <div className="bg-surface py-16"><div className="container-x"><GridSkeleton count={4} /></div></div>
+      </>
+    )
+  }
 
   return (
     <>
