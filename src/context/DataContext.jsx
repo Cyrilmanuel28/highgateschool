@@ -69,14 +69,20 @@ export function DataProvider({ children }) {
   // --- Mutate: optimistic update, push to Supabase in background ---
   const mutate = useCallback((key, updater) => {
     const previous = dbRef.current
-    const next = updater(previous[key])
+    const previousForKey = previous[key]
+    const next = updater(previousForKey)
     const newDb = { ...previous, [key]: next }
     dbRef.current = newDb
     setDb(newDb)
     try { saveCollection(key, next) } catch {}
     pushCollectionToRemote(key, next).then(r => {
       if (!r.ok) {
-        console.warn('[data] push failed for', key, r.error)
+        console.warn('[data] push failed for', key, r.error, '— rolling back local state')
+        // Rollback: restore previous state
+        const rollbackDb = { ...dbRef.current, [key]: previousForKey }
+        dbRef.current = rollbackDb
+        setDb(rollbackDb)
+        try { saveCollection(key, previousForKey) } catch {}
       }
     })
     return next

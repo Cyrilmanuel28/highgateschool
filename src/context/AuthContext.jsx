@@ -29,7 +29,23 @@ export function AuthProvider({ children }) {
         setUser(u)
         return { ok: true }
       }
-      return { ok: false, error: 'Remote authentication not configured' }
+      // Local fallback: check against seed settings credentials
+      try {
+        const { loadDb } = await import('../lib/store.js')
+        const db = loadDb()
+        const settings = db.settings || {}
+        const expectedUser = settings.adminUser || 'admin'
+        const expectedPass = settings.adminPass || 'admin123'
+        if (email === expectedUser && password === expectedPass) {
+          const u = { username: email, role: 'admin', loginAt: new Date().toISOString() }
+          sessionStorage.setItem(SESSION_KEY, JSON.stringify(u))
+          setUser(u)
+          return { ok: true }
+        }
+        return { ok: false, error: 'Invalid credentials' }
+      } catch {
+        return { ok: false, error: 'Login failed' }
+      }
     },
     []
   )

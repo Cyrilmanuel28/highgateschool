@@ -30,8 +30,26 @@ export function computeDiff(prev, next) {
   return { type: Object.keys(changed).length ? 'updated' : 'unchanged', fields: changed }
 }
 
+function stripLargeFields(obj) {
+  if (!obj || typeof obj !== 'object') return obj
+  if (Array.isArray(obj)) return obj.map(stripLargeFields)
+  const out = {}
+  for (const [k, v] of Object.entries(obj)) {
+    if (typeof v === 'string' && v.length > 2000 && (v.startsWith('data:') || v.startsWith('blob:'))) {
+      out[k] = v.substring(0, 50) + '...[stripped]'
+    } else if (typeof v === 'string' && v.length > 5000) {
+      out[k] = v.substring(0, 200) + '...[truncated]'
+    } else if (typeof v === 'object' && v !== null) {
+      out[k] = stripLargeFields(v)
+    } else {
+      out[k] = v
+    }
+  }
+  return out
+}
+
 const STORAGE_KEY = 'aia_v1_changeTracker'
-const MAX_CHANGES = 500
+const MAX_CHANGES = 200
 
 export function listRecentChanges() {
   try {
@@ -39,6 +57,23 @@ export function listRecentChanges() {
     return raw ? JSON.parse(raw) : []
   } catch {
     return []
+  }
+}
+
+function persistChanges(changes) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(changes))
+  } catch (e) {
+    console.warn('[changeTracker] Storage quota exceeded, trimming oldest changes')
+    const trimmed = changes.slice(0, Math.floor(changes.length / 2))
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(trimmed))
+    } catch (e2) {
+      console.warn('[changeTracker] Still full after trim, keeping minimal set')
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(trimmed.slice(0, 20)))
+      } catch {}
+    }
   }
 }
 
@@ -71,8 +106,8 @@ export function recordChange({
     status,
     failedStage,
     diff,
-    previousSnapshot: previousValue ? JSON.parse(JSON.stringify(previousValue)) : null,
-    newSnapshot: newValue ? JSON.parse(JSON.stringify(newValue)) : null,
+    previousSnapshot: previousValue ? stripLargeFields(JSON.parse(JSON.stringify(previousValue))) : null,
+    newSnapshot: newValue ? stripLargeFields(JSON.parse(JSON.stringify(newValue))) : null,
     verificationStages,
     note,
     timestamp: new Date().toISOString()
@@ -85,11 +120,7 @@ export function recordChange({
   }
 
   const capped = changes.slice(0, MAX_CHANGES)
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(capped))
-  } catch (e) {
-    console.warn('[changeTracker] Storage quota exceeded while persisting change:', e)
-  }
+  persistChanges(capped)
 
   return record
 }
@@ -103,9 +134,7 @@ export function updateChangeStatus(changeId, status, { failedStage = null, verif
     if (verificationStages !== null) changes[index].verificationStages = verificationStages
     if (note) changes[index].note = note
     changes[index].updatedAt = new Date().toISOString()
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(changes))
-    } catch {}
+    persistChanges(changes)
     return changes[index]
   }
   return null

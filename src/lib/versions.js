@@ -10,8 +10,12 @@ function stripLargeFields(obj) {
   for (const [k, v] of Object.entries(obj)) {
     if (typeof v === 'string' && v.length > 2000 && (v.startsWith('data:') || v.startsWith('blob:'))) {
       out[k] = v.substring(0, 50) + '...[stripped]'
-    } else {
+    } else if (typeof v === 'string' && v.length > 3000) {
+      out[k] = v.substring(0, 200) + '...[truncated]'
+    } else if (typeof v === 'object' && v !== null) {
       out[k] = stripLargeFields(v)
+    } else {
+      out[k] = v
     }
   }
   return out
@@ -36,7 +40,17 @@ function persist(map) {
         map[entity][id] = map[entity][id].slice(-2)
       }
     }
-    try { localStorage.setItem(KEY, JSON.stringify(map)) } catch { /* give up */ }
+    try {
+      localStorage.setItem(KEY, JSON.stringify(map))
+    } catch {
+      console.warn('[versions] Still full after trim, keeping only 1 version per record')
+      for (const entity of Object.keys(map)) {
+        for (const id of Object.keys(map[entity] || {})) {
+          map[entity][id] = map[entity][id].slice(-1)
+        }
+      }
+      try { localStorage.setItem(KEY, JSON.stringify(map)) } catch { /* give up */ }
+    }
   }
 }
 
