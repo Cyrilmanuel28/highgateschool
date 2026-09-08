@@ -54,8 +54,8 @@ export function BlockHero({ block }) {
   return (
     <section className="relative flex min-h-[80vh] sm:min-h-[92vh] items-center justify-center overflow-hidden bg-navy-950">
       <div className="absolute inset-0">
-        <Img src={c.image} alt={schoolName} className="opacity-40" eager fetchpriority="high" />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-950/90 via-navy-950/65 to-navy-950/95" />
+        <Img src={c.image} alt={schoolName} className="opacity-100" eager fetchpriority="high" />
+        <div className="absolute inset-0 bg-gradient-to-b from-navy-950/60 via-navy-950/30 to-navy-950/70" />
       </div>
       <div className="container-x relative z-10 py-20 sm:py-28 lg:py-32 text-center">
         {/* School Emblem / Kicker */}
