@@ -78,7 +78,7 @@ export default function Downloads() {
             categories.map(([cat, items], ci) => (
               <section key={cat} className={ci > 0 ? 'mt-14' : ''}>
                 <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-                  <h2 className="font-serif text-3xl font-semibold text-navy-900">{cat}</h2>
+                  <h2 className="min-w-0 font-serif text-2xl font-semibold text-navy-900 break-words sm:text-3xl">{cat}</h2>
                   <span className="rounded-full bg-white px-4 py-1.5 text-xs font-bold text-navy-800 shadow-card">
                     {items.length} document{items.length > 1 ? 's' : ''}
                   </span>

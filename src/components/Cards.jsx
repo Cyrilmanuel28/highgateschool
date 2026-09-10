@@ -17,7 +17,7 @@ export function NewsCard({ article, readLabel = 'Read Article' }) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-navy-950/50 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       </div>
-      <div className="flex flex-1 flex-col p-6">
+      <div className="flex flex-1 flex-col min-w-0 p-6">
         <div className="flex items-center gap-3 text-xs font-semibold">
           <span className="rounded-md border border-royal/20 bg-royal/5 px-2.5 py-1 text-royal font-medium">{article.tags?.[0] || 'News'}</span>
           <span className="flex items-center gap-1.5 text-charcoal/60">
@@ -61,7 +61,7 @@ export function EventCard({ event, viewLabel = 'View Event' }) {
                 ? formatDate(event.startDate, { year: undefined })
                 : formatDate(event.startDate)}
             </p>
-            <h3 className="max-w-[220px] font-serif text-lg font-semibold leading-snug text-white">{event.title}</h3>
+            <h3 className="max-w-[140px] sm:max-w-[220px] line-clamp-2 font-serif text-base font-semibold leading-snug text-white sm:text-lg">{event.title}</h3>
           </div>
         </div>
       </div>

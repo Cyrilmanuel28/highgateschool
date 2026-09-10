@@ -91,8 +91,8 @@ export default function NewsArticlePage() {
 
         {related.length > 0 && (
           <div className="container-x mt-20">
-            <div className="mb-8 flex items-end justify-between">
-              <h2 className="font-serif text-3xl font-semibold text-navy-900">Related Articles</h2>
+            <div className="mb-8 flex flex-wrap items-end justify-between gap-2">
+              <h2 className="font-serif text-2xl font-semibold text-navy-900 sm:text-3xl">Related Articles</h2>
               <Link to="/news" className="text-sm font-semibold text-gold-600 hover:text-gold-700">
                 View all →
               </Link>

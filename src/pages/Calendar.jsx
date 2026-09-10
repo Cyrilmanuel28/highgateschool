@@ -117,19 +117,19 @@ export default function Calendar() {
         <div className="container-x">
           <Reveal>
             <div className="card overflow-hidden">
-              <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4">
+              <div className="flex items-center justify-between border-b border-slate-100 px-3 py-3 sm:px-6 sm:py-4">
                 <button
                   onClick={() => setView((v) => (v.m === 0 ? { y: v.y - 1, m: 11 } : { y: v.y, m: v.m - 1 }))}
-                  className="flex h-10 w-10 items-center justify-center rounded-xl text-slate-500 transition hover:bg-navy-50 hover:text-navy-900"
+                  className="flex h-9 w-9 items-center justify-center rounded-xl text-slate-500 transition hover:bg-navy-50 hover:text-navy-900 sm:h-10 sm:w-10"
                   aria-label="Previous month"
                 >
                   <ChevronLeft size={18} />
                 </button>
-                <h2 className="font-serif text-2xl font-semibold text-navy-900">{monthName}</h2>
+                <h2 className="min-w-0 truncate font-serif text-lg font-semibold text-navy-900 sm:text-2xl">{monthName}</h2>
                 <div className="flex items-center gap-2">
                   <button
                     onClick={goToday}
-                    className="rounded-full border border-slate-200 px-4 py-1.5 text-xs font-bold text-navy-800 transition hover:border-gold-500 hover:text-gold-600"
+                    className="rounded-full border border-slate-200 px-3 py-1 text-[11px] font-bold text-navy-800 transition hover:border-gold-500 hover:text-gold-600 sm:px-4 sm:py-1.5 sm:text-xs"
                   >
                     Today
                   </button>
@@ -143,7 +143,7 @@ export default function Calendar() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-7 border-b border-slate-100 bg-navy-900 text-center text-[11px] font-bold uppercase tracking-wider text-navy-100">
+              <div className="grid grid-cols-7 border-b border-slate-100 bg-navy-900 text-center text-[10px] font-bold uppercase tracking-normal text-navy-100 sm:text-[11px] sm:tracking-wider">
                 {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((d) => (
                   <div key={d} className="py-3">{d}</div>
                 ))}
@@ -151,12 +151,12 @@ export default function Calendar() {
 
               <div className="grid grid-cols-7">
                 {grid.map((date, i) => {
-                  if (!date) return <div key={i} className="min-h-[84px] border-b border-r border-slate-50 bg-slate-50/50" />
+                  if (!date) return <div key={i} className="min-h-[64px] overflow-hidden border-b border-r border-slate-50 bg-slate-50/50 sm:min-h-[84px]" />
                   const key = date.toDateString()
                   const dayEvents = eventsByDate[key] || []
                   const isToday = date.toDateString() === today.toDateString()
                   return (
-                    <div key={i} className={cn('min-h-[84px] border-b border-r border-slate-100 p-1.5', date.getDay() === 0 && 'bg-cream')}>
+                    <div key={i} className={cn('min-h-[64px] overflow-hidden border-b border-r border-slate-100 p-1 sm:p-1.5 sm:min-h-[84px]', date.getDay() === 0 && 'bg-cream')}>
                       <span
                         className={cn(
                           'flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold',
@@ -184,7 +184,7 @@ export default function Calendar() {
                 })}
               </div>
 
-              <div className="flex flex-wrap gap-3 border-t border-slate-100 px-6 py-4 text-[11px] font-semibold text-slate-500">
+              <div className="flex flex-wrap gap-2 border-t border-slate-100 px-4 py-3 text-[10px] font-semibold text-slate-500 sm:gap-3 sm:px-6 sm:py-4 sm:text-[11px]">
                 {[
                   ['Term', 'bg-navy-800'],
                   ['Holiday', 'bg-gold-300'],

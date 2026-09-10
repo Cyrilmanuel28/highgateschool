@@ -113,7 +113,7 @@ export function BlockHero({ block }) {
 export function BlockRichText({ block }) {
   return (
     <section className="bg-cream py-12 sm:py-20 overflow-hidden">
-      <div className="container-x max-w-4xl px-5 sm:px-6 lg:px-8 overflow-hidden">
+      <div className="container-x max-w-4xl overflow-hidden">
         <Reveal>
           <RichTextRenderer html={block.html} />
         </Reveal>
@@ -153,7 +153,7 @@ export function BlockStats({ block }) {
     <section className="relative overflow-hidden bg-navy-900 border-y border-white/10 py-12 sm:py-20">
       <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-gold-500/10 blur-3xl" />
       <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-royal/20 blur-3xl" />
-      <div className="container-x relative grid grid-cols-2 gap-10 lg:grid-cols-4">
+      <div className="container-x relative grid grid-cols-2 gap-6 sm:gap-10 lg:grid-cols-4">
         {(block.items || []).map((s, i) => (
           <Reveal key={i} delay={i * 100} className="text-center">
             <p className="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold text-gold-400">{s.value}</p>

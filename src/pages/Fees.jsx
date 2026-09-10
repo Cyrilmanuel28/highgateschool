@@ -78,7 +78,7 @@ export default function Fees() {
                 return (
                   <Reveal key={f.id}>
                     <div className="card overflow-hidden">
-                      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 bg-navy-900 px-8 py-6">
+                      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 bg-navy-900 px-4 py-5 sm:px-6 lg:px-8 lg:py-6">
                         <div>
                           <h2 className="font-serif text-2xl font-semibold text-white">{f.level}</h2>
                           <p className="mt-0.5 text-sm text-navy-200">Academic Year {f.academicYear}</p>
@@ -87,10 +87,10 @@ export default function Fees() {
                           {f.items.length} items
                         </span>
                       </div>
-                      <div className="divide-y divide-slate-100 px-8">
+                      <div className="divide-y divide-slate-100 px-4 sm:px-6 lg:px-8">
                         {f.items.map((item, j) => (
-                          <div key={j} className="flex items-center justify-between gap-4 py-5">
-                            <p className="font-medium text-navy-900">{item.label}</p>
+                          <div key={j} className="flex items-center justify-between gap-4 py-4 sm:py-5">
+                            <p className="min-w-0 flex-1 font-medium text-navy-900">{item.label}</p>
                             <p className="font-serif text-xl font-semibold text-royal">
                               {item.amount === 0 ? 'Included' : GBP.format(item.amount)}
                             </p>
@@ -98,7 +98,7 @@ export default function Fees() {
                         ))}
                       </div>
                       {f.notes && (
-                        <div className="flex gap-3 border-t border-gold-200/50 bg-gold-50/70 px-8 py-5">
+                        <div className="flex gap-3 border-t border-gold-200/50 bg-gold-50/70 px-4 py-4 sm:px-6 lg:px-8 lg:py-5">
                           <Info size={18} className="mt-0.5 shrink-0 text-gold-600" />
                           <p className="text-sm leading-relaxed text-navy-950">{f.notes}</p>
                         </div>

@@ -45,9 +45,9 @@ export default function StaffProfile() {
                 <Img src={staff.photo} alt={staff.name} />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy-950/40 to-transparent lg:bg-none" />
               </div>
-              <div className="p-10 lg:col-span-2 lg:p-14">
+              <div className="p-6 sm:p-10 lg:col-span-2 lg:p-14">
                 <p className="eyebrow">{dept?.name || staff.department}</p>
-                <h1 className="mt-3 font-serif text-4xl font-semibold text-navy-900 sm:text-5xl">{staff.name}</h1>
+                <h1 className="mt-3 font-serif text-3xl font-semibold text-navy-900 sm:text-4xl lg:text-5xl">{staff.name}</h1>
                 <p className="mt-2 text-lg font-medium text-gold-600">{staff.title}</p>
 
                 <div className="mt-8 flex flex-wrap gap-3">

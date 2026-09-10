@@ -61,7 +61,7 @@ export default function Faq() {
                             onClick={() => setOpen(isOpen ? null : f.id)}
                             className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
                           >
-                            <span className="font-serif text-lg font-semibold text-navy-900">{f.question}</span>
+                            <span className="min-w-0 font-serif text-base font-semibold text-navy-900 sm:text-lg">{f.question}</span>
                             <span className={cn('flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-all duration-300', isOpen ? 'rotate-180 bg-gold-500 text-white' : 'bg-navy-50 text-navy-800')}>
                               <ChevronDown size={16} />
                             </span>

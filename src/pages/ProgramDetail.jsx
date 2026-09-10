@@ -190,9 +190,9 @@ export default function ProgramDetail() {
                     <span className="text-charcoal/70">Stage / Level</span>
                     <span className="font-semibold text-navy-900">{program.level}</span>
                   </div>
-                  <div className="flex justify-between py-3">
-                    <span className="text-charcoal/70">Curriculum</span>
-                    <span className="font-semibold text-navy-900 text-right">{program.curriculum}</span>
+                  <div className="flex justify-between gap-4 py-3">
+                    <span className="shrink-0 text-charcoal/70">Curriculum</span>
+                    <span className="min-w-0 font-semibold text-navy-900 text-right break-words">{program.curriculum}</span>
                   </div>
                   <div className="flex justify-between py-3">
                     <span className="text-charcoal/70">Class Size</span>

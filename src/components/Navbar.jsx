@@ -25,7 +25,7 @@ function Logo({ light, logo, name, shortName }) {
   const subName = shortName || displayName
   const initials = displayName.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase()
   return (
-    <Link to="/" className="group flex items-center gap-3.5">
+    <Link to="/" className="group flex min-w-0 items-center gap-3.5">
       {logo ? (
         <img src={logo} alt={displayName} className="h-11 w-11 rounded-lg object-contain shadow-subtle transition-transform duration-300 group-hover:scale-105" />
       ) : (
@@ -33,7 +33,7 @@ function Logo({ light, logo, name, shortName }) {
           <span className="text-gold-300">{initials}</span>
         </div>
       )}
-      <div className="leading-tight">
+      <div className="min-w-0 leading-tight">
         <p className="font-serif text-lg font-semibold tracking-wide text-white">
           {displayName}
         </p>
