@@ -94,7 +94,7 @@ export function BlockHero({ block }) {
         {/* Quick Identity Badges */}
         <div className="animate-fade-up mt-10 sm:mt-14 inline-flex flex-wrap items-center justify-center gap-3 sm:gap-6 rounded-2xl border border-white/10 bg-white/5 px-4 sm:px-6 py-3 text-[11px] sm:text-xs font-medium text-slate-200 backdrop-blur-sm [animation-delay:480ms]">
           <span className="inline-flex items-center gap-2">
-            <GraduationCap size={15} className="text-gold-400" /> Ages 3â€“18 Co-educational
+            <GraduationCap size={15} className="text-gold-400" /> Ages 3–18 Co-educational
           </span>
           <span className="hidden h-3 w-px bg-white/20 sm:inline" />
           <span className="inline-flex items-center gap-2">
@@ -229,7 +229,7 @@ export function BlockCards({ block }) {
                   )}
                   <h3 className="font-serif text-xl font-semibold text-navy-900">{c.title}</h3>
                   <p className="mt-2.5 flex-1 text-sm leading-relaxed text-slate-600">{c.text}</p>
-                  <span className="mt-4 text-sm font-semibold text-gold-600">{c.linkLabel || 'Learn more â†’'}</span>
+                  <span className="mt-4 text-sm font-semibold text-gold-600">{c.linkLabel || 'Learn more →'}</span>
                 </Link>
               ) : (
                 <div className="card h-full p-7">
@@ -378,7 +378,7 @@ export function BlockUpcomingEvents({ block }) {
       <div className="container-x">
         <SectionHeading eyebrow={block.eyebrow || "What's On"} title={block.title || 'Upcoming Events'} />
         {upcomingFiltered.length === 0 ? (
-          <p className="text-center text-charcoal/70">{block.emptyText || 'No upcoming events at the moment â€” check back soon.'}</p>
+          <p className="text-center text-charcoal/70">{block.emptyText || 'No upcoming events at the moment – check back soon.'}</p>
         ) : (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {upcomingFiltered.map((e, i) => (
@@ -568,7 +568,7 @@ export function BlockTestimonials({ block }) {
                 <div>
                   <div className="mb-4 flex items-center gap-1 text-gold-500">
                     {Array.from({ length: t.rating || 5 }).map((_, r) => (
-                      <span key={r} className="text-base">â˜…</span>
+                      <span key={r} className="text-base">★</span>
                     ))}
                   </div>
                   <p className="font-serif text-base italic leading-relaxed text-navy-900">
