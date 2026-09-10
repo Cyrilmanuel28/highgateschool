@@ -68,7 +68,7 @@ export function BlockHero({ block }) {
             </span>
           )}
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold-200">
-            {c.kicker || `${schoolName} · ${tagline}`}
+            {c.kicker || `${schoolName} Â· ${tagline}`}
           </p>
         </div>
 
@@ -94,7 +94,7 @@ export function BlockHero({ block }) {
         {/* Quick Identity Badges */}
         <div className="animate-fade-up mt-10 sm:mt-14 inline-flex flex-wrap items-center justify-center gap-3 sm:gap-6 rounded-2xl border border-white/10 bg-white/5 px-4 sm:px-6 py-3 text-[11px] sm:text-xs font-medium text-slate-200 backdrop-blur-sm [animation-delay:480ms]">
           <span className="inline-flex items-center gap-2">
-            <GraduationCap size={15} className="text-gold-400" /> Ages 3–18 Co-educational
+            <GraduationCap size={15} className="text-gold-400" /> Ages 3â€“18 Co-educational
           </span>
           <span className="hidden h-3 w-px bg-white/20 sm:inline" />
           <span className="inline-flex items-center gap-2">
@@ -102,7 +102,7 @@ export function BlockHero({ block }) {
           </span>
           <span className="hidden h-3 w-px bg-white/20 sm:inline" />
           <span className="inline-flex items-center gap-2">
-            <ShieldCheck size={15} className="text-gold-400" /> Founded {info?.founded || '1998'} · London
+            <ShieldCheck size={15} className="text-gold-400" /> Founded {info?.founded || '1998'} Â· London
           </span>
         </div>
       </div>
@@ -195,7 +195,7 @@ export function BlockImageText({ block }) {
 
 export function BlockQuote({ block }) {
   return (
-    <section className="bg-navy-950 py-16 sm:py-24">
+    <section className="bg-navy-950 py-16 sm:py-24 overflow-hidden">
       <div className="container-x mx-auto max-w-4xl text-center">
         <Reveal>
           <QuoteIcon size={44} className="mx-auto text-gold-500" />
@@ -214,7 +214,7 @@ export function BlockQuote({ block }) {
 
 export function BlockCards({ block }) {
   return (
-    <section className="bg-cream py-12 sm:py-20">
+    <section className="bg-cream py-12 sm:py-20 overflow-hidden">
       <div className="container-x">
         <SectionHeading title={block.title} subtitle={block.subtitle} />
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -229,7 +229,7 @@ export function BlockCards({ block }) {
                   )}
                   <h3 className="font-serif text-xl font-semibold text-navy-900">{c.title}</h3>
                   <p className="mt-2.5 flex-1 text-sm leading-relaxed text-slate-600">{c.text}</p>
-                  <span className="mt-4 text-sm font-semibold text-gold-600">{c.linkLabel || 'Learn more →'}</span>
+                  <span className="mt-4 text-sm font-semibold text-gold-600">{c.linkLabel || 'Learn more â†’'}</span>
                 </Link>
               ) : (
                 <div className="card h-full p-7">
@@ -247,7 +247,7 @@ export function BlockCards({ block }) {
 
 export function BlockTimeline({ block }) {
   return (
-    <section className="bg-white py-12 sm:py-20">
+    <section className="bg-white py-12 sm:py-20 overflow-hidden">
       <div className="container-x max-w-4xl">
         <SectionHeading eyebrow={block.eyebrow || 'Through the Years'} title={block.title} />
         <div className="relative">
@@ -277,7 +277,7 @@ export function BlockTimeline({ block }) {
 
 export function BlockValues({ block }) {
   return (
-    <section className="bg-surface py-12 sm:py-20 lg:py-24">
+    <section className="bg-surface py-12 sm:py-20 lg:py-24 overflow-hidden">
       <div className="container-x">
         <SectionHeading eyebrow={block.eyebrow || 'Our Values'} title={block.title} subtitle={block.subtitle} />
         <div className="grid gap-6 md:grid-cols-2">
@@ -304,7 +304,7 @@ export function BlockPrograms({ block }) {
   const { publishedOnly } = useData()
   const programs = publishedOnly('programs', 'order')
   return (
-    <section className="bg-surface py-12 sm:py-20 lg:py-24">
+    <section className="bg-surface py-12 sm:py-20 lg:py-24 overflow-hidden">
       <div className="container-x">
         <SectionHeading eyebrow={block.eyebrow || 'Academics'} title={block.title || 'Our Programmes'} subtitle={block.subtitle} />
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -327,7 +327,7 @@ export function BlockStaffGrid({ block }) {
   const depts = useData().db.departments || []
   const deptName = (d) => depts.find((x) => x.name === d)?.name || d
   return (
-    <section className="bg-surface py-12 sm:py-20 lg:py-24">
+    <section className="bg-surface py-12 sm:py-20 lg:py-24 overflow-hidden">
       <div className="container-x">
         <SectionHeading eyebrow={block.eyebrow || 'Our People'} title={block.title || 'Meet Our Team'} subtitle={block.subtitle} />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -346,7 +346,7 @@ export function BlockLatestNews({ block }) {
   const { publishedOnly } = useData()
   const news = publishedOnly('news', 'publishedAt', true).slice(0, 3)
   return (
-    <section className="bg-white py-12 sm:py-20 lg:py-24">
+    <section className="bg-white py-12 sm:py-20 lg:py-24 overflow-hidden">
       <div className="container-x">
         <SectionHeading eyebrow={block.eyebrow || 'Newsroom'} title={block.title || 'Latest News'} />
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -374,11 +374,11 @@ export function BlockUpcomingEvents({ block }) {
     .sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
     .slice(0, 3)
   return (
-    <section className="bg-surface py-12 sm:py-20 lg:py-24">
+    <section className="bg-surface py-12 sm:py-20 lg:py-24 overflow-hidden">
       <div className="container-x">
         <SectionHeading eyebrow={block.eyebrow || "What's On"} title={block.title || 'Upcoming Events'} />
         {upcomingFiltered.length === 0 ? (
-          <p className="text-center text-charcoal/70">{block.emptyText || 'No upcoming events at the moment — check back soon.'}</p>
+          <p className="text-center text-charcoal/70">{block.emptyText || 'No upcoming events at the moment â€” check back soon.'}</p>
         ) : (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {upcomingFiltered.map((e, i) => (
@@ -402,7 +402,7 @@ export function BlockGalleryPreview({ block }) {
   const { publishedOnly } = useData()
   const albums = publishedOnly('albums').slice(0, 3)
   return (
-    <section className="bg-white py-12 sm:py-20 lg:py-24">
+    <section className="bg-white py-12 sm:py-20 lg:py-24 overflow-hidden">
       <div className="container-x">
         <SectionHeading eyebrow={block.eyebrow || 'Gallery'} title={block.title || 'Life in Pictures'} />
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -499,7 +499,7 @@ export function BlockFacilities({ block }) {
   if (scenes.length === 0) return null
 
   return (
-    <section className="bg-white py-12 sm:py-20 lg:py-24">
+    <section className="bg-white py-12 sm:py-20 lg:py-24 overflow-hidden">
       <div className="container-x">
         <SectionHeading
           eyebrow={block.eyebrow || 'Campus & Facilities'}
@@ -554,7 +554,7 @@ export function BlockTestimonials({ block }) {
   if (testimonials.length === 0) return null
 
   return (
-    <section className="bg-surface border-y border-slate-200/70 py-12 sm:py-20 lg:py-24">
+    <section className="bg-surface border-y border-slate-200/70 py-12 sm:py-20 lg:py-24 overflow-hidden">
       <div className="container-x">
         <SectionHeading
           eyebrow={block.eyebrow || 'Community Voices'}
@@ -568,7 +568,7 @@ export function BlockTestimonials({ block }) {
                 <div>
                   <div className="mb-4 flex items-center gap-1 text-gold-500">
                     {Array.from({ length: t.rating || 5 }).map((_, r) => (
-                      <span key={r} className="text-base">★</span>
+                      <span key={r} className="text-base">â˜…</span>
                     ))}
                   </div>
                   <p className="font-serif text-base italic leading-relaxed text-navy-900">
@@ -585,7 +585,7 @@ export function BlockTestimonials({ block }) {
                   )}
                   <div>
                     <p className="font-serif text-sm font-semibold text-navy-900">{t.name}</p>
-                    <p className="text-xs text-charcoal/60">{t.role} · {t.relationship}</p>
+                    <p className="text-xs text-charcoal/60">{t.role} Â· {t.relationship}</p>
                   </div>
                 </div>
               </div>
@@ -635,7 +635,7 @@ export function BlockHeadOfSchool({ block }) {
 
 export function BlockPhilosophy({ block }) {
   return (
-    <section className="bg-surface py-12 sm:py-20 lg:py-24">
+    <section className="bg-surface py-12 sm:py-20 lg:py-24 overflow-hidden">
       <div className="container-x">
         <SectionHeading eyebrow={block.eyebrow || 'Our Approach'} title={block.title} subtitle={block.subtitle} />
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -696,7 +696,7 @@ export function BlockDistinctive({ block }) {
 
 export function BlockStudentExperience({ block }) {
   return (
-    <section className="bg-white py-12 sm:py-20 lg:py-24">
+    <section className="bg-white py-12 sm:py-20 lg:py-24 overflow-hidden">
       <div className="container-x">
         <SectionHeading eyebrow={block.eyebrow || 'Student Life'} title={block.title} subtitle={block.subtitle} />
         <div className="grid gap-6 md:grid-cols-2">
