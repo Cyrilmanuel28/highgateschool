@@ -15,11 +15,11 @@ export default function PublicLayout() {
   }, [location.pathname])
 
   return (
-    <div className="flex min-h-screen flex-col bg-cream">
+    <div className="flex min-h-screen flex-col bg-cream overflow-x-hidden">
       {/* Route-level progress bar */}
       <PageProgressBar />
       <Navbar />
-      <main key={location.pathname} className="flex-1 animate-fade-in">
+      <main key={location.pathname} className="flex-1 animate-fade-in overflow-x-hidden">
         <ErrorBoundary>
           <Outlet />
         </ErrorBoundary>

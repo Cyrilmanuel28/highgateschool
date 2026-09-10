@@ -112,8 +112,8 @@ export function BlockHero({ block }) {
 
 export function BlockRichText({ block }) {
   return (
-    <section className="bg-cream py-12 sm:py-20">
-      <div className="container-x max-w-4xl px-5 sm:px-6 lg:px-8">
+    <section className="bg-cream py-12 sm:py-20 overflow-hidden">
+      <div className="container-x max-w-4xl px-5 sm:px-6 lg:px-8 overflow-hidden">
         <Reveal>
           <RichTextRenderer html={block.html} />
         </Reveal>
@@ -167,7 +167,7 @@ export function BlockStats({ block }) {
 
 export function BlockImageText({ block }) {
   return (
-    <section className="bg-white py-12 sm:py-20 lg:py-24">
+    <section className="bg-white py-12 sm:py-20 lg:py-24 overflow-hidden">
       <div className="container-x grid items-center gap-12 lg:grid-cols-2">
         <Reveal className={cn(block.reversed && 'lg:order-2')}>
           <div className="relative">
@@ -457,7 +457,7 @@ export function BlockCta({ block, dark }) {
 
 export function BlockWelcome({ block }) {
   return (
-    <section className="bg-white py-16 sm:py-24">
+    <section className="bg-white py-16 sm:py-24 overflow-hidden">
       <div className="container-x grid items-center gap-14 lg:grid-cols-2">
         <Reveal>
           <p className="eyebrow mb-3">{block.eyebrow || 'Welcome'}</p>
@@ -604,7 +604,7 @@ export function BlockTestimonials({ block }) {
 
 export function BlockHeadOfSchool({ block }) {
   return (
-    <section className="bg-white py-16 sm:py-24 lg:py-28">
+    <section className="bg-white py-16 sm:py-24 lg:py-28 overflow-hidden">
       <div className="container-x grid items-center gap-14 lg:grid-cols-2">
         <Reveal>
           <div className="relative">
@@ -723,7 +723,7 @@ export function BlockStudentExperience({ block }) {
 
 export function BlockCommunity({ block }) {
   return (
-    <section className="bg-surface py-12 sm:py-20 lg:py-24">
+    <section className="bg-surface py-12 sm:py-20 lg:py-24 overflow-hidden">
       <div className="container-x grid items-center gap-14 lg:grid-cols-2">
         <Reveal>
           <div className="relative">

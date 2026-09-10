@@ -78,6 +78,8 @@
 /* Quill rich text rendering (public site) */
 .ql-rendered {
   @apply text-[1.0625rem] leading-[1.85] text-slate-700;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 .ql-rendered h2, .ql-rendered h3, .ql-rendered h4 {
   @apply font-serif text-navy-900 mt-8 mb-3;
