@@ -16,6 +16,12 @@ const SECTION_LABELS = {
   hquote: 'Quote',
   hgallery: 'Gallery Preview',
   hcta: 'Call to Action',
+  hheadofschool: 'Head of School',
+  hphilosophy: 'Educational Philosophy',
+  hdistinctive: 'The Highgate Difference',
+  hstudentexperience: 'Student Experience',
+  hcommunity: 'Community',
+  hfacilities: 'Facilities',
 }
 
 function HeroFields({ section, onChange }) {
@@ -155,6 +161,173 @@ function CtaFields({ section, onChange }) {
   )
 }
 
+function HeadOfSchoolFields({ section, onChange }) {
+  const c = section.content || {}
+  const set = (patch) => onChange({ ...section, content: { ...c, ...patch } })
+  return (
+    <div className="grid gap-4 sm:grid-cols-2">
+      <Field label="Eyebrow">
+        <TextInput value={c.eyebrow || ''} onChange={(e) => set({ eyebrow: e.target.value })} />
+      </Field>
+      <Field label="Title">
+        <TextInput value={c.title || ''} onChange={(e) => set({ title: e.target.value })} />
+      </Field>
+      <Field label="Body (HTML)" className="sm:col-span-2">
+        <TextArea rows={6} value={c.body || ''} onChange={(e) => set({ body: e.target.value })} />
+      </Field>
+      <Field label="Portrait">
+        <ImagePicker value={c.image} onChange={(v) => set({ image: v })} />
+      </Field>
+      <div className="space-y-3">
+        <Field label="Author name">
+          <TextInput value={c.author || ''} onChange={(e) => set({ author: e.target.value })} />
+        </Field>
+        <Field label="Role">
+          <TextInput value={c.role || ''} onChange={(e) => set({ role: e.target.value })} />
+        </Field>
+        <Field label="Signature text">
+          <TextInput value={c.signature || ''} onChange={(e) => set({ signature: e.target.value })} />
+        </Field>
+      </div>
+    </div>
+  )
+}
+
+function ItemsFields({ section, onChange, withImage = false }) {
+  const c = section.content || {}
+  const items = c.items || []
+  const setItems = (newItems) => onChange({ ...section, content: { ...c, items: newItems } })
+  return (
+    <div className="space-y-4">
+      {items.map((item, i) => (
+        <div key={i} className="rounded-lg border border-slate-200 p-3 space-y-2">
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-medium text-slate-500 flex-1">Item {i + 1}</span>
+            <button type="button" onClick={() => setItems(items.filter((_, j) => j !== i))}
+              className="text-xs text-red-400 hover:text-red-600">Remove</button>
+          </div>
+          <div className="grid gap-2 sm:grid-cols-2">
+            <Field label="Title">
+              <TextInput value={item.title || ''} onChange={(e) => {
+                const next = [...items]; next[i] = { ...next[i], title: e.target.value }; setItems(next)
+              }} />
+            </Field>
+            {item.icon !== undefined && (
+              <Field label="Icon">
+                <TextInput value={item.icon || ''} onChange={(e) => {
+                  const next = [...items]; next[i] = { ...next[i], icon: e.target.value }; setItems(next)
+                }} />
+              </Field>
+            )}
+          </div>
+          <Field label="Text">
+            <TextArea rows={2} value={item.text || ''} onChange={(e) => {
+              const next = [...items]; next[i] = { ...next[i], text: e.target.value }; setItems(next)
+            }} />
+          </Field>
+          {withImage && (
+            <Field label="Image">
+              <ImagePicker value={item.image} onChange={(v) => {
+                const next = [...items]; next[i] = { ...next[i], image: v }; setItems(next)
+              }} />
+            </Field>
+          )}
+        </div>
+      ))}
+      <button type="button" onClick={() => setItems([...items, { title: '', text: '' }])}
+        className="text-sm font-medium text-gold-600 hover:text-gold-700">+ Add item</button>
+    </div>
+  )
+}
+
+function PhilosophyFields({ section, onChange }) {
+  const c = section.content || {}
+  const set = (patch) => onChange({ ...section, content: { ...c, ...patch } })
+  return (
+    <div className="space-y-4">
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Field label="Eyebrow">
+          <TextInput value={c.eyebrow || ''} onChange={(e) => set({ eyebrow: e.target.value })} />
+        </Field>
+        <Field label="Title">
+          <TextInput value={c.title || ''} onChange={(e) => set({ title: e.target.value })} />
+        </Field>
+        <Field label="Subtitle" className="sm:col-span-2">
+          <TextArea rows={2} value={c.subtitle || ''} onChange={(e) => set({ subtitle: e.target.value })} />
+        </Field>
+      </div>
+      <ItemsFields section={section} onChange={onChange} />
+    </div>
+  )
+}
+
+function DistinctiveFields({ section, onChange }) {
+  return <PhilosophyFields section={section} onChange={onChange} />
+}
+
+function StudentExperienceFields({ section, onChange }) {
+  const c = section.content || {}
+  const set = (patch) => onChange({ ...section, content: { ...c, ...patch } })
+  return (
+    <div className="space-y-4">
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Field label="Eyebrow">
+          <TextInput value={c.eyebrow || ''} onChange={(e) => set({ eyebrow: e.target.value })} />
+        </Field>
+        <Field label="Title">
+          <TextInput value={c.title || ''} onChange={(e) => set({ title: e.target.value })} />
+        </Field>
+        <Field label="Subtitle" className="sm:col-span-2">
+          <TextArea rows={2} value={c.subtitle || ''} onChange={(e) => set({ subtitle: e.target.value })} />
+        </Field>
+      </div>
+      <ItemsFields section={section} onChange={onChange} withImage />
+    </div>
+  )
+}
+
+function CommunityFields({ section, onChange }) {
+  const c = section.content || {}
+  const set = (patch) => onChange({ ...section, content: { ...c, ...patch } })
+  const stats = c.stats || []
+  const setStats = (newStats) => onChange({ ...section, content: { ...c, stats: newStats } })
+  return (
+    <div className="space-y-4">
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Field label="Eyebrow">
+          <TextInput value={c.eyebrow || ''} onChange={(e) => set({ eyebrow: e.target.value })} />
+        </Field>
+        <Field label="Title">
+          <TextInput value={c.title || ''} onChange={(e) => set({ title: e.target.value })} />
+        </Field>
+        <Field label="Body (HTML)" className="sm:col-span-2">
+          <TextArea rows={5} value={c.body || ''} onChange={(e) => set({ body: e.target.value })} />
+        </Field>
+        <Field label="Image">
+          <ImagePicker value={c.image} onChange={(v) => set({ image: v })} />
+        </Field>
+      </div>
+      <div className="space-y-2">
+        <p className="text-sm font-medium text-slate-600">Stats</p>
+        {stats.map((item, i) => (
+          <div key={i} className="flex gap-3">
+            <TextInput value={item.value || ''} onChange={(e) => {
+              const next = [...stats]; next[i] = { ...next[i], value: e.target.value }; setStats(next)
+            }} placeholder="Value" />
+            <TextInput value={item.label || ''} onChange={(e) => {
+              const next = [...stats]; next[i] = { ...next[i], label: e.target.value }; setStats(next)
+            }} placeholder="Label" />
+            <button type="button" onClick={() => setStats(stats.filter((_, j) => j !== i))}
+              className="text-red-400 hover:text-red-600 px-2">&times;</button>
+          </div>
+        ))}
+        <button type="button" onClick={() => setStats([...stats, { value: '', label: '' }])}
+          className="text-sm font-medium text-gold-600 hover:text-gold-700">+ Add stat</button>
+      </div>
+    </div>
+  )
+}
+
 const FIELDS_BY_TYPE = {
   hero: HeroFields,
   welcome: WelcomeFields,
@@ -165,6 +338,12 @@ const FIELDS_BY_TYPE = {
   latestNews: SimpleTitleFields,
   upcomingEvents: SimpleTitleFields,
   galleryPreview: SimpleTitleFields,
+  headOfSchool: HeadOfSchoolFields,
+  philosophy: PhilosophyFields,
+  distinctive: DistinctiveFields,
+  studentExperience: StudentExperienceFields,
+  community: CommunityFields,
+  facilities: SimpleTitleFields,
 }
 
 export default function HomeSectionsEdit() {
