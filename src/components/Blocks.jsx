@@ -777,7 +777,7 @@ function BlockExploreOurSchool({ block }) {
           {cards.map((card, idx) => (
             <Reveal key={card.id || idx} delay={idx * 100}>
               <Link
-                to={card.to || '#'}
+                to={card.to || '/about'}
                 className="group card flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white transition-all duration-300 hover:-translate-y-1.5 hover:shadow-cardHover hover:border-slate-300"
               >
                 <div className="relative aspect-[16/10] overflow-hidden">
@@ -823,13 +823,13 @@ function BlockExploreOurSchool({ block }) {
         {(c.cta1 || c.cta2) && (
           <Reveal delay={400} className="mt-12 flex flex-wrap items-center justify-center gap-4">
             {c.cta1 && (
-              <Link to={c.cta1.to || '#'} className="btn-royal rounded-lg px-7 py-3.5 text-sm font-semibold">
-                {c.cta1.label || 'Explore Our School'} <ChevronRight size={16} />
+              <Link to={c.cta1?.to || '/about'} className="btn-royal rounded-lg px-7 py-3.5 text-sm font-semibold">
+                {c.cta1?.label || 'Explore Our School'} <ChevronRight size={16} />
               </Link>
             )}
             {c.cta2 && (
-              <Link to={c.cta2.to || '#'} className="btn-outline rounded-lg px-7 py-3.5 text-sm font-semibold">
-                {c.cta2.label || 'Discover Student Life'} <ChevronRight size={16} />
+              <Link to={c.cta2?.to || '/student-life'} className="btn-outline rounded-lg px-7 py-3.5 text-sm font-semibold">
+                {c.cta2?.label || 'Discover Student Life'} <ChevronRight size={16} />
               </Link>
             )}
           </Reveal>
