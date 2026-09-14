@@ -16,6 +16,7 @@ const SECTION_LABELS = {
   hquote: 'Quote',
   hgallery: 'Gallery Preview',
   hcta: 'Call to Action',
+  hexplore: 'Explore Our School',
   hheadofschool: 'Head of School',
   hphilosophy: 'Educational Philosophy',
   hdistinctive: 'The Highgate Difference',
@@ -328,6 +329,89 @@ function CommunityFields({ section, onChange }) {
   )
 }
 
+function ExploreOurSchoolFields({ section, onChange }) {
+  const c = section.content || {}
+  const set = (patch) => onChange({ ...section, content: { ...c, ...patch } })
+  const cards = c.cards || []
+  const setCards = (newCards) => onChange({ ...section, content: { ...c, cards: newCards } })
+  return (
+    <div className="space-y-4">
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Field label="Title">
+          <TextInput value={c.title || ''} onChange={(e) => set({ title: e.target.value })} />
+        </Field>
+        <Field label="Subtitle" className="sm:col-span-2">
+          <TextArea rows={2} value={c.subtitle || ''} onChange={(e) => set({ subtitle: e.target.value })} />
+        </Field>
+      </div>
+      <p className="text-sm font-medium text-slate-600">Exploration Cards</p>
+      {cards.map((card, i) => (
+        <div key={card.id || i} className="rounded-lg border border-slate-200 p-4 space-y-3">
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-medium text-slate-500 flex-1">Card {i + 1}</span>
+            <button type="button" onClick={() => setCards(cards.filter((_, j) => j !== i))}
+              className="text-xs text-red-400 hover:text-red-600">Remove</button>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <Field label="Title">
+              <TextInput value={card.title || ''} onChange={(e) => {
+                const next = [...cards]; next[i] = { ...next[i], title: e.target.value }; setCards(next)
+              }} />
+            </Field>
+            <Field label="Button label">
+              <TextInput value={card.buttonLabel || ''} onChange={(e) => {
+                const next = [...cards]; next[i] = { ...next[i], buttonLabel: e.target.value }; setCards(next)
+              }} />
+            </Field>
+            <Field label="Link destination">
+              <TextInput value={card.to || ''} onChange={(e) => {
+                const next = [...cards]; next[i] = { ...next[i], to: e.target.value }; setCards(next)
+              }} />
+            </Field>
+            <Field label="Image">
+              <ImagePicker value={card.image} onChange={(v) => {
+                const next = [...cards]; next[i] = { ...next[i], image: v }; setCards(next)
+              }} />
+            </Field>
+          </div>
+          <Field label="Description">
+            <TextArea rows={2} value={card.description || ''} onChange={(e) => {
+              const next = [...cards]; next[i] = { ...next[i], description: e.target.value }; setCards(next)
+            }} />
+          </Field>
+          <Field label="Supporting items (comma-separated)">
+            <TextInput value={(card.items || []).join(', ')} onChange={(e) => {
+              const next = [...cards]; next[i] = { ...next[i], items: e.target.value.split(',').map(s => s.trim()).filter(Boolean) }; setCards(next)
+            }} />
+          </Field>
+        </div>
+      ))}
+      <button type="button" onClick={() => setCards([...cards, { id: `exp${Date.now()}`, title: '', description: '', items: [], to: '', buttonLabel: '', image: '' }])}
+        className="text-sm font-medium text-gold-600 hover:text-gold-700">+ Add card</button>
+      <div className="grid gap-4 sm:grid-cols-2 pt-2 border-t border-slate-100">
+        <div className="space-y-2">
+          <p className="text-xs font-medium text-slate-500">Primary button</p>
+          <Field label="Label">
+            <TextInput value={c.cta1?.label || ''} onChange={(e) => set({ cta1: { ...c.cta1, label: e.target.value } })} />
+          </Field>
+          <Field label="Link">
+            <TextInput value={c.cta1?.to || ''} onChange={(e) => set({ cta1: { ...c.cta1, to: e.target.value } })} />
+          </Field>
+        </div>
+        <div className="space-y-2">
+          <p className="text-xs font-medium text-slate-500">Secondary button</p>
+          <Field label="Label">
+            <TextInput value={c.cta2?.label || ''} onChange={(e) => set({ cta2: { ...c.cta2, label: e.target.value } })} />
+          </Field>
+          <Field label="Link">
+            <TextInput value={c.cta2?.to || ''} onChange={(e) => set({ cta2: { ...c.cta2, to: e.target.value } })} />
+          </Field>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 const FIELDS_BY_TYPE = {
   hero: HeroFields,
   welcome: WelcomeFields,
@@ -344,6 +428,7 @@ const FIELDS_BY_TYPE = {
   studentExperience: StudentExperienceFields,
   community: CommunityFields,
   facilities: SimpleTitleFields,
+  exploreOurSchool: ExploreOurSchoolFields,
 }
 
 export default function HomeSectionsEdit() {

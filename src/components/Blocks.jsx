@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import {
   GraduationCap, Globe2, HeartHandshake, Sparkles, Phone, Mail, ShieldCheck, Music4, Trophy,
   Users, Baby, BookOpen, Compass, Camera, Target, Award, Quote as QuoteIcon, CalendarDays,
-  ChevronRight, MapPin, Lightbulb, Handshake, Eye, Star, Brain, Leaf, HandHelping, Zap
+  ChevronRight, MapPin, Lightbulb, Handshake, Eye, Star, Brain, Leaf, HandHelping, Zap,
+  ArrowRight
 } from 'lucide-react'
 import { useData } from '../context/DataContext.jsx'
 import Reveal from './Reveal.jsx'
@@ -755,6 +756,89 @@ export function BlockCommunity({ block }) {
   )
 }
 
+function BlockExploreOurSchool({ block }) {
+  const c = block
+  const cards = c.cards || []
+  return (
+    <section className="bg-surface py-16 sm:py-24 lg:py-28 overflow-hidden">
+      <div className="container-x">
+        <Reveal className="mb-14 max-w-3xl text-center mx-auto">
+          <p className="eyebrow mb-2.5">Explore Our School</p>
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-[2.65rem] font-semibold leading-tight tracking-tight text-navy-900">
+            {c.title || 'More Than a School. A Place to Belong.'}
+          </h2>
+          <div className="mt-4 h-1 w-14 rounded-full bg-gradient-to-r from-gold-500 to-gold-400 shadow-sm mx-auto" />
+          <p className="mt-5 text-base sm:text-lg leading-relaxed text-charcoal/80 max-w-2xl mx-auto">
+            {c.subtitle || 'At Highgate School, learning goes beyond textbooks. We create an environment where students are encouraged to discover their strengths, build meaningful relationships, develop confidence, and prepare for the future.'}
+          </p>
+        </Reveal>
+
+        <div className="grid gap-8 sm:grid-cols-2">
+          {cards.map((card, idx) => (
+            <Reveal key={card.id || idx} delay={idx * 100}>
+              <Link
+                to={card.to || '#'}
+                className="group card flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white transition-all duration-300 hover:-translate-y-1.5 hover:shadow-cardHover hover:border-slate-300"
+              >
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  <Img
+                    src={card.image}
+                    alt={card.title || ''}
+                    className="h-full w-full"
+                    imgClassName="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy-950/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                </div>
+                <div className="flex flex-1 flex-col p-7 sm:p-8">
+                  <h3 className="font-serif text-2xl font-semibold text-navy-900 transition-colors duration-200 group-hover:text-royal">
+                    {card.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-charcoal/70">
+                    {card.description}
+                  </p>
+                  {card.items && card.items.length > 0 && (
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {card.items.map((item, j) => (
+                        <span
+                          key={j}
+                          className="inline-block rounded-full bg-royal/5 px-3 py-1 text-xs font-medium text-royal border border-royal/10"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  <div className="mt-auto pt-6">
+                    <span className="inline-flex items-center gap-2 text-sm font-semibold text-royal transition-all duration-200 group-hover:gap-3">
+                      {card.buttonLabel || 'Learn more'}
+                      <ArrowRight size={16} className="transition-transform duration-200 group-hover:translate-x-1" />
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+
+        {(c.cta1 || c.cta2) && (
+          <Reveal delay={400} className="mt-12 flex flex-wrap items-center justify-center gap-4">
+            {c.cta1 && (
+              <Link to={c.cta1.to || '#'} className="btn-royal rounded-lg px-7 py-3.5 text-sm font-semibold">
+                {c.cta1.label || 'Explore Our School'} <ChevronRight size={16} />
+              </Link>
+            )}
+            {c.cta2 && (
+              <Link to={c.cta2.to || '#'} className="btn-outline rounded-lg px-7 py-3.5 text-sm font-semibold">
+                {c.cta2.label || 'Discover Student Life'} <ChevronRight size={16} />
+              </Link>
+            )}
+          </Reveal>
+        )}
+      </div>
+    </section>
+  )
+}
+
 export default function renderBlock(block, i = 0) {
   switch (block.type) {
     case 'hero':
@@ -801,6 +885,8 @@ export default function renderBlock(block, i = 0) {
       return <BlockCommunity key={block.id || i} block={block} />
     case 'welcome':
       return <BlockWelcome key={block.id || i} block={block} />
+    case 'exploreOurSchool':
+      return <BlockExploreOurSchool key={block.id || i} block={block} />
     case 'cta':
       return <BlockCta key={block.id || i} block={block} />
     default:

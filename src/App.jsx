@@ -100,6 +100,8 @@ export default function App() {
           <Route path="administration" element={<ContentPage slug="administration" />} />
           <Route path="board" element={<ContentPage slug="board" />} />
           <Route path="student-life" element={<ContentPage slug="student-life" />} />
+          <Route path="student-development" element={<ContentPage slug="student-development" />} />
+          <Route path="activities" element={<ContentPage slug="activities" />} />
           <Route path="admissions" element={<ContentPage slug="admissions" />} />
           <Route path="academics" element={<ContentPage slug="academics" />} />
           <Route path="privacy-policy" element={<ContentPage slug="privacy-policy" />} />
