@@ -51,6 +51,8 @@ export function BlockHero({ block }) {
 
   const cta1 = c.cta1 || { label: 'Apply for Admission', to: '/admissions' }
   const cta2 = c.cta2 || { label: 'Explore Our School', to: '/about' }
+  const cta1To = (cta1.to && cta1.to !== '/' && cta1.to !== '#') ? cta1.to : '/admissions'
+  const cta2To = (cta2.to && cta2.to !== '/' && cta2.to !== '#') ? cta2.to : '/about'
 
   return (
     <section className="relative flex min-h-[80vh] sm:min-h-[92vh] items-center justify-center overflow-hidden bg-navy-950">
@@ -84,10 +86,10 @@ export function BlockHero({ block }) {
         )}
 
         <div className="mt-8 sm:mt-10 flex animate-fade-up flex-wrap items-center justify-center gap-3 sm:gap-4 [animation-delay:360ms]">
-          <Link to={cta1.to || '/admissions'} className="btn-royal rounded-lg px-6 sm:px-7 py-3.5 text-sm font-semibold shadow-royal">
+          <Link to={cta1To} className="btn-royal rounded-lg px-6 sm:px-7 py-3.5 text-sm font-semibold shadow-royal">
             {cta1.label}
           </Link>
-          <Link to={cta2.to || '/about'} className="btn-outline-light rounded-lg px-6 sm:px-7 py-3.5 text-sm font-semibold">
+          <Link to={cta2To} className="btn-outline-light rounded-lg px-6 sm:px-7 py-3.5 text-sm font-semibold">
             {cta2.label}
           </Link>
         </div>
@@ -438,12 +440,12 @@ export function BlockCta({ block, dark }) {
             {(block.cta1 || block.cta2) && (
               <div className="relative mt-8 flex flex-wrap items-center justify-center gap-4">
                 {block.cta1 && (
-                  <Link to={block.cta1.to || '/'} className="btn-royal rounded-lg px-7 py-3 font-semibold shadow-royal">
+                  <Link to={(block.cta1.to && block.cta1.to !== '/' && block.cta1.to !== '#') ? block.cta1.to : '/admissions'} className="btn-royal rounded-lg px-7 py-3 font-semibold shadow-royal">
                     {block.cta1.label}
                   </Link>
                 )}
                 {block.cta2 && (
-                  <Link to={block.cta2.to || '/'} className="btn-outline-light rounded-lg px-7 py-3">
+                  <Link to={(block.cta2.to && block.cta2.to !== '/' && block.cta2.to !== '#') ? block.cta2.to : '/about'} className="btn-outline-light rounded-lg px-7 py-3">
                     {block.cta2.label}
                   </Link>
                 )}
@@ -777,7 +779,7 @@ function BlockExploreOurSchool({ block }) {
           {cards.map((card, idx) => (
             <Reveal key={card.id || idx} delay={idx * 100}>
               <Link
-                to={card.to || '/about'}
+                to={(card.to && card.to !== '/' && card.to !== '#') ? card.to : '/about'}
                 className="group card flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white transition-all duration-300 hover:-translate-y-1.5 hover:shadow-cardHover hover:border-slate-300"
               >
                 <div className="relative aspect-[16/10] overflow-hidden">
@@ -823,12 +825,12 @@ function BlockExploreOurSchool({ block }) {
         {(c.cta1 || c.cta2) && (
           <Reveal delay={400} className="mt-12 flex flex-wrap items-center justify-center gap-4">
             {c.cta1 && (
-              <Link to={c.cta1?.to || '/about'} className="btn-royal rounded-lg px-7 py-3.5 text-sm font-semibold">
+              <Link to={(c.cta1.to && c.cta1.to !== '/' && c.cta1.to !== '#') ? c.cta1.to : '/about'} className="btn-royal rounded-lg px-7 py-3.5 text-sm font-semibold">
                 {c.cta1?.label || 'Explore Our School'} <ChevronRight size={16} />
               </Link>
             )}
             {c.cta2 && (
-              <Link to={c.cta2?.to || '/student-life'} className="btn-outline rounded-lg px-7 py-3.5 text-sm font-semibold">
+              <Link to={(c.cta2.to && c.cta2.to !== '/' && c.cta2.to !== '#') ? c.cta2.to : '/student-life'} className="btn-outline rounded-lg px-7 py-3.5 text-sm font-semibold">
                 {c.cta2?.label || 'Discover Student Life'} <ChevronRight size={16} />
               </Link>
             )}
