@@ -15,6 +15,16 @@ import { NewsCard, EventCard, ProgramCard, AlbumCard, StaffCard } from './Cards.
 import { formatDate } from '../lib/utils.js'
 import { cn } from '../lib/utils.js'
 
+const resolveTo = (to, fallback) => {
+  if (typeof to === 'string') {
+    const t = to.trim()
+    if (t.startsWith('/') && t.length > 1) return t
+    if (/^https?:\/\//.test(t)) return t
+    if (/^mailto:/.test(t)) return t
+  }
+  return fallback
+}
+
 const ICONS = {
   graduation: GraduationCap,
   globe: Globe2,
@@ -51,8 +61,8 @@ export function BlockHero({ block }) {
 
   const cta1 = c.cta1 || { label: 'Apply for Admission', to: '/admissions' }
   const cta2 = c.cta2 || { label: 'Explore Our School', to: '/about' }
-  const cta1To = (cta1.to && cta1.to !== '/' && cta1.to !== '#') ? cta1.to : '/admissions'
-  const cta2To = (cta2.to && cta2.to !== '/' && cta2.to !== '#') ? cta2.to : '/about'
+  const cta1To = resolveTo(cta1.to, '/admissions')
+  const cta2To = resolveTo(cta2.to, '/about')
 
   return (
     <section className="relative flex min-h-[80vh] sm:min-h-[92vh] items-center justify-center overflow-hidden bg-navy-950">
@@ -186,7 +196,7 @@ export function BlockImageText({ block }) {
           <div className="mt-4 h-1 w-16 rounded-full bg-gold-500" />
           <p className="mt-6 text-lg leading-relaxed text-charcoal/80">{block.text}</p>
           {block.link && (
-            <Link to={block.link.to || '/'} className="mt-6 inline-flex items-center gap-2 font-semibold text-royal transition hover:text-navy-900 hover:gap-3">
+            <Link to={resolveTo(block.link.to, '/about')} className="mt-6 inline-flex items-center gap-2 font-semibold text-royal transition hover:text-navy-900 hover:gap-3">
               {block.link.label} <ChevronRight size={18} />
             </Link>
           )}
@@ -224,7 +234,7 @@ export function BlockCards({ block }) {
           {(block.items || []).map((c, i) => (
             <Reveal key={i} delay={i * 80} className="h-full">
               {c.to ? (
-                <Link to={c.to} className="card-hover group flex h-full flex-col p-7">
+                <Link to={resolveTo(c.to, '/about')} className="card-hover group flex h-full flex-col p-7">
                   {c.image && (
                     <div className="mb-5 aspect-[16/9] overflow-hidden rounded-xl">
                       <Img src={c.image} alt={c.title} />
@@ -440,12 +450,12 @@ export function BlockCta({ block, dark }) {
             {(block.cta1 || block.cta2) && (
               <div className="relative mt-8 flex flex-wrap items-center justify-center gap-4">
                 {block.cta1 && (
-                  <Link to={(block.cta1.to && block.cta1.to !== '/' && block.cta1.to !== '#') ? block.cta1.to : '/admissions'} className="btn-royal rounded-lg px-7 py-3 font-semibold shadow-royal">
+                  <Link to={resolveTo(block.cta1.to, '/admissions')} className="btn-royal rounded-lg px-7 py-3 font-semibold shadow-royal">
                     {block.cta1.label}
                   </Link>
                 )}
                 {block.cta2 && (
-                  <Link to={(block.cta2.to && block.cta2.to !== '/' && block.cta2.to !== '#') ? block.cta2.to : '/about'} className="btn-outline-light rounded-lg px-7 py-3">
+                  <Link to={resolveTo(block.cta2.to, '/about')} className="btn-outline-light rounded-lg px-7 py-3">
                     {block.cta2.label}
                   </Link>
                 )}
@@ -468,8 +478,8 @@ export function BlockWelcome({ block }) {
           <div className="mt-4 h-1 w-16 rounded-full bg-gold-500" />
           <div className="ql-rendered mt-6 text-lg text-charcoal/80" dangerouslySetInnerHTML={{ __html: block.body || '' }} />
           <div className="mt-8 flex flex-wrap gap-4">
-            <Link to={block.cta1?.to || '/about'} className="btn-royal">{block.cta1?.label || 'About the School'}</Link>
-            <Link to={block.cta2?.to || '/vision-mission'} className="btn-outline">{block.cta2?.label || 'Our Vision & Mission'}</Link>
+            <Link to={resolveTo(block.cta1?.to, '/about')} className="btn-royal">{block.cta1?.label || 'About the School'}</Link>
+            <Link to={resolveTo(block.cta2?.to, '/vision-mission')} className="btn-outline">{block.cta2?.label || 'Our Vision & Mission'}</Link>
           </div>
         </Reveal>
         <Reveal delay={140}>
@@ -779,7 +789,7 @@ function BlockExploreOurSchool({ block }) {
           {cards.map((card, idx) => (
             <Reveal key={card.id || idx} delay={idx * 100}>
               <Link
-                to={(card.to && card.to !== '/' && card.to !== '#') ? card.to : '/about'}
+                to={resolveTo(card.to, '/about')}
                 className="group card flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white transition-all duration-300 hover:-translate-y-1.5 hover:shadow-cardHover hover:border-slate-300"
               >
                 <div className="relative aspect-[16/10] overflow-hidden">
@@ -825,12 +835,12 @@ function BlockExploreOurSchool({ block }) {
         {(c.cta1 || c.cta2) && (
           <Reveal delay={400} className="mt-12 flex flex-wrap items-center justify-center gap-4">
             {c.cta1 && (
-              <Link to={(c.cta1.to && c.cta1.to !== '/' && c.cta1.to !== '#') ? c.cta1.to : '/about'} className="btn-royal rounded-lg px-7 py-3.5 text-sm font-semibold">
+              <Link to={resolveTo(c.cta1?.to, '/about')} className="btn-royal rounded-lg px-7 py-3.5 text-sm font-semibold">
                 {c.cta1?.label || 'Explore Our School'} <ChevronRight size={16} />
               </Link>
             )}
             {c.cta2 && (
-              <Link to={(c.cta2.to && c.cta2.to !== '/' && c.cta2.to !== '#') ? c.cta2.to : '/student-life'} className="btn-outline rounded-lg px-7 py-3.5 text-sm font-semibold">
+              <Link to={resolveTo(c.cta2?.to, '/student-life')} className="btn-outline rounded-lg px-7 py-3.5 text-sm font-semibold">
                 {c.cta2?.label || 'Discover Student Life'} <ChevronRight size={16} />
               </Link>
             )}
