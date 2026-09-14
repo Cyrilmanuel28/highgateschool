@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ChevronDown, ChevronRight, Save, GripVertical } from 'lucide-react'
+import { ChevronDown, ChevronRight, Save, GripVertical, Plus } from 'lucide-react'
 import { useData } from '../../context/DataContext.jsx'
 import { useToast } from '../../context/ToastContext.jsx'
 import { PageHeader, Card, Field, TextInput, TextArea, Btn } from '../../components/cms/UI.jsx'
@@ -24,6 +24,18 @@ const SECTION_LABELS = {
   hcommunity: 'Community',
   hfacilities: 'Facilities',
 }
+
+const ADDABLE_SECTIONS = [
+  { id: 'hexplore', type: 'exploreOurSchool', label: 'Explore Our School' },
+  { id: 'hheadofschool', type: 'headOfSchool', label: 'Head of School' },
+  { id: 'hphilosophy', type: 'philosophy', label: 'Educational Philosophy' },
+  { id: 'hdistinctive', type: 'distinctive', label: 'The Highgate Difference' },
+  { id: 'hstudentexperience', type: 'studentExperience', label: 'Student Experience' },
+  { id: 'hcommunity', type: 'community', label: 'Community' },
+  { id: 'hfacilities', type: 'facilities', label: 'Facilities' },
+  { id: 'hgallery', type: 'galleryPreview', label: 'Gallery Preview' },
+  { id: 'htestimonials', type: 'testimonials', label: 'Testimonials' },
+]
 
 function HeroFields({ section, onChange }) {
   const c = section.content || {}
@@ -436,7 +448,21 @@ export default function HomeSectionsEdit() {
   const { toast } = useToast()
   const [sections, setSections] = useState(() => {
     const raw = db.homeSections || []
-    return raw.map((s) => ({ ...s }))
+    const existing = raw.map((s) => ({ ...s }))
+    if (existing.length > 0 && !existing.some(s => s.id === 'hexplore')) {
+      const maxOrder = Math.max(...existing.map(s => s.order || 0))
+      existing.push({
+        id: 'hexplore', sectionKey: 'hexplore', order: maxOrder + 1, isVisible: true,
+        content: { type: 'exploreOurSchool', title: 'More Than a School. A Place to Belong.', subtitle: 'At Highgate School, learning goes beyond textbooks. We create an environment where students are encouraged to discover their strengths, build meaningful relationships, develop confidence, and prepare for the future.', cards: [
+          { id: 'exp1', title: 'Learning', description: 'Discover an engaging learning environment designed to help every student develop knowledge, curiosity, critical thinking, and confidence.', items: ['Academics', 'ICT & Technology', 'Science', 'Library'], to: '/academics', buttonLabel: 'Explore Learning', image: '' },
+          { id: 'exp2', title: 'Growing', description: 'We nurture more than academic achievement. Students develop character, leadership, responsibility, confidence, and essential life skills.', items: ['Character Development', 'Leadership', 'Life Skills', 'Student Support'], to: '/student-development', buttonLabel: 'Discover Growth', image: '' },
+          { id: 'exp3', title: 'Discovering', description: 'Students are encouraged to explore their interests, develop their talents, participate in activities, and discover new possibilities beyond the classroom.', items: ['Sports', 'Clubs', 'Arts & Creativity', 'Competitions'], to: '/clubs', buttonLabel: 'Explore Activities', image: '' },
+          { id: 'exp4', title: 'Belonging', description: 'Experience the friendships, traditions, celebrations, events, and community connections that make Highgate School feel like home.', items: ['School Community', 'Events', 'School Gallery', 'Parent Engagement'], to: '/student-life', buttonLabel: 'Experience School Life', image: '' }
+        ], cta1: { label: 'Explore Our School', to: '/about' }, cta2: { label: 'Discover Student Life', to: '/student-life' } }
+      })
+      replaceAll('homeSections', existing)
+    }
+    return existing
   })
   const [openId, setOpenId] = useState('hhero')
 
@@ -451,10 +477,27 @@ export default function HomeSectionsEdit() {
     updateSection(index, { ...s, isVisible: !s.isVisible })
   }
 
+  const addSection = (template) => {
+    if (sections.some(s => s.id === template.id)) {
+      toast(`${template.label} already exists`)
+      return
+    }
+    const maxOrder = Math.max(...sections.map(s => s.order || 0))
+    const newSection = {
+      id: template.id, sectionKey: template.id, order: maxOrder + 1, isVisible: true,
+      content: { type: template.type }
+    }
+    setSections([...sections, newSection])
+    setOpenId(template.id)
+    toast(`${template.label} added — save to keep it`)
+  }
+
   const save = () => {
     replaceAll('homeSections', sections)
     toast('Home sections saved')
   }
+
+  const availableToAdd = ADDABLE_SECTIONS.filter(t => !sections.some(s => s.id === t.id))
 
   return (
     <div>
@@ -502,6 +545,22 @@ export default function HomeSectionsEdit() {
           )
         })}
       </div>
+      {availableToAdd.length > 0 && (
+        <div className="mt-6 flex flex-wrap gap-2">
+          <span className="text-sm text-slate-500 self-center mr-1">Add section:</span>
+          {availableToAdd.map((t) => (
+            <button
+              key={t.id}
+              type="button"
+              onClick={() => addSection(t)}
+              className="inline-flex items-center gap-1.5 rounded-lg border border-dashed border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-navy-900 transition hover:border-royal hover:bg-royal/5 hover:text-royal"
+            >
+              <Plus size={13} />
+              {t.label}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
