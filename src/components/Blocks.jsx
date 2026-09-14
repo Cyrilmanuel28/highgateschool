@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import {
   GraduationCap, Globe2, HeartHandshake, Sparkles, Phone, Mail, ShieldCheck, Music4, Trophy,
   Users, Baby, BookOpen, Compass, Camera, Target, Award, Quote as QuoteIcon, CalendarDays,
@@ -54,6 +54,7 @@ const ICONS = {
 
 export function BlockHero({ block }) {
   const { db } = useData()
+  const { pathname } = useLocation()
   const c = block
   const info = db.schoolInfo
   const tagline = info?.tagline || 'Knowledge Without Borders'
@@ -63,6 +64,10 @@ export function BlockHero({ block }) {
   const cta2 = c.cta2 || { label: 'Explore Our School', to: '/about' }
   const cta1To = resolveTo(cta1.to, '/admissions')
   const cta2To = resolveTo(cta2.to, '/about')
+  // Never render a hero button that points at the page we're already on — it
+  // looks broken (clicking a self-link changes nothing).
+  const showCta1 = cta1To !== pathname
+  const showCta2 = cta2To !== pathname
 
   return (
     <section className="relative flex min-h-[80vh] sm:min-h-[92vh] items-center justify-center overflow-hidden bg-navy-950">
@@ -95,14 +100,20 @@ export function BlockHero({ block }) {
           </p>
         )}
 
-        <div className="mt-8 sm:mt-10 flex animate-fade-up flex-wrap items-center justify-center gap-3 sm:gap-4 [animation-delay:360ms]">
-          <Link to={cta1To} className="btn-royal rounded-lg px-6 sm:px-7 py-3.5 text-sm font-semibold shadow-royal">
-            {cta1.label}
-          </Link>
-          <Link to={cta2To} className="btn-outline-light rounded-lg px-6 sm:px-7 py-3.5 text-sm font-semibold">
-            {cta2.label}
-          </Link>
-        </div>
+        {(showCta1 || showCta2) && (
+          <div className="mt-8 sm:mt-10 flex animate-fade-up flex-wrap items-center justify-center gap-3 sm:gap-4 [animation-delay:360ms]">
+            {showCta1 && (
+              <Link to={cta1To} className="btn-royal rounded-lg px-6 sm:px-7 py-3.5 text-sm font-semibold shadow-royal">
+                {cta1.label}
+              </Link>
+            )}
+            {showCta2 && (
+              <Link to={cta2To} className="btn-outline-light rounded-lg px-6 sm:px-7 py-3.5 text-sm font-semibold">
+                {cta2.label}
+              </Link>
+            )}
+          </div>
+        )}
 
         {/* Quick Identity Badges */}
         <div className="animate-fade-up mt-10 sm:mt-14 inline-flex flex-wrap items-center justify-center gap-3 sm:gap-6 rounded-2xl border border-white/10 bg-white/5 px-4 sm:px-6 py-3 text-[11px] sm:text-xs font-medium text-slate-200 backdrop-blur-sm [animation-delay:480ms]">
