@@ -22,7 +22,7 @@ const ENTITY_ROUTE = {
   notices: 'notices', library: 'library', magazineArticles: 'magazine',
   vacancies: 'vacancies', downloads: 'downloads', faqs: 'faq', achievements: 'achievements',
   clubs: 'clubs', sports: 'sports', staff: 'staff', departments: 'departments',
-  programs: 'academics', fees: 'fees', calendarEvents: 'calendar',
+  programs: 'programs', fees: 'fees', calendarEvents: 'calendar',
   campusLocations: 'campus', tourScenes: 'tour', emergencyAlerts: 'emergency', stats: 'stats'
 }
 

@@ -81,6 +81,20 @@ export const PUBLIC_SUBMISSION = new Set([
   'applications','jobApplications','eventRegistrations',
 ])
 
+// Legacy demo rows that shipped in early builds. They must never surface in the
+// live CMS again, so they are stripped on load and (when an admin session
+// exists) deleted from Supabase the next time the collection is fetched.
+const LEGACY_DEMO_IDS = {
+  messages: ['msg1', 'msg2'],
+}
+
+function stripLegacyDemo(key, rows) {
+  const ids = LEGACY_DEMO_IDS[key]
+  if (!ids || !ids.length || !Array.isArray(rows)) return rows || []
+  const set = new Set(ids)
+  return rows.filter((r) => !set.has(r && r.id))
+}
+
 export const DB_KEY = 'aia_v1_'
 const BLOB_PREFIX = 'aia_v1_blob_'
 const IMAGE_MAX_BYTES = 4 * 1024 * 1024
@@ -101,6 +115,13 @@ export function loadDb() {
       }
     } catch {
       db[key] = SEEDERS[key] ? SEEDERS[key]() : []
+    }
+  }
+  // Purge legacy demo rows from any cached collection and persist the cleanup.
+  for (const key of Object.keys(LEGACY_DEMO_IDS)) {
+    if (Array.isArray(db[key]) && stripLegacyDemo(key, db[key]).length !== db[key].length) {
+      db[key] = stripLegacyDemo(key, db[key])
+      try { localStorage.setItem(DB_KEY + key, JSON.stringify(db[key])) } catch {}
     }
   }
   for (const key of Object.keys(SINGLES)) {
@@ -226,12 +247,21 @@ export async function fetchAllCollectionsFromRemote() {
       .order('created_at', { ascending: true })
     if (error) {
       console.warn(`[store] fetch ${key} failed, using cache:`, error.message)
-      try { db[key] = JSON.parse(localStorage.getItem(DB_KEY + key)) || [] } catch { db[key] = [] }
+      try { db[key] = stripLegacyDemo(key, JSON.parse(localStorage.getItem(DB_KEY + key)) || []) } catch { db[key] = [] }
       return
     }
-    const remoteRows = (data || []).map(r => r.data)
+    const allRemote = (data || []).map(r => r.data)
+    const remoteRows = stripLegacyDemo(key, allRemote)
+    if (remoteRows.length !== allRemote.length) {
+      // Best-effort: delete the legacy rows from Supabase as well (admins only).
+      try {
+        const session = await remoteSession()
+        if (session) await sb.from(ITEMS_TABLE).delete().eq('key', key).in('id', LEGACY_DEMO_IDS[key])
+      } catch (e) { console.warn('[store] legacy demo purge failed', key, e.message) }
+    }
     let localRows = []
     try { localRows = JSON.parse(localStorage.getItem(DB_KEY + key)) || [] } catch {}
+    localRows = stripLegacyDemo(key, localRows)
     const remoteIds = new Set(remoteRows.map(r => r.id))
     const localOnly = localRows.filter(r => !remoteIds.has(r.id))
     db[key] = [...remoteRows, ...localOnly]

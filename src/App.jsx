@@ -188,9 +188,9 @@ export default function App() {
           <Route path="departments" element={CMS(<DepartmentsCrud key="list" />)} />
           <Route path="departments/new" element={CMS(<DepartmentsCrud key="new" />)} />
           <Route path="departments/:id" element={CMS(<DepartmentsCrud key="edit" />)} />
-          <Route path="academics" element={CMS(<ProgramsCrud key="list" />)} />
-          <Route path="academics/new" element={CMS(<ProgramsCrud key="new" />)} />
-          <Route path="academics/:id" element={CMS(<ProgramsCrud key="edit" />)} />
+          <Route path="programs" element={CMS(<ProgramsCrud key="list" />)} />
+          <Route path="programs/new" element={CMS(<ProgramsCrud key="new" />)} />
+          <Route path="programs/:id" element={CMS(<ProgramsCrud key="edit" />)} />
           <Route path="fees" element={CMS(<FeesCrud key="list" />)} />
           <Route path="fees/new" element={CMS(<FeesCrud key="new" />)} />
           <Route path="fees/:id" element={CMS(<FeesCrud key="edit" />)} />

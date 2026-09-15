@@ -41,7 +41,7 @@ const NAV = [
     items: [
       { to: '/dashboard/staff', label: 'Staff', icon: Users },
       { to: '/dashboard/departments', label: 'Departments', icon: Library },
-      { to: '/dashboard/academics', label: 'Academic Programmes', icon: GraduationCap },
+      { to: '/dashboard/programs', label: 'Academic Programmes', icon: GraduationCap },
       { to: '/dashboard/fees', label: 'Fee Structures', icon: Wallet },
       { to: '/dashboard/calendar', label: 'Calendar Events', icon: CalendarRange },
       { to: '/dashboard/vacancies', label: 'Careers', icon: Briefcase }

@@ -606,10 +606,9 @@ export function seedCalendarEvents() {
 }
 
 export function seedMessages() {
-  return [
-    { id: 'msg1', name: 'Amelia Hart', email: 'amelia.hart@example.com', subject: 'Open Morning booking', message: 'We would love to attend the Open Morning in two weeks. Could you confirm availability for a family of four, and whether there is a children\'s programme?', submittedAt: new Date(Date.now() - 2 * 86400000).toISOString(), isRead: true },
-    { id: 'msg2', name: 'Jonas Weber', email: 'j.weber@example.de', subject: 'Year 7 place enquiry', message: 'We are relocating from Munich in January and would like to enquire about a Year 7 place. What is the mid-year admissions process and timeline?', submittedAt: new Date(Date.now() - 1 * 86400000).toISOString(), isRead: false }
-  ]
+  // Contact Messages are exclusively live submissions from the public form —
+  // never seed demo/simulated enquiries.
+  return []
 }
 
 export function seedMedia() {
