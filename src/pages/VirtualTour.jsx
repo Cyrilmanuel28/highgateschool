@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import { ChevronLeft, ChevronRight, Expand, X, Compass, Maximize2 } from 'lucide-react'
 import { useData } from '../context/DataContext.jsx'
 import SeoHead from '../components/SeoHead.jsx'
@@ -10,6 +11,8 @@ import { GridSkeleton } from '../components/Skeletons.jsx'
 import { cn } from '../lib/utils.js'
 
 export default function VirtualTour() {
+  const { id: urlSceneId } = useParams()
+  const navigate = useNavigate()
   const { db, loading } = useData()
   const info = db.schoolInfo
   const scenes = (db.tourScenes || []).filter((s) => (s.status === undefined || s.status === 'published') && s.isVisible !== false).sort((a, b) => (a.order || 0) - (b.order || 0))
@@ -20,6 +23,23 @@ export default function VirtualTour() {
     setActiveIndex(i)
     setFullscreen(true)
   }
+
+  // Pre-select scene from URL param (/virtual-tour/:id)
+  useEffect(() => {
+    if (!urlSceneId) return
+    const idx = scenes.findIndex((s) => s.id === urlSceneId)
+    if (idx >= 0 && activeIndex !== idx) {
+      setActiveIndex(idx)
+      setFullscreen(true)
+    }
+  }, [urlSceneId, scenes])
+
+  // Sync URL when scene changes
+  useEffect(() => {
+    if (activeIndex === null || !scenes[activeIndex]) return
+    const target = `/virtual-tour/${scenes[activeIndex].id}`
+    if (window.location.pathname !== target) navigate(target, { replace: true })
+  }, [activeIndex, scenes, navigate])
 
   const step = (dir) => {
     setActiveIndex((i) => (i + dir + scenes.length) % scenes.length)

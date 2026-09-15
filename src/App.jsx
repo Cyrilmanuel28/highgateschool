@@ -141,6 +141,7 @@ export default function App() {
           <Route path="emergency" element={<Lazy component={EmergencyPage} />} />
           <Route path="campus-map" element={<Lazy component={CampusMapPage} />} />
           <Route path="virtual-tour" element={<Lazy component={VirtualTourPage} />} />
+          <Route path="virtual-tour/:id" element={<Lazy component={VirtualTourPage} />} />
           <Route path="statistics" element={<Lazy component={StatisticsPage} />} />
           <Route path="feedback" element={<Lazy component={FeedbackPage} />} />
           <Route path="search" element={<Lazy component={SearchResults} />} />
