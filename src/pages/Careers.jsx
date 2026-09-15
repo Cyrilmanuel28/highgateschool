@@ -1,4 +1,5 @@
-import { useMemo, useRef, useState } from 'react'
+import { useMemo, useRef, useState, useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import { Briefcase, MapPin, Clock, ChevronDown, Upload, CheckCircle2, FileText, Trash2 } from 'lucide-react'
 import { useData } from '../context/DataContext.jsx'
 import { useToast } from '../context/ToastContext.jsx'
@@ -22,6 +23,8 @@ const inputCls = 'input'
 const labelCls = 'label'
 
 export default function Careers() {
+  const { id: urlVacancyId } = useParams()
+  const navigate = useNavigate()
   const { db, create } = useData()
   const info = db.schoolInfo
   const { toast } = useToast()
@@ -41,6 +44,19 @@ export default function Careers() {
   )
 
   const closed = useMemo(() => (db.vacancies || []).filter((v) => v.isOpen === false), [db.vacancies])
+
+  // Pre-select vacancy from URL param (/careers/:id)
+  useEffect(() => {
+    if (!urlVacancyId) return
+    const match = vacancies.find((v) => v.id === urlVacancyId)
+    if (match && !selected) setSelected(match)
+  }, [urlVacancyId, vacancies])
+
+  // Sync URL when selection changes
+  useEffect(() => {
+    const target = selected ? `/careers/${selected.id}` : '/careers'
+    if (window.location.pathname !== target) navigate(target, { replace: true })
+  }, [selected])
 
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }))
 

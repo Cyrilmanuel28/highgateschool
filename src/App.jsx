@@ -136,6 +136,7 @@ export default function App() {
           <Route path="magazine" element={<Lazy component={MagazinePage} />} />
           <Route path="magazine/:slug" element={<Lazy component={MagazineArticle} />} />
           <Route path="careers" element={<Lazy component={CareersPage} />} />
+          <Route path="careers/:id" element={<Lazy component={CareersPage} />} />
           <Route path="testimonials" element={<Lazy component={TestimonialsPage} />} />
           <Route path="emergency" element={<Lazy component={EmergencyPage} />} />
           <Route path="campus-map" element={<Lazy component={CampusMapPage} />} />
