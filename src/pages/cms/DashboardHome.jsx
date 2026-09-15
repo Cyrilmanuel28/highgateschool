@@ -19,11 +19,11 @@ const QUICK = [
 
 const ENTITY_ROUTE = {
   pages: 'pages', news: 'news', events: 'events', albums: 'gallery', videos: 'videos',
-  notices: 'notices', library: 'library', magazineArticles: 'magazine',
-  vacancies: 'vacancies', downloads: 'downloads', faqs: 'faq', achievements: 'achievements',
+  notices: 'notices', library: 'library', magazineArticles: 'magazineArticles',
+  vacancies: 'vacancies', downloads: 'downloads', faqs: 'faqs', achievements: 'achievements',
   clubs: 'clubs', sports: 'sports', staff: 'staff', departments: 'departments',
-  programs: 'programs', fees: 'fees', calendarEvents: 'calendar',
-  campusLocations: 'campus', tourScenes: 'tour', emergencyAlerts: 'emergency', stats: 'stats'
+  programs: 'programs', fees: 'fees', calendarEvents: 'calendarEvents',
+  campusLocations: 'campusLocations', tourScenes: 'tourScenes', emergencyAlerts: 'emergencyAlerts', stats: 'stats'
 }
 
 export default function DashboardHome() {

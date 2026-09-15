@@ -29,8 +29,8 @@ const NAV = [
       { to: '/dashboard/videos', label: 'Videos', icon: Clapperboard },
       { to: '/dashboard/downloads', label: 'Downloads', icon: FolderDown },
       { to: '/dashboard/library', label: 'Library', icon: BookOpen },
-      { to: '/dashboard/magazine', label: 'Magazine', icon: FileText },
-      { to: '/dashboard/faq', label: 'FAQ', icon: HelpCircle },
+      { to: '/dashboard/magazineArticles', label: 'Magazine', icon: FileText },
+      { to: '/dashboard/faqs', label: 'FAQ', icon: HelpCircle },
       { to: '/dashboard/achievements', label: 'Achievements', icon: Trophy },
       { to: '/dashboard/clubs', label: 'Clubs', icon: Puzzle },
       { to: '/dashboard/sports', label: 'Sports', icon: Dumbbell }
@@ -43,7 +43,7 @@ const NAV = [
       { to: '/dashboard/departments', label: 'Departments', icon: Library },
       { to: '/dashboard/programs', label: 'Academic Programmes', icon: GraduationCap },
       { to: '/dashboard/fees', label: 'Fee Structures', icon: Wallet },
-      { to: '/dashboard/calendar', label: 'Calendar Events', icon: CalendarRange },
+      { to: '/dashboard/calendarEvents', label: 'Calendar Events', icon: CalendarRange },
       { to: '/dashboard/vacancies', label: 'Careers', icon: Briefcase }
     ]
   },
@@ -53,16 +53,16 @@ const NAV = [
       { to: '/dashboard/applications', label: 'Admissions', icon: ClipboardList },
       { to: '/dashboard/feedback', label: 'Feedback', icon: MessageSquareText },
       { to: '/dashboard/testimonials', label: 'Testimonials', icon: Quote },
-      { to: '/dashboard/job-applications', label: 'Job Applications', icon: ClipboardCheck },
-      { to: '/dashboard/event-registrations', label: 'Event Registrations', icon: UserPlus }
+      { to: '/dashboard/jobApplications', label: 'Job Applications', icon: ClipboardCheck },
+      { to: '/dashboard/eventRegistrations', label: 'Event Registrations', icon: UserPlus }
     ]
   },
   {
     section: 'Campus',
     items: [
-      { to: '/dashboard/campus', label: 'Campus Locations', icon: MapPin },
-      { to: '/dashboard/tour', label: 'Virtual Tour', icon: Compass },
-      { to: '/dashboard/emergency', label: 'Emergency Alerts', icon: Megaphone },
+      { to: '/dashboard/campusLocations', label: 'Campus Locations', icon: MapPin },
+      { to: '/dashboard/tourScenes', label: 'Virtual Tour', icon: Compass },
+      { to: '/dashboard/emergencyAlerts', label: 'Emergency Alerts', icon: Megaphone },
       { to: '/dashboard/stats', label: 'Statistics', icon: BarChart3 }
     ]
   },
@@ -80,7 +80,7 @@ const NAV = [
     items: [
       { to: '/dashboard/media', label: 'Media Library', icon: FolderOpen },
       { to: '/dashboard/seo', label: 'SEO', icon: Search },
-      { to: '/dashboard/newsletter-subscribers', label: 'Newsletter', icon: Mail },
+      { to: '/dashboard/newsletterSubscribers', label: 'Newsletter', icon: Mail },
       { to: '/dashboard/contact-messages', label: 'Contact Messages', icon: MessageSquare, badgeKey: 'unread' },
       { to: '/dashboard/settings', label: 'Settings', icon: SettingsIcon }
     ]

@@ -171,9 +171,9 @@ export default function App() {
           <Route path="downloads" element={CMS(<DownloadsCrud key="list" />)} />
           <Route path="downloads/new" element={CMS(<DownloadsCrud key="new" />)} />
           <Route path="downloads/:id" element={CMS(<DownloadsCrud key="edit" />)} />
-          <Route path="faq" element={CMS(<FaqCrud key="list" />)} />
-          <Route path="faq/new" element={CMS(<FaqCrud key="new" />)} />
-          <Route path="faq/:id" element={CMS(<FaqCrud key="edit" />)} />
+          <Route path="faqs" element={CMS(<FaqCrud key="list" />)} />
+          <Route path="faqs/new" element={CMS(<FaqCrud key="new" />)} />
+          <Route path="faqs/:id" element={CMS(<FaqCrud key="edit" />)} />
           <Route path="achievements" element={CMS(<AchievementsCrud key="list" />)} />
           <Route path="achievements/new" element={CMS(<AchievementsCrud key="new" />)} />
           <Route path="achievements/:id" element={CMS(<AchievementsCrud key="edit" />)} />
@@ -195,9 +195,9 @@ export default function App() {
           <Route path="fees" element={CMS(<FeesCrud key="list" />)} />
           <Route path="fees/new" element={CMS(<FeesCrud key="new" />)} />
           <Route path="fees/:id" element={CMS(<FeesCrud key="edit" />)} />
-          <Route path="calendar" element={CMS(<CalendarCrud key="list" />)} />
-          <Route path="calendar/new" element={CMS(<CalendarCrud key="new" />)} />
-          <Route path="calendar/:id" element={CMS(<CalendarCrud key="edit" />)} />
+          <Route path="calendarEvents" element={CMS(<CalendarCrud key="list" />)} />
+          <Route path="calendarEvents/new" element={CMS(<CalendarCrud key="new" />)} />
+          <Route path="calendarEvents/:id" element={CMS(<CalendarCrud key="edit" />)} />
           <Route path="media" element={CMS(<Lazy component={MediaLibrary} />)} />
           <Route path="seo" element={CMS(<Lazy component={Seo} />)} />
           <Route path="contact-messages" element={CMS(<Lazy component={ContactMessages} />)} />
@@ -211,39 +211,39 @@ export default function App() {
           <Route path="library" element={CMS(<LibraryCrud key="list" />)} />
           <Route path="library/new" element={CMS(<LibraryCrud key="new" />)} />
           <Route path="library/:id" element={CMS(<LibraryCrud key="edit" />)} />
-          <Route path="magazine" element={CMS(<MagazineCrud key="list" />)} />
-          <Route path="magazine/new" element={CMS(<MagazineCrud key="new" />)} />
-          <Route path="magazine/:id" element={CMS(<MagazineCrud key="edit" />)} />
+          <Route path="magazineArticles" element={CMS(<MagazineCrud key="list" />)} />
+          <Route path="magazineArticles/new" element={CMS(<MagazineCrud key="new" />)} />
+          <Route path="magazineArticles/:id" element={CMS(<MagazineCrud key="edit" />)} />
           <Route path="vacancies" element={CMS(<VacanciesCrud key="list" />)} />
           <Route path="vacancies/new" element={CMS(<VacanciesCrud key="new" />)} />
           <Route path="vacancies/:id" element={CMS(<VacanciesCrud key="edit" />)} />
-          <Route path="job-applications" element={CMS(<JobApplicationsCrud key="list" />)} />
-          <Route path="job-applications/new" element={CMS(<JobApplicationsCrud key="new" />)} />
-          <Route path="job-applications/:id" element={CMS(<JobApplicationsCrud key="edit" />)} />
+          <Route path="jobApplications" element={CMS(<JobApplicationsCrud key="list" />)} />
+          <Route path="jobApplications/new" element={CMS(<JobApplicationsCrud key="new" />)} />
+          <Route path="jobApplications/:id" element={CMS(<JobApplicationsCrud key="edit" />)} />
           <Route path="feedback" element={CMS(<FeedbackCrud key="list" />)} />
           <Route path="feedback/new" element={CMS(<FeedbackCrud key="new" />)} />
           <Route path="feedback/:id" element={CMS(<FeedbackCrud key="edit" />)} />
           <Route path="testimonials" element={CMS(<TestimonialsCrud key="list" />)} />
           <Route path="testimonials/new" element={CMS(<TestimonialsCrud key="new" />)} />
           <Route path="testimonials/:id" element={CMS(<TestimonialsCrud key="edit" />)} />
-          <Route path="newsletter-subscribers" element={CMS(<NewsletterSubscribersCrud key="list" />)} />
-          <Route path="newsletter-subscribers/new" element={CMS(<NewsletterSubscribersCrud key="new" />)} />
-          <Route path="newsletter-subscribers/:id" element={CMS(<NewsletterSubscribersCrud key="edit" />)} />
-          <Route path="newsletter-campaigns" element={CMS(<NewsletterCampaignsCrud key="list" />)} />
-          <Route path="newsletter-campaigns/new" element={CMS(<NewsletterCampaignsCrud key="new" />)} />
-          <Route path="newsletter-campaigns/:id" element={CMS(<NewsletterCampaignsCrud key="edit" />)} />
-          <Route path="campus" element={CMS(<CampusLocationsCrud key="list" />)} />
-          <Route path="campus/new" element={CMS(<CampusLocationsCrud key="new" />)} />
-          <Route path="campus/:id" element={CMS(<CampusLocationsCrud key="edit" />)} />
-          <Route path="tour" element={CMS(<TourScenesCrud key="list" />)} />
-          <Route path="tour/new" element={CMS(<TourScenesCrud key="new" />)} />
-          <Route path="tour/:id" element={CMS(<TourScenesCrud key="edit" />)} />
-          <Route path="emergency" element={CMS(<EmergencyAlertsCrud key="list" />)} />
-          <Route path="emergency/new" element={CMS(<EmergencyAlertsCrud key="new" />)} />
-          <Route path="emergency/:id" element={CMS(<EmergencyAlertsCrud key="edit" />)} />
-          <Route path="event-registrations" element={CMS(<EventRegistrationsCrud key="list" />)} />
-          <Route path="event-registrations/new" element={CMS(<EventRegistrationsCrud key="new" />)} />
-          <Route path="event-registrations/:id" element={CMS(<EventRegistrationsCrud key="edit" />)} />
+          <Route path="newsletterSubscribers" element={CMS(<NewsletterSubscribersCrud key="list" />)} />
+          <Route path="newsletterSubscribers/new" element={CMS(<NewsletterSubscribersCrud key="new" />)} />
+          <Route path="newsletterSubscribers/:id" element={CMS(<NewsletterSubscribersCrud key="edit" />)} />
+          <Route path="newsletterCampaigns" element={CMS(<NewsletterCampaignsCrud key="list" />)} />
+          <Route path="newsletterCampaigns/new" element={CMS(<NewsletterCampaignsCrud key="new" />)} />
+          <Route path="newsletterCampaigns/:id" element={CMS(<NewsletterCampaignsCrud key="edit" />)} />
+          <Route path="campusLocations" element={CMS(<CampusLocationsCrud key="list" />)} />
+          <Route path="campusLocations/new" element={CMS(<CampusLocationsCrud key="new" />)} />
+          <Route path="campusLocations/:id" element={CMS(<CampusLocationsCrud key="edit" />)} />
+          <Route path="tourScenes" element={CMS(<TourScenesCrud key="list" />)} />
+          <Route path="tourScenes/new" element={CMS(<TourScenesCrud key="new" />)} />
+          <Route path="tourScenes/:id" element={CMS(<TourScenesCrud key="edit" />)} />
+          <Route path="emergencyAlerts" element={CMS(<EmergencyAlertsCrud key="list" />)} />
+          <Route path="emergencyAlerts/new" element={CMS(<EmergencyAlertsCrud key="new" />)} />
+          <Route path="emergencyAlerts/:id" element={CMS(<EmergencyAlertsCrud key="edit" />)} />
+          <Route path="eventRegistrations" element={CMS(<EventRegistrationsCrud key="list" />)} />
+          <Route path="eventRegistrations/new" element={CMS(<EventRegistrationsCrud key="new" />)} />
+          <Route path="eventRegistrations/:id" element={CMS(<EventRegistrationsCrud key="edit" />)} />
           <Route path="stats" element={CMS(<StatsCrud key="list" />)} />
           <Route path="stats/new" element={CMS(<StatsCrud key="new" />)} />
           <Route path="stats/:id" element={CMS(<StatsCrud key="edit" />)} />
