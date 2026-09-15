@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 import Navbar from './Navbar.jsx'
 import Footer from './Footer.jsx'
 import AssistantWidget from './AssistantWidget.jsx'
+import ScrollToTopBtn from './ScrollToTopBtn.jsx'
 import A11yPanel from './A11yPanel.jsx'
 import { PageProgressBar } from './PageLoader.jsx'
 import ErrorBoundary from './ErrorBoundary.jsx'
@@ -26,6 +27,7 @@ export default function PublicLayout() {
       </main>
       <Footer />
       <AssistantWidget />
+      <ScrollToTopBtn />
       <A11yPanel />
     </div>
   )
