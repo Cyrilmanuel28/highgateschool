@@ -447,7 +447,7 @@ export default function HomeSectionsEdit() {
   const { toast } = useToast()
   const [sections, setSections] = useState(() => {
     const raw = db.homeSections || []
-    const existing = raw.map((s) => ({ ...s }))
+    const existing = raw.map((s) => ({ ...s })).filter((s) => s.id !== 'htestimonials')
     if (existing.length > 0 && !existing.some(s => s.id === 'hexplore')) {
       const maxOrder = Math.max(...existing.map(s => s.order || 0))
       existing.push({
