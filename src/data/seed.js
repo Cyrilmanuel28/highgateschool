@@ -532,7 +532,6 @@ export function seedHomeSections() {
     ] }, 13),
     b('hfacilities', 'facilities', { title: 'World-Class Learning Spaces', subtitle: 'Purpose-built for inquiry, creativity, and athletic excellence.' }, 14),
     b('hgallery', 'galleryPreview', { title: 'Life in Pictures' }, 15),
-    b('htestimonials', 'testimonials', { title: 'What Parents & Students Say', subtitle: 'Real perspectives from families who call Highgate their school community.' }, 16),
     b('hcta', 'cta', { title: 'Begin Your Highgate Story', text: 'Book a campus tour, attend an Open Morning, or simply start a conversation with our admissions team. We would love to welcome your family into ours.', cta1: { label: 'Book a Tour', to: '/contact' }, cta2: { label: 'Explore Admissions', to: '/admissions' } }, 17)
   ]
 }

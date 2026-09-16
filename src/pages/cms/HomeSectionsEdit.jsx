@@ -34,7 +34,6 @@ const ADDABLE_SECTIONS = [
   { id: 'hcommunity', type: 'community', label: 'Community' },
   { id: 'hfacilities', type: 'facilities', label: 'Facilities' },
   { id: 'hgallery', type: 'galleryPreview', label: 'Gallery Preview' },
-  { id: 'htestimonials', type: 'testimonials', label: 'Testimonials' },
 ]
 
 function HeroFields({ section, onChange }) {
