@@ -44,6 +44,7 @@ export function NoticesCrud() {
         { key: 'priority', label: 'Priority', type: 'select', options: ['normal', 'high', 'urgent'], default: 'normal' },
         { key: 'pinned', label: 'Pin to top', type: 'toggle', default: false },
         { key: 'body', label: 'Body', type: 'textarea', required: true, span: true },
+        { key: 'image', label: 'Image', type: 'image' },
         { key: 'publishDate', label: 'Publish date', type: 'datetime', required: true },
         { key: 'expireDate', label: 'Expiry date', type: 'datetime', hint: 'Notice moves to the archive after this date' },
         { key: 'isVisible', label: 'Visible on public site', type: 'toggle', default: true },
