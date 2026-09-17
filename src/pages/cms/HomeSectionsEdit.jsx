@@ -33,6 +33,7 @@ const ADDABLE_SECTIONS = [
   { id: 'hstudentexperience', type: 'studentExperience', label: 'Student Experience' },
   { id: 'hcommunity', type: 'community', label: 'Community' },
   { id: 'hfacilities', type: 'facilities', label: 'Facilities' },
+  { id: 'hnotices', type: 'notices', label: 'School Notices' },
   { id: 'hgallery', type: 'galleryPreview', label: 'Gallery Preview' },
 ]
 
@@ -439,6 +440,7 @@ const FIELDS_BY_TYPE = {
   studentExperience: StudentExperienceFields,
   community: CommunityFields,
   facilities: SimpleTitleFields,
+  notices: SimpleTitleFields,
   exploreOurSchool: ExploreOurSchoolFields,
 }
 

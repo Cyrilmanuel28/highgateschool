@@ -4,7 +4,7 @@ import {
   GraduationCap, Globe2, HeartHandshake, Sparkles, Phone, Mail, ShieldCheck, Music4, Trophy,
   Users, Baby, BookOpen, Compass, Camera, Target, Award, Quote as QuoteIcon, CalendarDays,
   ChevronRight, MapPin, Lightbulb, Handshake, Eye, Star, Brain, Leaf, HandHelping, Zap,
-  ArrowRight
+  ArrowRight, Megaphone
 } from 'lucide-react'
 import { useData } from '../context/DataContext.jsx'
 import Reveal from './Reveal.jsx'
@@ -415,6 +415,65 @@ export function BlockUpcomingEvents({ block }) {
         <div className="mt-12 text-center">
           <Link to="/events" className="btn-outline">
             {block.viewAllLabel || 'View All Events'} <ChevronRight size={16} />
+          </Link>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export function BlockNotices({ block }) {
+  const { publishedOnly } = useData()
+  const now = Date.now()
+  const notices = useMemo(() => {
+    return (publishedOnly('notices') || [])
+      .filter((n) => {
+        if (n.expireDate && new Date(n.expireDate).getTime() < now) return false
+        return n.isVisible !== false
+      })
+      .sort((a, b) => {
+        if (a.pinned && !b.pinned) return -1
+        if (!a.pinned && b.pinned) return 1
+        return new Date(b.publishDate || b.createdAt || 0) - new Date(a.publishDate || a.createdAt || 0)
+      })
+      .slice(0, 4)
+  }, [publishedOnly, now])
+
+  if (notices.length === 0) return null
+
+  const priorityColor = (p) => {
+    if (p === 'urgent') return 'bg-red-500'
+    if (p === 'high') return 'bg-gold-500'
+    return 'bg-royal'
+  }
+
+  return (
+    <section className="bg-navy-50 py-12 sm:py-20 overflow-hidden">
+      <div className="container-x">
+        <SectionHeading eyebrow={block.eyebrow || 'Announcements'} title={block.title || 'School Notices'} subtitle={block.subtitle || 'Important updates for parents and guardians'} light />
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
+          {notices.map((n, i) => (
+            <Reveal key={n.id} delay={i * 60}>
+              <div className="card flex gap-4 p-5 transition hover:shadow-md">
+                <div className={`mt-1 h-2.5 w-2.5 shrink-0 rounded-full ${priorityColor(n.priority)}`} />
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    {n.category && <span className="rounded-full bg-royal/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-royal">{n.category}</span>}
+                    {n.pinned && <span className="rounded-full bg-gold-100 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-gold-700">Pinned</span>}
+                  </div>
+                  <h3 className="mt-2 font-serif text-lg font-semibold text-navy-900">{n.title}</h3>
+                  <p className="mt-1.5 line-clamp-2 text-sm text-charcoal/70">{n.body}</p>
+                  {n.expireDate && (
+                    <p className="mt-2 text-xs text-slate-400">Expires {formatDate(n.expireDate)}</p>
+                  )}
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+        <div className="mt-10 text-center">
+          <Link to="/notices" className="btn-outline">
+            {block.viewAllLabel || 'View All Notices'} <ChevronRight size={16} />
           </Link>
         </div>
       </div>
@@ -890,6 +949,8 @@ export default function renderBlock(block, i = 0) {
       return <BlockLatestNews key={block.id || i} block={block} />
     case 'upcomingEvents':
       return <BlockUpcomingEvents key={block.id || i} block={block} />
+    case 'notices':
+      return <BlockNotices key={block.id || i} block={block} />
     case 'galleryPreview':
       return <BlockGalleryPreview key={block.id || i} block={block} />
     case 'facilities':
