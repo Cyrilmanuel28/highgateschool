@@ -423,13 +423,15 @@ export function BlockUpcomingEvents({ block }) {
 }
 
 export function BlockNotices({ block }) {
-  const { publishedOnly } = useData()
+  const { db } = useData()
   const now = Date.now()
   const notices = useMemo(() => {
-    return (publishedOnly('notices') || [])
+    return (db.notices || [])
       .filter((n) => {
+        if (n.isVisible === false) return false
+        if (n.status === 'archived') return false
         if (n.expireDate && new Date(n.expireDate).getTime() < now) return false
-        return n.isVisible !== false
+        return true
       })
       .sort((a, b) => {
         if (a.pinned && !b.pinned) return -1

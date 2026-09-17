@@ -31,7 +31,7 @@ export default function Notices() {
   const all = useMemo(
     () =>
       (db.notices || [])
-        .filter((n) => (n.status === undefined || n.status === 'published') && n.isVisible !== false)
+        .filter((n) => n.isVisible !== false && n.status !== 'archived')
         .map((n) => ({ ...n, active: !n.expireDate || new Date(n.expireDate).getTime() > now })),
     [db.notices, now]
   )
