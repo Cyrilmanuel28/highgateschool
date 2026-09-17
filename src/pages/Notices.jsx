@@ -31,7 +31,7 @@ export default function Notices() {
   const all = useMemo(
     () =>
       (db.notices || [])
-        .filter((n) => (n.status === undefined || n.status === 'published' || n.status === 'scheduled' || n.status === 'unpublished') && n.isVisible !== false && n.status !== 'archived')
+        .filter((n) => (n.status === undefined || n.status === 'published') && n.isVisible !== false)
         .map((n) => ({ ...n, active: !n.expireDate || new Date(n.expireDate).getTime() > now })),
     [db.notices, now]
   )
@@ -48,6 +48,19 @@ export default function Notices() {
     }
     return rows.sort((a, b) => Number(b.pinned || 0) - Number(a.pinned || 0) || new Date(b.publishDate) - new Date(a.publishDate))
   }, [active, category, query])
+
+  const categoryCounts = useMemo(() => {
+    const counts = { All: active.length }
+    active.forEach((n) => {
+      counts[n.category] = (counts[n.category] || 0) + 1
+    })
+    return counts
+  }, [active])
+
+  const availableCategories = useMemo(() => {
+    const cats = new Set(active.map((n) => n.category).filter(Boolean))
+    return ['All', ...CATEGORIES.filter((c) => c === 'All' || cats.has(c))]
+  }, [active])
 
   // Scroll to notice when URL has :id
   useEffect(() => {
@@ -85,16 +98,24 @@ export default function Notices() {
         <div className="container-x">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex flex-wrap gap-2">
-              {CATEGORIES.map((c) => (
+              {availableCategories.map((c) => (
                 <button
                   key={c}
                   onClick={() => setCategory(c)}
                   className={cn(
-                    'rounded-full px-4 py-2 text-xs font-semibold transition',
+                    'flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold transition',
                     category === c ? 'bg-navy-900 text-white' : 'bg-white text-slate-600 shadow-card hover:text-navy-900'
                   )}
                 >
                   {c}
+                  {categoryCounts[c] > 0 && (
+                    <span className={cn(
+                      'ml-0.5 rounded-full px-1.5 py-0.5 text-[10px] font-bold',
+                      category === c ? 'bg-white/20 text-white' : 'bg-navy-100 text-navy-600'
+                    )}>
+                      {categoryCounts[c]}
+                    </span>
+                  )}
                 </button>
               ))}
             </div>
