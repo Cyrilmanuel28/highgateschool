@@ -1,6 +1,6 @@
 import { useMemo, useState, useEffect, useRef } from 'react'
 import { useParams } from 'react-router-dom'
-import { Megaphone, Pin, Search, Archive, ChevronDown } from 'lucide-react'
+import { Megaphone, Pin, Search, Archive, ChevronDown, X } from 'lucide-react'
 import { useData } from '../context/DataContext.jsx'
 import SeoHead from '../components/SeoHead.jsx'
 import Breadcrumbs from '../components/Breadcrumbs.jsx'
@@ -26,6 +26,7 @@ export default function Notices() {
   const [query, setQuery] = useState('')
   const [showArchive, setShowArchive] = useState(false)
   const [highlightId, setHighlightId] = useState(null)
+  const [lightbox, setLightbox] = useState(null)
   const now = Date.now()
   const noticeRefs = useRef({})
 
@@ -149,9 +150,9 @@ export default function Notices() {
                     )}
                   >
                     {n.image && (
-                      <div className="h-20 w-20 shrink-0 overflow-hidden rounded-lg">
-                        <Img src={n.image} alt={n.title} className="h-full w-full object-cover" />
-                      </div>
+                      <button type="button" onClick={() => setLightbox(n.image)} className="h-20 w-20 shrink-0 overflow-hidden rounded-lg cursor-zoom-in">
+                        <Img src={n.image} alt={n.title} className="h-full w-full object-cover transition-transform hover:scale-105" />
+                      </button>
                     )}
                     <div className="min-w-0 flex-1">
                       <div className="flex flex-wrap items-center gap-2">
@@ -205,6 +206,15 @@ export default function Notices() {
           )}
         </div>
       </div>
+
+      {lightbox && (
+        <div className="fixed inset-0 z-[95] flex items-center justify-center bg-navy-950/80 p-4 backdrop-blur-sm" onClick={() => setLightbox(null)}>
+          <button onClick={() => setLightbox(null)} className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-white transition hover:bg-white/40" aria-label="Close">
+            <X size={20} />
+          </button>
+          <img src={lightbox} alt="Notice" className="max-h-[85vh] max-w-[90vw] rounded-2xl object-contain shadow-2xl" onClick={(e) => e.stopPropagation()} />
+        </div>
+      )}
     </>
   )
 }

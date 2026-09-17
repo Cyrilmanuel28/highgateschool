@@ -1,10 +1,10 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import {
   GraduationCap, Globe2, HeartHandshake, Sparkles, Phone, Mail, ShieldCheck, Music4, Trophy,
   Users, Baby, BookOpen, Compass, Camera, Target, Award, Quote as QuoteIcon, CalendarDays,
   ChevronRight, MapPin, Lightbulb, Handshake, Eye, Star, Brain, Leaf, HandHelping, Zap,
-  ArrowRight, Megaphone
+  ArrowRight, Megaphone, X
 } from 'lucide-react'
 import { useData } from '../context/DataContext.jsx'
 import Reveal from './Reveal.jsx'
@@ -424,6 +424,7 @@ export function BlockUpcomingEvents({ block }) {
 
 export function BlockNotices({ block }) {
   const { db } = useData()
+  const [lightbox, setLightbox] = useState(null)
   const now = Date.now()
   const notices = useMemo(() => {
     return (db.notices || [])
@@ -439,7 +440,7 @@ export function BlockNotices({ block }) {
         return new Date(b.publishDate || b.createdAt || 0) - new Date(a.publishDate || a.createdAt || 0)
       })
       .slice(0, 4)
-  }, [publishedOnly, now])
+  }, [db, now])
 
   if (notices.length === 0) return null
 
@@ -450,6 +451,7 @@ export function BlockNotices({ block }) {
   }
 
   return (
+    <>
     <section className="bg-navy-50 py-12 sm:py-20 overflow-hidden">
       <div className="container-x">
         <SectionHeading eyebrow={block.eyebrow || 'Announcements'} title={block.title || 'School Notices'} subtitle={block.subtitle || 'Important updates for parents and guardians'} light />
@@ -459,9 +461,9 @@ export function BlockNotices({ block }) {
               <div className="card overflow-hidden transition hover:shadow-md">
                 <div className="flex gap-4 p-5">
                   {n.image && (
-                    <div className="h-20 w-20 shrink-0 overflow-hidden rounded-lg">
-                      <Img src={n.image} alt={n.title} className="h-full w-full object-cover" />
-                    </div>
+                    <button type="button" onClick={() => setLightbox(n.image)} className="h-20 w-20 shrink-0 overflow-hidden rounded-lg cursor-zoom-in">
+                      <Img src={n.image} alt={n.title} className="h-full w-full object-cover transition-transform hover:scale-105" />
+                    </button>
                   )}
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
@@ -486,6 +488,15 @@ export function BlockNotices({ block }) {
         </div>
       </div>
     </section>
+    {lightbox && (
+      <div className="fixed inset-0 z-[95] flex items-center justify-center bg-navy-950/80 p-4 backdrop-blur-sm" onClick={() => setLightbox(null)}>
+        <button onClick={() => setLightbox(null)} className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-white transition hover:bg-white/40" aria-label="Close">
+          <X size={20} />
+        </button>
+        <img src={lightbox} alt="Notice" className="max-h-[85vh] max-w-[90vw] rounded-2xl object-contain shadow-2xl" onClick={(e) => e.stopPropagation()} />
+      </div>
+    )}
+    </>
   )
 }
 
