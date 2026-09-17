@@ -6,6 +6,7 @@ import SeoHead from '../components/SeoHead.jsx'
 import Breadcrumbs from '../components/Breadcrumbs.jsx'
 import Reveal from '../components/Reveal.jsx'
 import EmptyState from '../components/EmptyState.jsx'
+import Img from '../components/Img.jsx'
 import { GridSkeleton } from '../components/Skeletons.jsx'
 import { formatDate, cn } from '../lib/utils.js'
 
@@ -147,9 +148,11 @@ export default function Notices() {
                       highlightId === n.id && 'ring-2 ring-gold-400 bg-gold-50/50'
                     )}
                   >
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-navy-900 text-gold-400">
-                      {n.pinned ? <Pin size={20} /> : <Megaphone size={20} />}
-                    </div>
+                    {n.image && (
+                      <div className="h-20 w-20 shrink-0 overflow-hidden rounded-lg">
+                        <Img src={n.image} alt={n.title} className="h-full w-full object-cover" />
+                      </div>
+                    )}
                     <div className="min-w-0 flex-1">
                       <div className="flex flex-wrap items-center gap-2">
                         <span className="rounded-full bg-navy-50 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-navy-700">
