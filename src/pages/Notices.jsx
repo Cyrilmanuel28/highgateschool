@@ -32,7 +32,7 @@ export default function Notices() {
     () =>
       (db.notices || [])
         .filter((n) => n.isVisible !== false && n.status !== 'archived')
-        .map((n) => ({ ...n, active: !n.expireDate || new Date(n.expireDate).getTime() > now })),
+        .map((n) => ({ ...n, active: !n.expireDate || new Date(n.expireDate).getTime() > now - 86400000 })),
     [db.notices, now]
   )
 
@@ -59,7 +59,7 @@ export default function Notices() {
 
   const availableCategories = useMemo(() => {
     const cats = new Set(active.map((n) => n.category).filter(Boolean))
-    return ['All', ...CATEGORIES.filter((c) => c === 'All' || cats.has(c))]
+    return CATEGORIES.filter((c) => c === 'All' || cats.has(c))
   }, [active])
 
   // Scroll to notice when URL has :id
