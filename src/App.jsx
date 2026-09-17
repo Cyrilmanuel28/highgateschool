@@ -131,6 +131,7 @@ export default function App() {
           <Route path="faq" element={<Lazy component={FaqPage} />} />
           <Route path="contact" element={<Lazy component={ContactPage} />} />
           <Route path="notices" element={<Lazy component={NoticesPage} />} />
+          <Route path="notices/:id" element={<Lazy component={NoticesPage} />} />
           <Route path="apply" element={<Lazy component={ApplyPage} />} />
           <Route path="library" element={<Lazy component={LibraryPage} />} />
           <Route path="magazine" element={<Lazy component={MagazinePage} />} />

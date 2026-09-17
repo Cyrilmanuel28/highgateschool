@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect, useRef } from 'react'
+import { useParams } from 'react-router-dom'
 import { Megaphone, Pin, Search, Archive, ChevronDown } from 'lucide-react'
 import { useData } from '../context/DataContext.jsx'
 import SeoHead from '../components/SeoHead.jsx'
@@ -17,12 +18,15 @@ const PRIORITY_TONE = {
 const PRIORITY_DOT = { normal: 'bg-sky-500', high: 'bg-amber-500', urgent: 'bg-red-500' }
 
 export default function Notices() {
+  const { id: urlNoticeId } = useParams()
   const { db, loading } = useData()
   const info = db.schoolInfo
   const [category, setCategory] = useState('All')
   const [query, setQuery] = useState('')
   const [showArchive, setShowArchive] = useState(false)
+  const [highlightId, setHighlightId] = useState(null)
   const now = Date.now()
+  const noticeRefs = useRef({})
 
   const all = useMemo(
     () =>
@@ -44,6 +48,20 @@ export default function Notices() {
     }
     return rows.sort((a, b) => Number(b.pinned || 0) - Number(a.pinned || 0) || new Date(b.publishDate) - new Date(a.publishDate))
   }, [active, category, query])
+
+  // Scroll to notice when URL has :id
+  useEffect(() => {
+    if (!urlNoticeId) return
+    const timer = setTimeout(() => {
+      const el = noticeRefs.current[urlNoticeId]
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        setHighlightId(urlNoticeId)
+        setTimeout(() => setHighlightId(null), 2000)
+      }
+    }, 200)
+    return () => clearTimeout(timer)
+  }, [urlNoticeId, filtered])
 
   return (
     <>
@@ -101,9 +119,11 @@ export default function Notices() {
               {filtered.map((n, i) => (
                 <Reveal key={n.id} delay={i * 50}>
                   <div
+                    ref={(el) => { if (el) noticeRefs.current[n.id] = el }}
                     className={cn(
-                      'card-hover relative flex gap-5 border-l-4 p-6',
-                      n.pinned ? 'border-gold-500' : 'border-transparent'
+                      'card-hover relative flex gap-5 border-l-4 p-6 transition-all duration-300',
+                      n.pinned ? 'border-gold-500' : 'border-transparent',
+                      highlightId === n.id && 'ring-2 ring-gold-400 bg-gold-50/50'
                     )}
                   >
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-navy-900 text-gold-400">
