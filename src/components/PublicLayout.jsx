@@ -7,13 +7,24 @@ import ScrollToTopBtn from './ScrollToTopBtn.jsx'
 import A11yPanel from './A11yPanel.jsx'
 import { PageProgressBar } from './PageLoader.jsx'
 import ErrorBoundary from './ErrorBoundary.jsx'
+import { useData } from '../context/DataContext.jsx'
 
 export default function PublicLayout() {
   const location = useLocation()
+  const { db } = useData()
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'auto' })
   }, [location.pathname])
+
+  useEffect(() => {
+    const t = db.theme
+    if (!t) return
+    const root = document.documentElement
+    if (t.primaryColor) root.style.setProperty('--color-primary', t.primaryColor)
+    if (t.accentColor) root.style.setProperty('--color-accent', t.accentColor)
+    if (t.backgroundColor) root.style.setProperty('--color-background', t.backgroundColor)
+  }, [db.theme])
 
   return (
     <div className="flex min-h-screen flex-col bg-cream overflow-x-hidden">

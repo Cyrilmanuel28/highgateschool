@@ -297,18 +297,28 @@ export default function Settings() {
           </div>
         </Card>
 
-        <Card title="Theme" subtitle="Brand colours used across the public site" action={<Btn variant="gold" onClick={saveTheme}><Save size={14} /> Save</Btn>}>
+        <Card title="Theme" subtitle="Brand colours used across the public site" action={
+          <div className="flex items-center gap-2">
+            <Btn variant="outline" onClick={() => setTheme({ primaryColor: '#0B1F3A', accentColor: '#C9A227', backgroundColor: '#F5F7FA' })}>Reset Defaults</Btn>
+            <Btn variant="gold" onClick={saveTheme}><Save size={14} /> Save</Btn>
+          </div>
+        }>
+          <div className="mb-5 flex h-20 overflow-hidden rounded-xl border border-slate-200 shadow-sm">
+            <div className="flex-1 flex items-center justify-center text-sm font-bold text-white" style={{ backgroundColor: theme.primaryColor || '#0B1F3A' }}>Primary</div>
+            <div className="flex-1 flex items-center justify-center text-sm font-bold" style={{ backgroundColor: theme.accentColor || '#C9A227', color: '#fff' }}>Accent</div>
+            <div className="flex-1 flex items-center justify-center text-sm font-bold text-charcoal" style={{ backgroundColor: theme.backgroundColor || '#F5F7FA' }}>Background</div>
+          </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {[
-              { key: 'primaryColor', label: 'Primary colour (navy)' },
-              { key: 'accentColor', label: 'Accent colour (gold)' },
-              { key: 'backgroundColor', label: 'Background colour' }
+              { key: 'primaryColor', label: 'Primary colour (navy)', default: '#0B1F3A' },
+              { key: 'accentColor', label: 'Accent colour (gold)', default: '#C9A227' },
+              { key: 'backgroundColor', label: 'Background colour', default: '#F5F7FA' }
             ].map((f) => (
               <Field key={f.key} label={f.label}>
                 <div className="flex items-center gap-3">
                   <input
                     type="color"
-                    value={theme[f.key] || '#1B2A4A'}
+                    value={theme[f.key] || f.default}
                     onChange={(e) => setTheme({ ...theme, [f.key]: e.target.value })}
                     className="h-10 w-14 cursor-pointer rounded-lg border border-slate-200 bg-white p-1"
                   />
